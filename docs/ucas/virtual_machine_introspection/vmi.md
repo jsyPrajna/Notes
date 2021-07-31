@@ -23,7 +23,7 @@
   
     LibVMI 架构：
   
-    <img src="https://libvmi.com/assets/images/access.png" alt="img" style="zoom: 50%;" />
+    <img src="./libvmi.png" alt="img" style="zoom: 50%;" />
   
   - 硬件架构知识，寄存器值、硬件事件等。根据虚拟机修改 CR3 时触发 VM Exit 陷入 hypervisor 可以检测到进程创建或切换，通过强制触发 VM Exit 监控系统调用。
   
