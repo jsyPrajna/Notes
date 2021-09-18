@@ -24,7 +24,7 @@ Meltdown
 - Linux 4.15 之后，之前的版本可能有问题
 - 页表切换，TLB 刷新带来的开销，PCID 可以避免 TLB 刷新，但 Linux 在 4.14 之后才支持。
 
-<img src="image-20210628164042079.png" alt="image-20210628164042079" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628164042079.png" alt="image-20210628164042079" style="zoom:80%;" />
 
 ### EPT
 
@@ -33,7 +33,7 @@ gPT: GVA to GPA; EPT: GPA to HPA
 - EPT-TLB：加速 GPA to HPA
 - combined-TLB：加速 GVA to HPA
 
-<img src="image-20210628164136315.png" alt="image-20210628164136315" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628164136315.png" alt="image-20210628164136315" style="zoom:80%;" />
 
 ### EPTP switching with VMFUNC
 
@@ -46,7 +46,7 @@ gPT: GVA to GPA; EPT: GPA to HPA
 1. 先用 invlpg 指令刷新所有 TLB，然后访问 EPT-0 中的目标地址（填充 EPT-0 的 TLB）。然后测试在 EPT-0 和 EPT-1 下目标地址的访问时间，可得每个 EPT 在 TLB 中都有自己的映射区域，互不干扰。
 2. 在 EPT-0 下通过写 CR3 和 invplg 刷新 TLB，发现两种操作都会刷新所有 EPT 的 TLB。
 
-<img src="image-20210628143732554.png" alt="image-20210628143732554" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628143732554.png" alt="image-20210628143732554" style="zoom:80%;" />
 
 ## System Overview
 
@@ -58,7 +58,7 @@ EPTI 的三个目标：
 
 构造两个 EPT，EPTk 和 EPTu，保证用户态程序运行时无法访问到内核空间数据。直观的想法是从 EPTu 中去除所有内核态的 HPA 页映射，但是因为内核会把所有 GPA 直接映射到 GVA，这意味着要删除所有的 GPA 映射，当然不可行。另一种思路是将 gPT 中映射内核空间的页都在 EPTu 中重映射到 0 页。这样当用户进程尝试使用 GVA 访问内核地址时，无法完成地址转换，因为找不到对应的页。这就需要知道哪些页是用来映射内核空间的，EPTI 通过跟踪 gL3 来找。
 
-<img src="image-20210628164223299.png" alt="image-20210628164223299" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628164223299.png" alt="image-20210628164223299" style="zoom:80%;" />
 
 然后要解决的问题是切换 EPT 的时间点，定位特权级切换的指令，使用二进制插桩动态重写内核代码，在内核态出口和入口插入两端跳板代码，实现 EPT switching。这样就可以与虚拟机迁移配合，实现无缝保护。
 
@@ -72,7 +72,7 @@ EPTI 的设计，首先要构造 EPTu，删除其中所有的内核地址映射�
 
 在 EPTu 中将用于内核空间映射的 gPT 对应的页映射到归零的物理页。Linux 使用 4 级页表转换 48 位虚拟机地址，每个进程都有不同的 gL4 页。为了最小化对 EPTu 的修改，只将用于内核地址转换的 gL3 页归零。如下图，内核的 gL3 在不同的 gPT 之间共享。
 
-<img src="image-20210628164912398.png" alt="image-20210628164912398" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628164912398.png" alt="image-20210628164912398" style="zoom:80%;" />
 
 置零之后，在用户态访问内核地址会触发 page fault，因为 GVA 没有映射。而内核运行在 EPTk 上，它无法填充 EPTu 中的归零 gL3 页，攻击者永远无法访问内核内存。
 
@@ -84,13 +84,13 @@ EPTI 的设计，首先要构造 EPTu，删除其中所有的内核地址映射�
 
 跳板代码如下：
 
-<img src="image-20210628171001969.png" alt="image-20210628171001969" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628171001969.png" alt="image-20210628171001969" style="zoom:80%;" />
 
 RAX 和 RCX 包含 VMFUNC 索引和参数，而且都是 caller-saved，需要跳板代码保存和恢复寄存器值。需要确保跳板代码在两个 EPT 中都能允许，且有保存 caller-saved 寄存器值的地方。
 
 在 EPTu 中，只有跳板代码所在页能映射到内核空间，同一 gPT 页中的其他的页表项都置零。修改 VM 的内核态入口（IDT 表项或 MSR）指向跳板代码，如下图。在 EPTk 中，EPTI 将跳板代码插入到 VM 内核直接映射区域末端，然后重写内核修改退出点将控制流转移到跳板代码。
 
-<img src="image-20210628193014171.png" alt="image-20210628193014171" style="zoom:80%;" />
+<img src="./epti.assets/image-20210628193014171.png" alt="image-20210628193014171" style="zoom:80%;" />
 
 > 这里的意思是跳板代码都在内核态，那么切换到 EPTk 的代码应该插入到内核态入口（中断或系统调用）已经切换到内核态之后（此时还是 EPTu），切换回 EPTu 的代码应该插入在退出点之后（否则在切换回 EPTu 之后就无法执行剩余的内核态代码）。所以就需要在 EPTu 中有映射跳板代码的页表项所在页，但是这个页中的其他页表项应该都置零。
 
@@ -146,21 +146,21 @@ EPTI 利用硬件特性减少捕获加载旧 CR3 值触发的 VM Exit。Intel �
 
 然后就是进行各种性能测试，五个对照系统：Linux without KPTI，KPTI，EPTI 的不同优化版本（EPTI-No, EPTO-CR3, EPTI-CR3+L3）。首先是用 LMBench 测试一些关键操作（如系统调用）的性能表现，结果如下。
 
-<img src="image-20210629155221468.png" alt="image-20210629155221468" style="zoom:80%;" />
+<img src="./epti.assets/image-20210629155221468.png" alt="image-20210629155221468" style="zoom:80%;" />
 
 SPEC_CPU 2006 项目之后就是对各种应用进行性能测试，包括 Fs_mark, Redis, PostgreSQL, MongoDB, Apache, Nginx, 多 VM。
 
 然后测试 EPTI 优化对性能和 VM Exit 数量的影响。最后还测试了多个 Linux 内核版本和 VM 实时迁移的性能。
 
-<img src="image-20210629155643942.png" alt="image-20210629155643942" style="zoom:80%;" />
+<img src="./epti.assets/image-20210629155643942.png" alt="image-20210629155643942" style="zoom:80%;" />
 
-<img src="image-20210629155724823.png" alt="image-20210629155724823" style="zoom:80%;" />
+<img src="./epti.assets/image-20210629155724823.png" alt="image-20210629155724823" style="zoom:80%;" />
 
-<img src="image-20210629155707315.png" alt="image-20210629155707315" style="zoom: 80%;" />
+<img src="./epti.assets/image-20210629155707315.png" alt="image-20210629155707315" style="zoom: 80%;" />
 
-<img src="image-20210629155755350.png" alt="image-20210629155755350" style="zoom:80%;" />
+<img src="./epti.assets/image-20210629155755350.png" alt="image-20210629155755350" style="zoom:80%;" />
 
-<img src="image-20210629155805017.png" alt="image-20210629155805017" style="zoom: 80%;" />
+<img src="./epti.assets/image-20210629155805017.png" alt="image-20210629155805017" style="zoom: 80%;" />
 
 ## Discussion
 
