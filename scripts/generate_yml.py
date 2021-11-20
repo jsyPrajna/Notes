@@ -31,7 +31,7 @@ def recursive_scan(path):
         subpath_list.remove(index_file)
 
     for sub_path in subpath_list:
-        if sub_path.is_dir():
+        if sub_path.is_dir() and not (list(sub_path.rglob("*.md")) == []):
             file_list.append({sub_path.name: recursive_scan(sub_path)})
         elif sub_path.is_file() and sub_path.suffix == md_suffix:
             file_list.append(str(sub_path.relative_to(str(docs_root_path))).replace("\\", "/"))
