@@ -1,0 +1,2928 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://notes.caijiqhx.top/os/os_lab/lab6/preview/">
+      
+      
+        <meta name="author" content="caijiqhx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Preview - caijiqhx notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CSource+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#preview" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              caijiqhx notes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Preview
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../tools/vscode/" class="md-tabs__link">
+          常用工具
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../rust/" class="md-tabs__link">
+          Rust
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../cpp/" class="md-tabs__link">
+          C++
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../network/" class="md-tabs__link">
+          计算机网络
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../" class="md-tabs__link md-tabs__link--active">
+          操作系统
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../database/" class="md-tabs__link">
+          数据库
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../ucas/" class="md-tabs__link">
+          UCAS
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    caijiqhx notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="QHX's Notes" class="md-nav__link">
+      QHX's Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TOP/" title="TOP" class="md-nav__link">
+      TOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      常用工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        常用工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vscode/" title="Visual Studio Code 配置同步" class="md-nav__link">
+      Visual Studio Code 配置同步
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/manjaro/" title="Manjaro 从头配置" class="md-nav__link">
+      Manjaro 从头配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/gitbook/" title="Gitbook" class="md-nav__link">
+      Gitbook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/regex/" title="正则表达式" class="md-nav__link">
+      正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs/" title="mkdocs" class="md-nav__link">
+      mkdocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs_zh_search/" title="MkDocs 中文搜索" class="md-nav__link">
+      MkDocs 中文搜索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vim/" title="vim" class="md-nav__link">
+      vim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      部署工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        部署工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/docker_introduction/" title="Docker 简介" class="md-nav__link">
+      Docker 简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/dockerfile/" title="Dockerfile" class="md-nav__link">
+      Dockerfile
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      调试工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        调试工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/ida/" title="IDA" class="md-nav__link">
+      IDA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Rust
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Rust
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rust 程序设计语言
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rust 程序设计语言
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/" title="The Rust Programming Language" class="md-nav__link">
+      The Rust Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x00/" title="0x00 Introduction" class="md-nav__link">
+      0x00 Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x01/" title="0x01 Getting Started" class="md-nav__link">
+      0x01 Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x02/" title="0x02 Guessing Game Tutorial" class="md-nav__link">
+      0x02 Guessing Game Tutorial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x03/" title="0x03 Common Programming Concepts" class="md-nav__link">
+      0x03 Common Programming Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x04/" title="0x04 Ownership" class="md-nav__link">
+      0x04 Ownership
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x05/" title="0x05 Structs" class="md-nav__link">
+      0x05 Structs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x06/" title="0x06 Enums and Pattern Matching" class="md-nav__link">
+      0x06 Enums and Pattern Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x07/" title="0x07 Managing Growing Projects with Packages, Crates and Modules" class="md-nav__link">
+      0x07 Managing Growing Projects with Packages, Crates and Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x08/" title="0x08 Common Collections" class="md-nav__link">
+      0x08 Common Collections
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Rustlings
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Rustlings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/" title="Rustlings" class="md-nav__link">
+      Rustlings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics2/" title="Rustlings: move_semantics2" class="md-nav__link">
+      Rustlings: move_semantics2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics3/" title="Rustlings: move_semantics3" class="md-nav__link">
+      Rustlings: move_semantics3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/" title="菜鸡的 C++ 学习" class="md-nav__link">
+      菜鸡的 C++ 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/memo/" title="C++ 备忘录" class="md-nav__link">
+      C++ 备忘录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/casting/" title="C++ 类型转换" class="md-nav__link">
+      C++ 类型转换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/rtti/" title="C++ 运行时类型识别" class="md-nav__link">
+      C++ 运行时类型识别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/unordered_set/" title="unordered_set" class="md-nav__link">
+      unordered_set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/custom_compare/" title="C++ 中自定义比较函数" class="md-nav__link">
+      C++ 中自定义比较函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      C++ 11/14 快速上手
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        C++ 11/14 快速上手
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/0/" title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/1/" title="语言可用性的强化" class="md-nav__link">
+      语言可用性的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/2/" title="语言运行期的强化" class="md-nav__link">
+      语言运行期的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/3/" title="对标准库的扩充：新增容器" class="md-nav__link">
+      对标准库的扩充：新增容器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/4/" title="对标准库的扩充：智能指针和引用计数" class="md-nav__link">
+      对标准库的扩充：智能指针和引用计数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/5/" title="对标准库的扩充：正则表达式" class="md-nav__link">
+      对标准库的扩充：正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/6/" title="对标准库的扩充：语言级线程支持" class="md-nav__link">
+      对标准库的扩充：语言级线程支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/7/" title="其他杂项" class="md-nav__link">
+      其他杂项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/8/" title="C++17 简介" class="md-nav__link">
+      C++17 简介
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/stl_learning/" title="STL 学习" class="md-nav__link">
+      STL 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      设计模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        设计模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/" title="设计模式" class="md-nav__link">
+      设计模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/basic/" title="设计模式预备知识" class="md-nav__link">
+      设计模式预备知识
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-3" type="checkbox" id="nav-4-9-3">
+    
+    <label class="md-nav__link" for="nav-4-9-3">
+      创建型模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-9-3">
+        创建型模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/simple_factory/" title="简单工厂模式" class="md-nav__link">
+      简单工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/factory_method/" title="工厂方法模式" class="md-nav__link">
+      工厂方法模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/abstract_factory/" title="抽象工厂模式" class="md-nav__link">
+      抽象工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/builder/" title="建造者模式" class="md-nav__link">
+      建造者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      计算机网络
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        计算机网络
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/" title="计算机网络" class="md-nav__link">
+      计算机网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/questions/" title="牛客网题目记录" class="md-nav__link">
+      牛客网题目记录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/tcp_and_udp/" title="TCP 和 UDP" class="md-nav__link">
+      TCP 和 UDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/protocols/" title="计算机网络协议" class="md-nav__link">
+      计算机网络协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/ip_addr/" title="IP 地址相关问题" class="md-nav__link">
+      IP 地址相关问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/devices/" title="各层网络设备" class="md-nav__link">
+      各层网络设备
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http/" title="HTTP 学习" class="md-nav__link">
+      HTTP 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http_status_code/" title="HTTP 状态码" class="md-nav__link">
+      HTTP 状态码
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      操作系统
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        操作系统
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="操作系统" class="md-nav__link">
+      操作系统
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2" checked>
+    
+    <label class="md-nav__link" for="nav-6-2">
+      os_lab
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        os_lab
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="操作系统实验" class="md-nav__link">
+      操作系统实验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
+    
+    <label class="md-nav__link" for="nav-6-2-2">
+      lab1
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-2">
+        lab1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer1/" title="EXER1: 理解通过 make 生成执行文件的过程" class="md-nav__link">
+      EXER1: 理解通过 make 生成执行文件的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer2/" title="EXER2: 使用 qemu 执行并调试 lab1 中的软件" class="md-nav__link">
+      EXER2: 使用 qemu 执行并调试 lab1 中的软件
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer3/" title="EXER3: 分析 bootloader 进入保护模式的过程" class="md-nav__link">
+      EXER3: 分析 bootloader 进入保护模式的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer4/" title="EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程" class="md-nav__link">
+      EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer5/" title="EXER5: 实现函数调用堆栈跟踪函数" class="md-nav__link">
+      EXER5: 实现函数调用堆栈跟踪函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer6/" title="EXER6: 完善中断初始化和处理" class="md-nav__link">
+      EXER6: 完善中断初始化和处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/lab1/" title="Lab1 report" class="md-nav__link">
+      Lab1 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
+    
+    <label class="md-nav__link" for="nav-6-2-3">
+      lab2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-3">
+        lab2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-nav__link">
+      EXER1: 实现 first-fit 连续物理内存分配算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/exer2/" title="EXER2: 实现寻找虚拟地址对应的页表项" class="md-nav__link">
+      EXER2: 实现寻找虚拟地址对应的页表项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/exer3/" title="EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射" class="md-nav__link">
+      EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab2/lab2/" title="lab2 report" class="md-nav__link">
+      lab2 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-4" type="checkbox" id="nav-6-2-4">
+    
+    <label class="md-nav__link" for="nav-6-2-4">
+      lab3
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-4">
+        lab3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/exer1/" title="EXER1: 给未被映射的地址映射上物理页" class="md-nav__link">
+      EXER1: 给未被映射的地址映射上物理页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/exer2/" title="EXER2: 补充完成基于 FIFO 的页面替换算法" class="md-nav__link">
+      EXER2: 补充完成基于 FIFO 的页面替换算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/challenge/" title="Challenge: Extended Clock" class="md-nav__link">
+      Challenge: Extended Clock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/lab3/" title="lab3 report" class="md-nav__link">
+      lab3 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-5" type="checkbox" id="nav-6-2-5">
+    
+    <label class="md-nav__link" for="nav-6-2-5">
+      lab4
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-5">
+        lab4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer1/" title="EXER1: 分配并初始化一个进程控制块" class="md-nav__link">
+      EXER1: 分配并初始化一个进程控制块
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer2/" title="EXER2: 为新创建的内核线程分配资源" class="md-nav__link">
+      EXER2: 为新创建的内核线程分配资源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer3/" title="EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的" class="md-nav__link">
+      EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/lab4/" title="Lab4 report" class="md-nav__link">
+      Lab4 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-6" type="checkbox" id="nav-6-2-6">
+    
+    <label class="md-nav__link" for="nav-6-2-6">
+      lab5
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-6">
+        lab5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer1/" title="EXER1: 加载应用程序并执行" class="md-nav__link">
+      EXER1: 加载应用程序并执行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer2/" title="EXER2: 父进程复制自己的内存空间给子进程" class="md-nav__link">
+      EXER2: 父进程复制自己的内存空间给子进程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer3/" title="EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现" class="md-nav__link">
+      EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/lab5/" title="Lab5 report" class="md-nav__link">
+      Lab5 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-7" type="checkbox" id="nav-6-2-7" checked>
+    
+    <label class="md-nav__link" for="nav-6-2-7">
+      lab6
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-7">
+        lab6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Preview
+      </label>
+    
+    <a href="./" title="Preview" class="md-nav__link md-nav__link--active">
+      Preview
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实验流程概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    进程状态
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    进程调度实现
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    进程切换过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    调度框架和调度算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    设计思路
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    数据结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stride-scheduling" class="md-nav__link">
+    Stride Scheduling
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-nav__link">
+      EXER1: 使用 Round Robin 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exer2/" title="EXER2: 实现 Stride Scheduling 调度算法" class="md-nav__link">
+      EXER2: 实现 Stride Scheduling 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab6/" title="Lab6 report" class="md-nav__link">
+      Lab6 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-8" type="checkbox" id="nav-6-2-8">
+    
+    <label class="md-nav__link" for="nav-6-2-8">
+      lab7
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-8">
+        lab7
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/exer1/" title="EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题" class="md-nav__link">
+      EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/exer2/" title="EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题" class="md-nav__link">
+      EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/lab7/" title="Lab7 report" class="md-nav__link">
+      Lab7 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-9" type="checkbox" id="nav-6-2-9">
+    
+    <label class="md-nav__link" for="nav-6-2-9">
+      lab8
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-9">
+        lab8
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/preview/" title="preview" class="md-nav__link">
+      preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/exer1/" title="EXER1: 完成读文件操作的实现" class="md-nav__link">
+      EXER1: 完成读文件操作的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/exer2/" title="EXER2: 完成基于文件系统的执行程序机制的实现" class="md-nav__link">
+      EXER2: 完成基于文件系统的执行程序机制的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/lab8/" title="Lab8 report" class="md-nav__link">
+      Lab8 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      数据库
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        数据库
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/" title="数据库" class="md-nav__link">
+      数据库
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/theory/" title="数据库系统原理" class="md-nav__link">
+      数据库系统原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sql/" title="SQL" class="md-nav__link">
+      SQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/mysql/" title="MySQL" class="md-nav__link">
+      MySQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sqlite.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      UCAS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        UCAS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/" title="UCAS" class="md-nav__link">
+      UCAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/virtualization_overview/virtualization/" title="虚拟化概述" class="md-nav__link">
+      虚拟化概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      侧信道攻击
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        侧信道攻击
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/side_channel/side_channel.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/spectre/spectre/" title="Spectre" class="md-nav__link">
+      Spectre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-5" type="checkbox" id="nav-8-5">
+    
+    <label class="md-nav__link" for="nav-8-5">
+      ZombieLoad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-5">
+        ZombieLoad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-6" type="checkbox" id="nav-8-6">
+    
+    <label class="md-nav__link" for="nav-8-6">
+      QEMU/KVM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-6">
+        QEMU/KVM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/qemu_kvm/" title="QEMU/KVM 学习" class="md-nav__link">
+      QEMU/KVM 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/qemu_kvm/qemu_kvm_overview/" title="QEMU 与 KVM 概述" class="md-nav__link">
+      QEMU 与 KVM 概述
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-7" type="checkbox" id="nav-8-7">
+    
+    <label class="md-nav__link" for="nav-8-7">
+      Linux Kernel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-7">
+        Linux Kernel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/" title="Linux Kernel 学习" class="md-nav__link">
+      Linux Kernel 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/boot_to_main/" title="从开机加电到执行 main 函数之前的过程" class="md-nav__link">
+      从开机加电到执行 main 函数之前的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/initial_and_create_process_0/" title="Initial and create process 0" class="md-nav__link">
+      Initial and create process 0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/create_process_1_and_execute/" title="Create process 1 and execute" class="md-nav__link">
+      Create process 1 and execute
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实验流程概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    进程状态
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    进程调度实现
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    进程切换过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    调度框架和调度算法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    设计思路
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    数据结构
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stride-scheduling" class="md-nav__link">
+    Stride Scheduling
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/caijiqhx/Notes/edit/master/docs/os/os_lab/lab6/preview.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="preview">Preview<a class="headerlink" href="#preview" title="Permanent link">*</a></h1>
+<p>lab5 完成了用户进程的管理，可在用户态运行多个进程。但到目前为止，采用的调度策略是很简单的 FIFO 调度策略。本次实验，主要是熟悉 ucore 的系统调度器框架，以及基于此框架的 Round-Robin(R) 调度算法。然后参考 RR 调度算法的实现，完成 Stride Scheduling 调度算法。</p>
+<p>还是先用 meld merge 代码，在 ./kern/process/proc.c 中 alloc_proc 有一处需要更新的，需要对 proc_struct 新增的成员变量初始化：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">memset</span><span class="p">(</span><span class="n">proc</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="p">));</span><span class="w"></span>
+<span class="n">proc</span><span class="o">-&gt;</span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="n">proc</span><span class="o">-&gt;</span><span class="n">cr3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">boot_cr3</span><span class="p">;</span><span class="w"></span>
+<span class="n">list_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">proc</span><span class="o">-&gt;</span><span class="n">run_link</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// 相当于就加了个 list_init，因为前面对结构体整体置 0 了</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="_1">实验流程概述<a class="headerlink" href="#_1" title="Permanent link">*</a></h2>
+<p>lab5 创建了用户进程，并让它们正确运行，这中间也实现了 FIFO 调度策略。lab6 专门需要针对处理器调度框架和各种算法进行设计和实现，为此对 ucore 的调度部分进行了适当的修改，使得 ./kern/schedule/sched.c 只实现了调度器框架，而不再涉及具体的调度算法实现，而调度算法在单独的文件（default_sched.c）中实现。</p>
+<p>此外，实验中还设计了 idleproc 的概念，当 cpu 没有进程可以执行时，ucore 已单独的进程 idleproc 作为 cpu 空闲的 idle 进程，通常是个死循环。</p>
+<p>lab6 的大致执行过程，在 ./kern/init/init.c 的 kern_init 函数增加了对 sched_init 函数的调用。主要完成了对实现特定调度算法的调度类 sched_class 的绑定，其结构就类似于前面的 pmm_manager，保存了实现调度方法的函数指针。</p>
+<p>重点问题在于：</p>
+<ol>
+<li>何时或何事件发生后需要调度？</li>
+<li>何时或何事件发生后需要调整实现调度算法所涉及的参数？</li>
+<li>如何基于调度框架设计具体的调度算法？</li>
+<li>如何灵活应用链表等数据结构管理进程调度？</li>
+</ol>
+<h2 id="_2">进程状态<a class="headerlink" href="#_2" title="Permanent link">*</a></h2>
+<p>进程状态之间的转换需要有一个更为清晰的表述，runnable 的进程会被放在运行队列中，running 和 runnable 共享同一状态 PROC_RUNNABLE，不同之处在于处于 running 态的进程不会放在运行队列中。</p>
+<p>进程的正常生命周期如下：</p>
+<ol>
+<li>进程首先在 cpu 初始化或 sys_fork 时被创建，当为该进程分配了一个进程控制块即 ./kern/process/proc.c::alloc_proc 后，该进程进入 uinit 状态；</li>
+<li>当进程完全完成初始化后，进程转为 runnable 态；</li>
+<li>当达到调度点时，由调度器 sched_class 根据运行队列 rq 的内容来判断一个进程是否应该被运行，即把处于 runnable 态的进程转换成 running 态，在 cpu 执行；</li>
+<li>running 态的进程通过 wait 等系统调用被阻塞，进入 sleeping 态；</li>
+<li>sleeping 态的进程被 wakeup 变成 runnable 态的进程；</li>
+<li>running 态的进程主动 exit 编程 zombie 态，然后由其父进程完成对其资源的最后释放，子进程的进程控制块成为 unused；</li>
+<li>所有从 runnable 态变成其他状态的进程都要出运行队列，反之，被放入某个运行队列中。</li>
+</ol>
+<h2 id="_3">进程调度实现<a class="headerlink" href="#_3" title="Permanent link">*</a></h2>
+<p>调度本质上体现了对 cpu 资源的抢占，对用户进程而言，中断可以随时打断用户进程的执行，转到操作系统内部，从而给了操作系统以调度控制权，让操作系统可以根据具体情况（比如用户进程时间片已经用完）选择其他用户进程执行。这体现了用户进程的可抢占行（preemptive）。ucore 的内核执行是不可抢占的，即在执行任意内核代码时，cpu 控制权不可被强制剥夺。不是在所有情况下 ucore 内核执行都是不可抢占的，有以下几种固定情况是例外：</p>
+<ol>
+<li>进程同步互斥操作；</li>
+<li>进行磁盘读写等耗时的异步操作，由于等待完成的耗时太长，ucore 会调用 schedule 让其他就绪进程执行。</li>
+</ol>
+<p>其实就是由于当前进程所需的某个资源无法得到满足，无法继续执行下去，从而不得不主动放弃对 cpu 的控制权。这些在内核中放弃 cpu 控制权的执行地点是固定而不是任意的，不能体现内核任意位置都可抢占性的特点。</p>
+<p>lab6 中的调度点 ：</p>
+<ol>
+<li>proc.c::do_exit: 用户进程执行结束，主动放弃 cpu 控制权；</li>
+<li>proc.c::do_wait: 用户等待子进程结束，主动放弃 cpu 控制权；</li>
+<li>proc.c::init_main: initproc 内核线程等待所有用户进程结束，如果没有结束，就主动放弃 cpu 控制权，initproc 内核线程在所有用户进程结束后，让 kswapd 内核线程执行 10 次，用于回收空闲内核资源；</li>
+<li>proc.c::cpu_idle: idleproc 内核线程的工作就是等待有处于就绪态的进程或线程，如果有就调用 schedule 函数；</li>
+<li>sync.h::lock: 在获取锁的过程中，如果无法得到锁，则主动放弃 cpu 控制权；</li>
+<li>trap.c::trap: 如果在当前进程在用户态被打断去，且当前进程控制块的成员变量 need_resched 置 1，则当前进程会放弃 cpu 控制权。</li>
+</ol>
+<h3 id="_4">进程切换过程<a class="headerlink" href="#_4" title="Permanent link">*</a></h3>
+<p>进程调度函数 schedule 选择下一个将占用 cpu 执行的进程后，将调用进程切换，从而让新的进程得以执行。两个用户进程进行进程切换的过程如下：</p>
+<ol>
+<li>首先在执行某进程 A 的用户代码时，出现了一个 trap，这个时候就会从进程 A 的用户态切换到内核态，并保存好进程 A 的 trapframe；</li>
+<li>当内核态处理中断时发现需要进行进程切换时，ucore 通过 schedule 函数选择下一个将占用 cpu 执行的进程 B，然后会调用 proc_run 函数进一步调用 switch_to 函数；</li>
+<li>切换到 进程 B 的内核态，继续进程 B 上一次在内核态的操作，并通过 iret 指令，最终将执行权转交给进程 B 的用户空间；</li>
+<li>当进程 B 由于某种原因发生中断之后，会从进程 B 的用户态切换到内核态，并保存好进程 B 的 trapframe；</li>
+<li>当内核处理中断时发现需要进行进程切换时，即需要切换到进程 A，ucore 再次切换到进程 A，会执行进程 A 上一次在内核调用 schedule 函数返回后的下一行代码，这行代码当然还是在进程 A 的上一次中断处理流程中；</li>
+<li>最后当进程 A 的中断处理完毕后，执行权反交给进程 A 的用户态代码。</li>
+</ol>
+<h2 id="_5">调度框架和调度算法<a class="headerlink" href="#_5" title="Permanent link">*</a></h2>
+<h3 id="_6">设计思路<a class="headerlink" href="#_6" title="Permanent link">*</a></h3>
+<p>调度算法都需要选择一个就绪进程来占用 cpu 运行，需要选择对应的数据结构，队列、二叉树、红黑树等不同的组织方式。</p>
+<p>操作时，就要从基于某种数据结构的就绪进程集合中选择出一个进程执行，分为选择和提出两个操作。同时要考虑到一个处于运行态的进程还会由于某种原因回到就绪态而不能继续占用 cpu 执行，这样就会重新进入到就绪进程集合中。这样三个基本操作：选择、进入和离开。</p>
+<p>在进程的执行过程中，就绪进程的等待时间和执行进程的执行时间是影响调度选择的重要因素，这两个因素随着时间的流逝和各种时间的发生在不停地变化，这就需要调度器实现相关的变化感知操作：timer 时间事件感知操作。在进程运行或等待的过程中，调度器可以调整进程控制块中与进程调度相关的属性值（消耗的时间片、进程优先级等），并可能导致对进程组织形式的调整（以时间片大小的顺序来重排双向链表），并最终可能操作调度选择新的进程占用 cpu 运行，属于调整操作。</p>
+<h3 id="_7">数据结构<a class="headerlink" href="#_7" title="Permanent link">*</a></h3>
+<p>ucore 中引入 run_queue 即运行队列，单 cpu 只有一个全局的运行队列。</p>
+<p>运行队列通过链表的形式组织，每个节点是一个 list_entry_t，每个又对应到了 proc_struct*，通过宏 le2proc 完成。在 proc_struct 中有一个 run_link 的，因此可以通过偏移量找到对</p>
+<p>调度器框架：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">sched_class</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 初始化运行队列</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">init</span><span class="p">)(</span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 将进程 proc 插入队列 rq</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">enqueue</span><span class="p">)(</span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="w"> </span><span class="o">*</span><span class="n">proc</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 将进程 proc 从队列 rq 删除</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">dequeue</span><span class="p">)(</span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="w"> </span><span class="o">*</span><span class="n">proc</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 返回运行队列中下一个可执行的进程</span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="n">pick_next</span><span class="p">)(</span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// timetick 处理函数</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">proc_tick</span><span class="p">)(</span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="w"> </span><span class="o">*</span><span class="n">proc</span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>进程控制块中与进程调度相关的信息：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">proc_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 当前进程是否需要调度</span>
+<span class="w">    </span><span class="k">volatile</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">need_resched</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 运行队列</span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="o">*</span><span class="n">rq</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 当前进程的调度链表结构，该结构内部的连接组成了运行队列</span>
+<span class="w">    </span><span class="n">list_entry_t</span><span class="w"> </span><span class="n">run_link</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 该进程剩余的时间片</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">time_slice</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 进程在优先队列中的节点</span>
+<span class="w">    </span><span class="n">skew_heap_entry_t</span><span class="w"> </span><span class="n">lab6_run_pool</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 进程的调度优先级</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">lab6_stride</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 进程的调度步进值</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">lab6_priority</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>运行队列：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">run_queue</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 队列头或尾</span>
+<span class="w">    </span><span class="n">list_entry_t</span><span class="w"> </span><span class="n">run_list</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 表示内部的进程总数</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">proc_num</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 每个进程一轮占用的最多时间片</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">max_time_slice</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// For LAB6 ONLY 优先队列形式的进程容器</span>
+<span class="w">    </span><span class="n">skew_heap_entry_t</span><span class="w"> </span><span class="o">*</span><span class="n">lab6_run_pool</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>Round Robin 算法的具体实现分析见练习 1。</p>
+<h2 id="stride-scheduling">Stride Scheduling<a class="headerlink" href="#stride-scheduling" title="Permanent link">*</a></h2>
+<p>基本思想：</p>
+<ol>
+<li>每个 runnable 的进程设置一个当前状态 stride，表示该进程当前的调度权。另外定义其对应的 pass 值，表示对应进程在调度后，stride 需要进行的累加值。</li>
+<li>每次需要调度时，从当前 runnable 态的进程中选择 stride 最小的进程调度。</li>
+<li>对于获得调度的进程 P，将对应的 stride 加上其对应的步长 pass（只与进程的优先权有关系）。</li>
+<li>在一段固定的时间之后，回到 2.步骤，重新调度当前 stride 最小的进程。</li>
+<li>可以证明，如果令 P.pass =BigStride / P.priority 其中 P.priority 表示进程的优先权（大于 1），而 BigStride 表示一个预先定义的大常数，则该调度方案为每个进程分配的时间将与其优先级成正比</li>
+</ol>
+<p>ucore 提供了斜堆来实现每次选出最小 stride 进程的操作。</p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: March 10, 2020
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../lab5/lab5/" title="Lab5 report" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Lab5 report
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                EXER1: 使用 Round Robin 调度算法
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 caijiqhx
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
+      
+        <script src="../../../../static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

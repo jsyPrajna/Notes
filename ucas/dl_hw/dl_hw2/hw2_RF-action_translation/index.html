@@ -1,0 +1,2843 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://notes.caijiqhx.top/ucas/dl_hw/dl_hw2/hw2_RF-action_translation/">
+      
+      
+        <meta name="author" content="caijiqhx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>hw2 RF action translation - caijiqhx notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CSource+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#_1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              caijiqhx notes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                hw2 RF action translation
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../tools/vscode/" class="md-tabs__link">
+          常用工具
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../rust/" class="md-tabs__link">
+          Rust
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../cpp/" class="md-tabs__link">
+          C++
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../network/" class="md-tabs__link">
+          计算机网络
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../os/" class="md-tabs__link">
+          操作系统
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../database/" class="md-tabs__link">
+          数据库
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../" class="md-tabs__link">
+          UCAS
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    caijiqhx notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="QHX's Notes" class="md-nav__link">
+      QHX's Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TOP/" title="TOP" class="md-nav__link">
+      TOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      常用工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        常用工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vscode/" title="Visual Studio Code 配置同步" class="md-nav__link">
+      Visual Studio Code 配置同步
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/manjaro/" title="Manjaro 从头配置" class="md-nav__link">
+      Manjaro 从头配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/gitbook/" title="Gitbook" class="md-nav__link">
+      Gitbook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/regex/" title="正则表达式" class="md-nav__link">
+      正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs/" title="mkdocs" class="md-nav__link">
+      mkdocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs_zh_search/" title="MkDocs 中文搜索" class="md-nav__link">
+      MkDocs 中文搜索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vim/" title="vim" class="md-nav__link">
+      vim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      部署工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        部署工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/docker_introduction/" title="Docker 简介" class="md-nav__link">
+      Docker 简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/dockerfile/" title="Dockerfile" class="md-nav__link">
+      Dockerfile
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      调试工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        调试工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/ida/" title="IDA" class="md-nav__link">
+      IDA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Rust
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Rust
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rust 程序设计语言
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rust 程序设计语言
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/" title="The Rust Programming Language" class="md-nav__link">
+      The Rust Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x00/" title="0x00 Introduction" class="md-nav__link">
+      0x00 Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x01/" title="0x01 Getting Started" class="md-nav__link">
+      0x01 Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x02/" title="0x02 Guessing Game Tutorial" class="md-nav__link">
+      0x02 Guessing Game Tutorial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x03/" title="0x03 Common Programming Concepts" class="md-nav__link">
+      0x03 Common Programming Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x04/" title="0x04 Ownership" class="md-nav__link">
+      0x04 Ownership
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x05/" title="0x05 Structs" class="md-nav__link">
+      0x05 Structs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x06/" title="0x06 Enums and Pattern Matching" class="md-nav__link">
+      0x06 Enums and Pattern Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x07/" title="0x07 Managing Growing Projects with Packages, Crates and Modules" class="md-nav__link">
+      0x07 Managing Growing Projects with Packages, Crates and Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x08/" title="0x08 Common Collections" class="md-nav__link">
+      0x08 Common Collections
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Rustlings
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Rustlings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/" title="Rustlings" class="md-nav__link">
+      Rustlings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics2/" title="Rustlings: move_semantics2" class="md-nav__link">
+      Rustlings: move_semantics2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics3/" title="Rustlings: move_semantics3" class="md-nav__link">
+      Rustlings: move_semantics3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/" title="菜鸡的 C++ 学习" class="md-nav__link">
+      菜鸡的 C++ 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/memo/" title="C++ 备忘录" class="md-nav__link">
+      C++ 备忘录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/casting/" title="C++ 类型转换" class="md-nav__link">
+      C++ 类型转换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/rtti/" title="C++ 运行时类型识别" class="md-nav__link">
+      C++ 运行时类型识别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/unordered_set/" title="unordered_set" class="md-nav__link">
+      unordered_set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/custom_compare/" title="C++ 中自定义比较函数" class="md-nav__link">
+      C++ 中自定义比较函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      C++ 11/14 快速上手
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        C++ 11/14 快速上手
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/0/" title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/1/" title="语言可用性的强化" class="md-nav__link">
+      语言可用性的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/2/" title="语言运行期的强化" class="md-nav__link">
+      语言运行期的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/3/" title="对标准库的扩充：新增容器" class="md-nav__link">
+      对标准库的扩充：新增容器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/4/" title="对标准库的扩充：智能指针和引用计数" class="md-nav__link">
+      对标准库的扩充：智能指针和引用计数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/5/" title="对标准库的扩充：正则表达式" class="md-nav__link">
+      对标准库的扩充：正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/6/" title="对标准库的扩充：语言级线程支持" class="md-nav__link">
+      对标准库的扩充：语言级线程支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/7/" title="其他杂项" class="md-nav__link">
+      其他杂项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/8/" title="C++17 简介" class="md-nav__link">
+      C++17 简介
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/stl_learning/" title="STL 学习" class="md-nav__link">
+      STL 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      设计模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        设计模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/" title="设计模式" class="md-nav__link">
+      设计模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/basic/" title="设计模式预备知识" class="md-nav__link">
+      设计模式预备知识
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-3" type="checkbox" id="nav-4-9-3">
+    
+    <label class="md-nav__link" for="nav-4-9-3">
+      创建型模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-9-3">
+        创建型模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/simple_factory/" title="简单工厂模式" class="md-nav__link">
+      简单工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/factory_method/" title="工厂方法模式" class="md-nav__link">
+      工厂方法模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/abstract_factory/" title="抽象工厂模式" class="md-nav__link">
+      抽象工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/builder/" title="建造者模式" class="md-nav__link">
+      建造者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      计算机网络
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        计算机网络
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/" title="计算机网络" class="md-nav__link">
+      计算机网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/questions/" title="牛客网题目记录" class="md-nav__link">
+      牛客网题目记录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/tcp_and_udp/" title="TCP 和 UDP" class="md-nav__link">
+      TCP 和 UDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/protocols/" title="计算机网络协议" class="md-nav__link">
+      计算机网络协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/ip_addr/" title="IP 地址相关问题" class="md-nav__link">
+      IP 地址相关问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/devices/" title="各层网络设备" class="md-nav__link">
+      各层网络设备
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http/" title="HTTP 学习" class="md-nav__link">
+      HTTP 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http_status_code/" title="HTTP 状态码" class="md-nav__link">
+      HTTP 状态码
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      操作系统
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        操作系统
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/" title="操作系统" class="md-nav__link">
+      操作系统
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      os_lab
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        os_lab
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/" title="操作系统实验" class="md-nav__link">
+      操作系统实验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
+    
+    <label class="md-nav__link" for="nav-6-2-2">
+      lab1
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-2">
+        lab1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer1/" title="EXER1: 理解通过 make 生成执行文件的过程" class="md-nav__link">
+      EXER1: 理解通过 make 生成执行文件的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer2/" title="EXER2: 使用 qemu 执行并调试 lab1 中的软件" class="md-nav__link">
+      EXER2: 使用 qemu 执行并调试 lab1 中的软件
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer3/" title="EXER3: 分析 bootloader 进入保护模式的过程" class="md-nav__link">
+      EXER3: 分析 bootloader 进入保护模式的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer4/" title="EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程" class="md-nav__link">
+      EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer5/" title="EXER5: 实现函数调用堆栈跟踪函数" class="md-nav__link">
+      EXER5: 实现函数调用堆栈跟踪函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/exer6/" title="EXER6: 完善中断初始化和处理" class="md-nav__link">
+      EXER6: 完善中断初始化和处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab1/lab1/" title="Lab1 report" class="md-nav__link">
+      Lab1 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
+    
+    <label class="md-nav__link" for="nav-6-2-3">
+      lab2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-3">
+        lab2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-nav__link">
+      EXER1: 实现 first-fit 连续物理内存分配算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/exer2/" title="EXER2: 实现寻找虚拟地址对应的页表项" class="md-nav__link">
+      EXER2: 实现寻找虚拟地址对应的页表项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/exer3/" title="EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射" class="md-nav__link">
+      EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab2/lab2/" title="lab2 report" class="md-nav__link">
+      lab2 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-4" type="checkbox" id="nav-6-2-4">
+    
+    <label class="md-nav__link" for="nav-6-2-4">
+      lab3
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-4">
+        lab3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab3/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab3/exer1/" title="EXER1: 给未被映射的地址映射上物理页" class="md-nav__link">
+      EXER1: 给未被映射的地址映射上物理页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab3/exer2/" title="EXER2: 补充完成基于 FIFO 的页面替换算法" class="md-nav__link">
+      EXER2: 补充完成基于 FIFO 的页面替换算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab3/challenge/" title="Challenge: Extended Clock" class="md-nav__link">
+      Challenge: Extended Clock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab3/lab3/" title="lab3 report" class="md-nav__link">
+      lab3 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-5" type="checkbox" id="nav-6-2-5">
+    
+    <label class="md-nav__link" for="nav-6-2-5">
+      lab4
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-5">
+        lab4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab4/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab4/exer1/" title="EXER1: 分配并初始化一个进程控制块" class="md-nav__link">
+      EXER1: 分配并初始化一个进程控制块
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab4/exer2/" title="EXER2: 为新创建的内核线程分配资源" class="md-nav__link">
+      EXER2: 为新创建的内核线程分配资源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab4/exer3/" title="EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的" class="md-nav__link">
+      EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab4/lab4/" title="Lab4 report" class="md-nav__link">
+      Lab4 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-6" type="checkbox" id="nav-6-2-6">
+    
+    <label class="md-nav__link" for="nav-6-2-6">
+      lab5
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-6">
+        lab5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab5/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab5/exer1/" title="EXER1: 加载应用程序并执行" class="md-nav__link">
+      EXER1: 加载应用程序并执行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab5/exer2/" title="EXER2: 父进程复制自己的内存空间给子进程" class="md-nav__link">
+      EXER2: 父进程复制自己的内存空间给子进程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab5/exer3/" title="EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现" class="md-nav__link">
+      EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab5/lab5/" title="Lab5 report" class="md-nav__link">
+      Lab5 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-7" type="checkbox" id="nav-6-2-7">
+    
+    <label class="md-nav__link" for="nav-6-2-7">
+      lab6
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-7">
+        lab6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab6/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab6/exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-nav__link">
+      EXER1: 使用 Round Robin 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab6/exer2/" title="EXER2: 实现 Stride Scheduling 调度算法" class="md-nav__link">
+      EXER2: 实现 Stride Scheduling 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab6/lab6/" title="Lab6 report" class="md-nav__link">
+      Lab6 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-8" type="checkbox" id="nav-6-2-8">
+    
+    <label class="md-nav__link" for="nav-6-2-8">
+      lab7
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-8">
+        lab7
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab7/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab7/exer1/" title="EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题" class="md-nav__link">
+      EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab7/exer2/" title="EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题" class="md-nav__link">
+      EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab7/lab7/" title="Lab7 report" class="md-nav__link">
+      Lab7 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-9" type="checkbox" id="nav-6-2-9">
+    
+    <label class="md-nav__link" for="nav-6-2-9">
+      lab8
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-9">
+        lab8
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab8/preview/" title="preview" class="md-nav__link">
+      preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab8/exer1/" title="EXER1: 完成读文件操作的实现" class="md-nav__link">
+      EXER1: 完成读文件操作的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab8/exer2/" title="EXER2: 完成基于文件系统的执行程序机制的实现" class="md-nav__link">
+      EXER2: 完成基于文件系统的执行程序机制的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../os/os_lab/lab8/lab8/" title="Lab8 report" class="md-nav__link">
+      Lab8 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      数据库
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        数据库
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/" title="数据库" class="md-nav__link">
+      数据库
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/theory/" title="数据库系统原理" class="md-nav__link">
+      数据库系统原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sql/" title="SQL" class="md-nav__link">
+      SQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/mysql/" title="MySQL" class="md-nav__link">
+      MySQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sqlite.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      UCAS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        UCAS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="UCAS" class="md-nav__link">
+      UCAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../virtualization_overview/virtualization/" title="虚拟化概述" class="md-nav__link">
+      虚拟化概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      侧信道攻击
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        侧信道攻击
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../side_channel/side_channel.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../spectre/spectre/" title="Spectre" class="md-nav__link">
+      Spectre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-5" type="checkbox" id="nav-8-5">
+    
+    <label class="md-nav__link" for="nav-8-5">
+      ZombieLoad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-5">
+        ZombieLoad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-6" type="checkbox" id="nav-8-6">
+    
+    <label class="md-nav__link" for="nav-8-6">
+      QEMU/KVM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-6">
+        QEMU/KVM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../qemu_kvm/" title="QEMU/KVM 学习" class="md-nav__link">
+      QEMU/KVM 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../qemu_kvm/qemu_kvm_overview/" title="QEMU 与 KVM 概述" class="md-nav__link">
+      QEMU 与 KVM 概述
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-7" type="checkbox" id="nav-8-7">
+    
+    <label class="md-nav__link" for="nav-8-7">
+      Linux Kernel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-7">
+        Linux Kernel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../the_art_of_linux_kernel_design/" title="Linux Kernel 学习" class="md-nav__link">
+      Linux Kernel 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../the_art_of_linux_kernel_design/boot_to_main/" title="从开机加电到执行 main 函数之前的过程" class="md-nav__link">
+      从开机加电到执行 main 函数之前的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../the_art_of_linux_kernel_design/initial_and_create_process_0/" title="Initial and create process 0" class="md-nav__link">
+      Initial and create process 0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../the_art_of_linux_kernel_design/create_process_1_and_execute/" title="Create process 1 and execute" class="md-nav__link">
+      Create process 1 and execute
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    引言
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    贡献
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    相关工作
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    射频信号入门
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    方法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    无线信号产生骨架
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    与模式无关的动作识别
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    时空注意模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    多提案模块
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    多模式端到端培训
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    实验
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    数据集
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    设置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    定性结果
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    与其他模型比较
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    不同模态的比较
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    动作检测
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    消融研究
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    结论
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/caijiqhx/Notes/edit/master/docs/ucas/dl_hw/dl_hw2/hw2_RF-action_translation.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>hw2 RF action translation</h1>
+                
+                <p><strong>Making the Invisible Visible: Action Recognition Through Walls and Occlusions</strong></p>
+<p>[toc]</p>
+<h2 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">*</a></h2>
+<p>了解人们的行为和互动通常取决于看到他们。 从视觉数据中自动进行动作识别的过程已成为计算机视觉社区中许多研究的主题。 但是，如果太暗，或者人被遮挡或在墙壁后面怎么办？ 在本文中，我们介绍了一种神经网络模型，该模型可以在光线不足的情况下通过墙壁和遮挡物检测人的动作。 我们的模型将射频（RF）信号作为输入，生成3D人体骨骼作为中间表示，并随着时间的推移识别多个人的动作和互动。 通过将输入转换为基于中间骨架的表示形式，我们的模型可以从基于视觉的数据集和基于RF的数据集中学习，并允许这两个任务互相帮助。 我们证明了我们的模型在可见的场景中可以达到与基于视觉的动作识别系统相当的准确性，但是在看不见的人的情况下仍可以继续准确地工作，因此可以解决超出当今基于视觉的动作识别的局限性的场景。</p>
+<h2 id="_2">引言<a class="headerlink" href="#_2" title="Permanent link">*</a></h2>
+<p>人体动作识别是计算机视觉中的核心任务。它在视频游戏，监视，手势识别，行为分析等方面具有广泛的应用。动作识别被定义为从时间序列（视频帧，人体骨骼序列等）中检测和分类人类动作。 在过去的几年中，深度学习的进步以惊人的速度推动了动作识别的发展[30、40、36、31、48、10、18、8、11、23、17、20]。尽管如此，基于摄影机的方法本质上受遮挡的限制-也就是说，必须让对象可见才能识别其动作。 以前的工作通过更改相机视点或随时间插值帧来缓解此问题。 然而，当照相机被固定或人被相当长时间地完全遮挡时，例如人走进另一个房间时，这种方法将失败。</p>
+<p>从本质上讲，照相机遭受着人类同样的局限性：我们的眼睛只能感知可见光，因此无法穿透墙壁和遮挡物。 然而可见光只是频谱的一端。  WiFi频率中的无线电信号可以穿过墙壁和遮挡物。 此外，它们会反射出人体。 如果可以解释这种无线电反射，则可以通过墙壁和遮挡物来执行动作识别。 确实，有关无线系统的一些研究已尝试利用此属性进行动作识别[33，39，19，1，37]。 但是，现有的基于无线电的动作识别系统大大落后于基于视觉的系统。 它们仅限于少数动作（2到10），不能很好地推广到新环境或训练过程中未见人员，也不能处理多人动作（有关详细信息，请参阅第2节）。</p>
+<p>在本文中，我们旨在弥合两个世界。我们介绍了RF-Action，这是一个端到端的深度神经网络，可以从无线信号中识别出人类的动作。它的性能可与基于视觉的系统相媲美，但可以穿过墙壁和遮挡物，并且对光照条件不敏感。 图1显示了两种情况下RF-Action的性能。 在左侧，两个人握手，但其中一个被遮挡。 基于视觉的系统将无法识别动作，而RFAction轻松将其归类为握手。 在右侧，一个人正在打电话，而另一个人将要向他扔东西。 由于光线不佳，基于视觉的系统几乎看不到后一个人。 相反，RF-Action可以正确识别两个动作。</p>
+<p><img alt="image-20210518221039810" src="../image-20210518221039810.png" /></p>
+<blockquote>
+<p>图1：该图显示了我们系统的两个测试用例。 在左侧，两个人在握手，而其中一个在墙后。 在右边，一个人躲在黑暗中，向另一个正在打电话的人扔东西。 底行显示了由我们的模型生成的骨骼表示和动作预测。</p>
+</blockquote>
+<p>RF-Action基于多模式设计，可与无线信号和基于视觉的数据集一起使用。 我们利用最近的工作表明可以从无线信号中推断出人体骨骼（即姿势）[43、45]，并采用该骨骼作为适合于射频和基于视觉的系统的中间表示。 使用骨架作为中间表示是有利的，因为：（1）它使模型能够同时训练RF和视觉数据，并利用现有的基于视觉的3D骨架数据集，例如PKU-MMD和NTURGB + D [26，31]；  （2）它允许对中间骨骼进行额外的监督，从而有助于指导学习过程，而不仅仅是过去基于RF的动作识别系统中使用的单纯动作标签；  （3）由于骨架表示受环境或对象身份的影响最小，因此提高了模型对新环境和新人进行泛化的能力。</p>
+<p>我们通过两项改进其性能的创新进一步扩展了我们的模型：首先，骨骼，尤其是从RF信号生成的骨骼，可能会出现错误和错误预测。 为了解决这个问题，我们的中间表示除了包括骨架之外，还包括每个关节上随时间变化的置信度得分。 我们使用自我关注来允许模型随着时间的推移以不同的方式关注不同的关节，具体取决于它们的置信度得分。</p>
+<p>其次，过去的动作识别模型可以随时生成单个动作。 但是，场景中的不同人可能会采取不同的动作，如图1右图所示，其中一个人正在打电话，而另一个人正在扔东西。 我们的模型可以使用专门设计用于解决此问题的多提案模块来解决此类情况。</p>
+<p>为了评估RF-Action，我们使用无线设备和多摄像头系统收集了来自不同环境的动作检测数据集。 该数据集跨越25个小时，包含30个执行各种单人和多人动作的人。 我们的实验表明，RFAction在可见场景中的性能可与基于视觉的系统相媲美，并且在存在完全遮挡的情况下仍能继续保持良好的性能。 具体而言，RF-Action在无遮挡的情况下可达到87.8的平均平均精度（mAP），在穿墙场景中的mAP为83.0。 我们的结果还表明，多模式训练可以改善视觉和无线模式的动作检测。 使用RF数据集和PKU-MMD数据集训练模型，我们观察到测试集的mAP性能从RF数据集（无遮挡）从83.3提高到87.8（无遮挡），从PKU-MMD从92.9提高到93.3 数据集（跨学科），该数据集显示了使用骨架作为中间通用表示形式的价值。</p>
+<h3 id="_3">贡献<a class="headerlink" href="#_3" title="Permanent link">*</a></h3>
+<p>本文具有以下贡献：</p>
+<ul>
+<li>提出了第一个使用无线电信号进行基于骨骼的动作识别的模型； 它进一步证明了这种模型可以仅使用RF信号（如图1所示）就可以准确识别穿过墙壁的动作和相互作用，并且在极端恶劣的照明条件下。</li>
+<li>本文提出了“骨架”作为跨各种形式来传递与动作识别相关的知识的中间表示，并通过经验证明这种知识的传递可以提高绩效。</li>
+<li>
+<p>本文介绍了一个新的时空注意模块，该模块改进了基于骨骼的动作识别，而不管骨骼是从RF还是基于视觉的数据生成的。</p>
+</li>
+<li>
+<p>它还提出了一种新颖的多提案模块，该模块扩展了基于骨骼的动作识别，以检测多个人同时进行的动作和互动。</p>
+</li>
+</ul>
+<h2 id="_4">相关工作<a class="headerlink" href="#_4" title="Permanent link">*</a></h2>
+<p>（a）基于视频的动作识别：在过去的几年中，从视频中识别动作一直是一个热门话题。 早期方法使用手工制作的功能。 例如，像HOG和SIFT这样的图像描述符已扩展到3D [6，27]，以从视频中提取时间线索。 此外，诸如改进的密集轨迹（iDT）[35]之类的描述符是专门设计用来跟踪视频中的运动信息的。 最新的解决方案基于深度学习，分为两大类。 第一类通过利用3D卷积网络共同提取运动和外观特征[5，30]。 第二类通过使用双流神经网络分别考虑空间特征和时间特征[32、36]。</p>
+<p>（b）基于骨骼的动作识别：基于骨骼的动作识别最近受到了广泛的关注[12，4]。 这种方法具有多个优点。 首先，骨骼为人类动态提供了一种强大的表现力来抵抗背景噪声[23]。 其次，与RGB视频相比，骨骼更为简洁，这减少了计算开销，并允许使用更小的模型来适合移动平台[20]。</p>
+<p>基于骨骼的动作识别的先前工作可以分为三类。 早期的工作使用递归神经网络（RNN）对骨架数据中的时间依赖性进行建模[9，31，48]。然而，最近，文献转向了卷积神经网络（CNN）以学习时空特征并取得了令人印象深刻的性能[8，23，20]。另外，一些论文将骨架表示为图，并利用图神经网络（GNN）进行动作识别[38，13]。在我们的工作中，我们采用基于CNN的方法，并通过引入时空注意模块来处理从无线信号生成的骨骼，并在多提案中扩展了分层共现网络（HCN）模型[23]。 模块以同时启用多个动作预测。</p>
+<p>（c）基于无线电的动作识别：无线系统的研究已经探索了使用无线电信号进行的动作识别，特别是对于出于隐私考虑可能无法使用相机的家庭应用[37、14、29、1]。这些作品可以分为两类：第一类类似于RF-Action，因为它可以分析从人体反弹的无线电信号。 他们使用动作标签进行监督，并使用简单的分类器[37、14、29、1]。他们仅识别简单的动作（例如步行，坐着和跑步），最多只能识别10个不同的动作。 而且，它们仅处理单人场景。 第二类依赖于传感器网络。 他们或者针对不同的动作部署不同的传感器（例如，冰箱门上的传感器可以检测到进食）[19、39]，或者在每个身体部位都安装可穿戴式传感器，并根据身体部位的移动来识别对象的行为[21]。 这样的系统需要对环境或人的大量检测，这限制了它们的实用性和鲁棒性。</p>
+<h2 id="_5">射频信号入门<a class="headerlink" href="#_5" title="Permanent link">*</a></h2>
+<p>我们使用过去基于射频的动作识别[45、24、41、7、28、33、16、42、46、44]中常用的一种无线电。 无线电会产生一个称为FMCW的波形，并在5.4至7.2 GHz之间工作。 该设备具有垂直和水平排列的两个天线阵列。因此，我们的输入数据采用二维热图的形式，一个来自水平阵列，一个来自垂直阵列。 如图2所示，水平热图是无线电信号在平行于地面的平面上的投影，而垂直热图是信号在垂直于地面的平面上的投影（红色表示较大的值，蓝色表示较大的值。 较小的值）。 直观地，较高的值对应于来自某个位置的信号反射的强度更高。 无线电以30 FPS的帧速率工作，即每秒产生30对热图。</p>
+<p>如图2所示，RF信号与视觉数据具有不同的属性，这使基于RF的动作识别成为一个难题。 特别是：</p>
+<ul>
+<li>穿过壁的频率中的RF信号具有比视觉数据低的空间分辨率。 在我们的系统中，深度分辨率为10 cm，角度分辨率为10度。 如此低的分辨率使得很难区分诸如挥手和梳头等活动。</li>
+<li>人体在穿过墙壁的频率范围内是镜面的[2]。RF镜面反射是一种物理现象，当波长大于表面粗糙度时会发生这种现象。 在这种情况下，物体的作用类似于反射器，即镜子，而不是散射器。
+     我们收音机的波长约为5厘米，因此人类可以充当反射器。 根据每个肢体表面的方向，信号可能会反射到我们的传感器或远离我们的传感器。 将信号反射到远离无线电的肢体对于设备而言是不可见的。 即使信号被反射回收音机，但表面较小的肢体（例如手）也会反射较少的信号，因此更难追踪。</li>
+<li>尽管RF信号可以穿过墙壁，但它们穿过墙壁时的衰减明显大于通过空气的衰减。 结果，当人在墙壁后面时，从人体反射的信号较弱，因此，在墙壁和遮挡物存在的情况下，检测动作的准确性降低。</li>
+</ul>
+<p><img alt="image-20210518221747868" src="../image-20210518221747868.png" /></p>
+<blockquote>
+<p>图2：同时记录的RF热图和RGB图像。</p>
+</blockquote>
+<h2 id="_6">方法<a class="headerlink" href="#_6" title="Permanent link">*</a></h2>
+<p>RF-Action是一种端到端的神经网络模型，可以通过遮挡和不良照明来检测人类行为。 模型架构如图3所示。如图所示，该模型将无线信号作为输入，生成3D人体骨骼作为中间表示，并随着时间的推移识别多个人的动作和交互。 该图进一步显示，RF-Action还可以获取从可视数据生成的3D骨架。 这允许RF-Action与现有的基于骨骼的动作识别数据集一起训练。</p>
+<p>在本节的其余部分，我们将描述如何将无线信号转换为3D骨架序列，以及如何从这些骨架序列中推断出动作-即图3中的黄色和绿色框。 通过使用AlphaPose之类的算法从图像中提取2D骨骼，然后对3D关键点进行三角剖分以生成3D骨骼，可以完成3D骨骼的生成，如文献[15、45]中通常所做的那样。</p>
+<p><img alt="image-20210518221841008" src="../image-20210518221841008.png" /></p>
+<blockquote>
+<p>图3：RF-Action架构。  RF-Action可从无线信号中检测人为行为。 它首先从原始无线信号输入（黄色框）中提取每个人的3D骨架。 然后，它对提取的骨架序列（绿色框）执行动作检测和识别。 动作检测框架还可以将从视觉数据生成的3D骨架作为输入（蓝色框），从而可以使用RF生成的骨架和现有的基于骨架的动作识别数据集进行训练。</p>
+</blockquote>
+<h3 id="_7">无线信号产生骨架<a class="headerlink" href="#_7" title="Permanent link">*</a></h3>
+<p>为了从无线信号生成人体骨骼，我们采用[45]中的架构。 具体来说，骨骼生成网络（图3中的橙色框）以图2所示的水平和垂直热图的形式接收无线信号，并生成多人3D骨骼。 网络的输入是水平和垂直热图的3秒窗口（90帧）。该网络由三个通常用于姿势/骨架估计的模块组成[45]。 首先，包括时空卷积的特征网络从输入的RF信号中提取特征。 然后，将提取的特征传递到区域提议网络（RPN），以获得可能的骨架边界框的多个提议。 最终，将提取的提案输入3D姿势估计子网，以从每个提案中提取3D骨架。</p>
+<h3 id="_8">与模式无关的动作识别<a class="headerlink" href="#_8" title="Permanent link">*</a></h3>
+<p>如图3所示，与模式无关的动作识别框架使用从RF信号生成的3D骨架来执行动作检测。</p>
+<p>输入：我们首先跨时间关联骨骼以获取多个骨骼序列，每个序列都来自一个人。 每个骨骼都由关键点（肩膀，手腕，头部等）的3D坐标表示。 由于无线电信号的特性，不同的关键点在不同的时间实例反射不同数量的无线电信号，从而导致对关键点位置的置信度发生变化（跨时间和跨关键点）。 因此，我们将骨架生成网络的预测置信度用作每个关键点的另一个输入参数。 因此，每个骨架序列都是大小为 4×T×Nj 的矩阵，其中4表示空间尺寸加上置信度，T是序列中的帧数，而Nj对应于骨架中关键点的数量。</p>
+<p>模型：我们的动作检测模型（图3中的绿色框）具有以下三个模块：1）基于注意力的特征学习网络，该网络从每个骨架序列中提取高级时空特征。  2）然后，我们将这些功能传递给多提案模块，以提取提案-即每个与操作的开始和结束相对应的时间窗口。 我们的多提案模块包含两个提案子网络：一个用于为单人操作生成提案，另一个用于两人互动。  3）最后，我们使用生成的提案对相应的潜在特征进行裁剪和调整大小，并将每个裁剪后的动作段输入到分类网络中。 分类网络首先通过执行2-way分类来确定此持续时间是否包含动作，从而改进时间建议。然后，它预测相应动作段的动作类别。</p>
+<p>接下来，我们详细描述注意力模块和多提议模块。</p>
+<h4 id="_9">时空注意模块<a class="headerlink" href="#_9" title="Permanent link">*</a></h4>
+<p>我们学习使用基于时空关注的网络进行动作识别的功能。我们的模型基于分层共现网络（HCN）[48]。  HCN使用两种卷积流：对骨架关键点进行操作的空间流，以及随时间变化对骨架关键点的位置进行更改的时间流。  HCN连接这两个流的输出，以从输入骨架序列中提取时空特征。 然后，它使用这些功能来预测人类的行为。</p>
+<p>但是， （图4）。 具体来说，我们定义一个可学习的蒙版权重Wm，并在每个步骤将其与潜在的空间特征fs和时间特征ft卷积：
+$$
+Mask = Conv(concat(f_s, f_t), W_m).
+$$
+然后，我们在潜在特征上应用蒙版，如图4所示。通过这种方式，蒙版可以学习为不同的关节提供不同的权重，以获得更好的动作识别性能。 在特征提取后的时间维度上，我们还添加了一个多头注意力模块[34]，以了解不同时间戳上的注意力。</p>
+<p><img alt="image-20210518222522320" src="../image-20210518222522320.png" /></p>
+<blockquote>
+<p>图4：时空注意模块。 我们建议的注意力模块（黄色框）学习面具，使模型更专注于身体关节，并具有更高的预测置信度。 它还使用多头注意力模块来帮助模型更多地参与有用的时间实例。</p>
+</blockquote>
+<p>我们建议的注意力模块可以帮助模型学习更多具有代表性的特征，因为学习到的遮罩会利用由空间流和时间流提供的信息，而多头注意力可以帮助模型更多地参与有用的时间实例。 这种时空上的注意力改变了原始的HCN设计，其中只有使用后期融合才能使空间和时间路径相互影响。 我们的实验表明，时空注意模块不仅有助于提高从无线信号预测的骨骼上的动作检测精度，而且还有助于提高基准视觉动作识别数据集的性能。 这进一步表明，所提出的注意力模块有助于更有效地组合空间和时间表示，并将导致更好的特征表示。</p>
+<h4 id="_10">多提案模块<a class="headerlink" href="#_10" title="Permanent link">*</a></h4>
+<p>以前的大多数动作识别数据集在任何时间都只有一个动作（或交互作用），而不管出现在场的人数如何。结果，先前的骨架动作识别方法无法处理多个人同时执行不同动作的情况。 当场景中有多个人时，他们只需对从每个人提取的特征进行最大化处理，然后转发结果组合的特征以输出一个动作。 因此，他们一次只能预测一个动作。</p>
+<p>但是，在我们的数据集中，当场景中有多个人时，他们可以随时执行任何操作或彼此互动。 因此，在许多情况下，多个人同时在做动作和互动。 我们通过一个多提案模块解决了这个问题。 具体而言，将N表示为同时出现的人数。 我们的多提案模块不是对N个功能执行最大共享，而是从这N个功能中输出N +（N，2）个提议，对应于N个可能的单人操作和每两个人之间的（N，2）个可能的交互。 我们的多提案模块使我们能够同时输出多个动作和交互。 最后，我们采用优先级策略，以优先于单人操作进行交互。 例如，如果同时存在“指向某人”（单人）和“指向某人”（互动）的预测，那么我们的最终预测将是“指向某人”。</p>
+<h3 id="_11">多模式端到端培训<a class="headerlink" href="#_11" title="Permanent link">*</a></h3>
+<p>由于我们想以端到端的方式训练模型，因此不再像过去基于RF的姿势估计[45]一样，无法使用arg max来提取3D关键点位置。因此，我们使用回归函数来执行arg max的功能，以提取每个关键点的3D位置。 这使模型具有可区分性，因此动作标签也可以充当对骨架预测模型的监督。</p>
+<p>我们的端到端架构使用3D骨架作为中间表示，这使我们能够利用以前基于骨架的动作识别数据集。 我们通过以下方式组合不同的模式来训练我们的模型：对于无线信号数据集，梯度会在整个模型中反向传播，并用于调整骨架预测模型和动作识别模型的参数； 对于以前的基于骨骼的动作识别数据集，梯度会向后传播到骨骼，然后将它们用于调整动作识别模块的参数。 如实验部分所示，这种多模式训练显着增加了数据多样性并改善了我们模型的性能。</p>
+<h2 id="_12">实验<a class="headerlink" href="#_12" title="Permanent link">*</a></h2>
+<h3 id="_13">数据集<a class="headerlink" href="#_13" title="Permanent link">*</a></h3>
+<p>由于没有可用的动作检测数据集提供RF信号和相应的骨骼，因此我们收集了我们自己的数据集，我们将其称为RF多模态数据集（RF-MMD）。 我们使用无线电设备收集RF信号，并使用具有10个不同视点的摄像头系统收集视频帧。 无线电设备和摄像头系统同步到10毫秒内。 附录A包含对我们的数据收集系统的更详细描述。</p>
+<p>我们在10个不同环境中（包括办公室，休息室，走廊，走廊，演讲室等）与30名志愿者收集了25小时的数据。我们从北大-MMD的行动集中选择了35个行动（29个单一行动和6个互动）[26]  。 对于每10分钟的数据，我们最多要求3名志愿者从上述集合中随机执行不同的操作。 平均而言，每个样本包含1.54名志愿者，每名志愿者在10分钟内执行了43项操作，每项操作耗时5.4秒。 我们使用20个小时的数据集进行训练，并使用5个小时进行测试。</p>
+<p>该数据集还包含2种通透方案，其中一种用于训练，一种用于测试。 对于这些穿墙环境，我们将摄像头放在墙壁的每一侧，以便可以使用无线电设备对摄像头系统进行校准，并使用可以看到人员的摄像头来标记动作。  RF-MMD上的所有测试结果仅使用无线电信号，而无需基于视觉的输入。</p>
+<p>我们使用多视点摄像头系统提取3D骨架序列[45]。 我们首先将AlphaPose [12]应用于我们的相机系统收集的视频，以提取多视图2D骨架。 由于场景中可能有多个人，因此我们将每个视图的2D骨架关联起来，以获得每个人的多视图2D骨架。 之后，由于我们的相机系统已经过校准，因此我们可以对每个人的3D骨骼进行三角剖分。 这些3D骨架充当我们模型生成的中间3D骨架的监督。</p>
+<p>最后，我们利用PKU-MMD数据集[26]提供其他培训示例。 该数据集允许进行动作检测和识别。它包含由66个主体执行的来自51个类别的近20,000个动作。 该数据集使我们能够展示RF-Action如何从基于视觉的示例中学到东西。</p>
+<h3 id="_14">设置<a class="headerlink" href="#_14" title="Permanent link">*</a></h3>
+<p>公制。 与文献中基于视频的动作检测[25、47、3]和基于骨架的动作检测[26、22、23]一样，我们使用不同交点处的平均平均精度（mAP）评估模型的性能 工会（IoU）阈值θ。 我们报告了mAP在θ= 0.1和θ= 0.5时的结果。</p>
+<p>地面真相标签。要执行我们提出的RF-Action模型的端到端训练，我们需要两种类型的地面真相标签：3D人体骨骼来监督我们的中间表示，以及动作开始-结束时间和类别来监督我们模型的输出。使用AlphaPose和先前描述的多视图相机系统对3D骨骼进行了三角剖分。 至于动作的持续时间和类别，我们使用多视角摄像头系统手动对每个人的动作进行细分和标记。</p>
+<h3 id="_15">定性结果<a class="headerlink" href="#_15" title="Permanent link">*</a></h3>
+<p>图5显示的定性结果说明了在各种情况下RF-Action的输出。 该图显示，即使不同的人同时执行不同的动作，RF-Action仍可以正确检测到动作和交互，并且可以应对遮挡和恶劣的照明条件。 因此，它解决了当今动作识别系统面临的多个挑战。</p>
+<p><img alt="image-20210518230854369" src="../image-20210518230854369.png" /></p>
+<blockquote>
+<p>图5：定性结果。 该图显示了RF-Action在各种情况下的输出。 前两行显示了我们模型在可见场景中的表现。 最下面的两行显示了我们模型在部分/完全遮挡和恶劣照明条件下的性能。 所示的骨架是由我们的模型生成的中间3D骨架的2D投影。</p>
+</blockquote>
+<h3 id="_16">与其他模型比较<a class="headerlink" href="#_16" title="Permanent link">*</a></h3>
+<p>我们将RF-Action的性能与基于骨架的动作识别和基于RF的动作识别的最新模型进行了比较。 我们将HCN用作计算机视觉中性能最高的基于骨骼的动作检测系统的代表。 当前，它在此任务上达到了最佳准确性。 我们使用Aryokee [33]作为基于RF的动作识别技术的代表。据我们所知，这是过去除分类之外唯一执行动作检测的基于RF的动作识别系统。1所有模型都在我们的RF动作识别数据集上进行了训练和测试。 由于HCN将骨骼作为输入（与RF信号相反），因此我们为它提供了由RF-Action生成的中间骨骼。 这使我们可以在基于相同骨架的动作识别方面将RF-Action与HCN进行比较。</p>
+<p><img alt="image-20210518230448185" src="../image-20210518230448185.png" /></p>
+<blockquote>
+<p>表1：RF-MMD数据集上的模型比较。该表显示了在不同IoU阈值θ下可见光和穿墙场景中的mAP。 由于HCN在骨骼上运行，并且为了公平起见，我们为它提供了RF-Action生成的基于RF的骨骼。</p>
+</blockquote>
+<p>表1显示了在可见场景和穿墙场景下以无线信号作为输入进行测试的结果。 如表所示，在两种测试条件下，RF-Action的性能均优于HCN。 这表明了我们提出的模块的有效性。 此外，我们还可以看到，在可见光和穿墙情况下，RF-Action的性能都大大优于Aryokee。 这表明来自骨骼的额外监督以及RF-Action神经网络设计对于使用RF数据提供准确的性能非常重要。</p>
+<h3 id="_17">不同模态的比较<a class="headerlink" href="#_17" title="Permanent link">*</a></h3>
+<p>接下来，我们研究在基于RF的骨骼与基于视觉的骨骼上操作时，RF-Action的性能。 和以前一样，我们在训练集上训练RF-Action。但是，在进行推理时，我们要么为它提供来自测试集的输入RF信号，要么为它提供使用我们的摄像头系统获得的可见的地面真相骨架。 表2显示了不同输入方式的结果。 该表显示，对于可见的场景，对摄像机系统中的地面真实骨骼进行操作只会导致精度提高百分之几。 这是可以预期的，因为RF骨架是使用基于视觉的骨架作为地面实况来训练的。 此外，正如我们在实验环境中所述，基于摄像头的系统使用10个视点来估计3D骨架，而只有一个无线设备用于基于RF的动作识别。 该结果表明，基于RF的动作识别可以实现接近经过精心校准的10个视点的摄像头系统的性能。 该系统在穿墙情况下仍能继续正常工作，尽管由于信号在穿墙时会受到一定程度的衰减，因此精度降低了百分之几。</p>
+<p><img alt="image-20210518230735811" src="../image-20210518230735811.png" /></p>
+<blockquote>
+<p>表2：在不同IoU阈值θ下，基于RF的骨骼（RFMMD）和基于视觉的骨骼（G.T. Skeleton）的RF-Action的性能（mAP）。</p>
+</blockquote>
+<h3 id="_18">动作检测<a class="headerlink" href="#_18" title="Permanent link">*</a></h3>
+<p>在图6中，我们显示了测试集上动作检测结果的代表性示例。 该实验有两个人参加。 他们有时会独立执行动作，或彼此互动。 第一行显示第一人称的动作持续时间，第二行显示第二人称的动作持续时间，第三行显示它们之间的交互。 我们的模型可以高精度地检测每个人的动作以及他们之间的互动。 这清楚地表明，在多个人独立执行某些动作或彼此交互的情况下，我们的多提案模块具有良好的性能。</p>
+<p><img alt="image-20210518230922362" src="../image-20210518230922362.png" /></p>
+<blockquote>
+<p>图6：测试集上的动作检测结果示例，其中两个人既在做动作又在交互。 实地行动部分以蓝色绘制，而使用我们的模型检测到的部分以红色绘制。 水平轴是指帧号。</p>
+</blockquote>
+<h3 id="_19">消融研究<a class="headerlink" href="#_19" title="Permanent link">*</a></h3>
+<p>我们还进行了广泛的消融研究，以验证我们提出的方法的每个关键组成部分的有效性。 为简单起见，在RF-MMD中的可见场景上进行了以下实验，并在0.5 IoU阈值下计算了mAP。</p>
+<p>注意模块。我们在表3中评估了我们提出的时空注意模块的有效性。我们展示了有或没有我们的注意模块在RF-MMD和PKU-MMD上的动作检测性能。 结果表明，我们的注意力对于这两个数据集都是有用的，但是在RF-MMD上进行操作时尤其有用。 这是因为从RF信号预测的骨骼可能具有不准确的关节。 我们还对NTURGB + D [31]数据集进行了实验。 与允许进行动作检测的PKU-MMD和RF-MMD不同，此数据集仅对动作分类有效。 下表显示了我们的注意力模块在这种情况下也很有用。</p>
+<p><img alt="image-20210518231120727" src="../image-20210518231120727.png" /></p>
+<blockquote>
+<p>表3：在有注意和没有注意的情况下，RF-Action在不同数据集上的性能。 对于PKU-MMD和NTU-RGB + D（跨主题/交叉视图），我们测试了动作识别网络（没有骨架生成网络）。 在RF-MMD上的测试是跨主题和环境的。</p>
+</blockquote>
+<p>多提案模块。我们提出了一个多提案模块，可以同时启用多个动作预测。 无论有没有多提案模块，我们都会评估模型的性能。 如表4所示，添加的多提案模块显着提高了性能。 这是因为我们的数据集包含许多人们同时执行不同动作的实例。 在单方案的情况下，我们的模型的准确性会很差，而在多方案的情况下，我们的模型会获得更高的性能。</p>
+<p><img alt="image-20210518231209932" src="../image-20210518231209932.png" /></p>
+<blockquote>
+<p>表4：多提案模块的好处。 该表显示添加多提案模块可以大大提高RF-MMD的性能</p>
+</blockquote>
+<p>多式联运培训。如前所述，使用骨架作为中间表示可以使模型从RF数据集和基于视觉的骨架数据集中学习。 为了说明这一优势，我们通过将PKU-MMD的训练集添加到我们的RF-Action模型的训练中来执行多模式训练。 更具体地说，我们使用数据集训练整个RF-Action端到端模型，并使用PKU-MMD数据集训练RF-Action的活动检测模型。 在训练期间可以交替使用这两个数据集。 如表5所示，将检测结果与分别在任一数据集上训练的模型进行比较，我们发现多峰训练可以提高模型性能，因为它引入了更多的训练数据，因此可以获得更好的泛化能力。</p>
+<p><img alt="image-20210518231334238" src="../image-20210518231334238.png" /></p>
+<blockquote>
+<p>表5：多式联运培训的好处。 该表显示，将PKU-MMD添加到训练集中可以显着提高RF-MMD的性能。 使用PKU-MMD的跨学科训练集可以实现RF-MMD上的RF-MMD + PKU-MMD的mAP。 仅使用RF-MMD进行训练在PKU-MMD上的效果较差，因为RF-MMD的动作集只是PKU-MMD动作集的一部分。</p>
+</blockquote>
+<p>端到端模型。  RF-Action使用端到端模型，其中动作识别的丢失通过骨骼生成网络反向传播。 在这里，我们证明了这种端到端的方法可以改善框架本身。 表6报告了两个系统的骨骼关节位置的平均误差：我们的端到端模型和一个替代模型，其中骨骼是与动作分开学习的，即动作损失不会通过骨骼生成网络传播。 该表显示，端到端模型不仅可以提高动作检测任务的性能，还可以减少估计关节在基于RF的骨骼中的位置时的错误。 这是因为动作检测损失为从RF信号生成的3D骨骼提供了正则化。</p>
+<p><img alt="image-20210518231425689" src="../image-20210518231425689.png" /></p>
+<blockquote>
+<p>表6：在有和没有端到端训练的情况下，测试数据上的mAP和中间3D骨架错误。</p>
+</blockquote>
+<h2 id="_20">结论<a class="headerlink" href="#_20" title="Permanent link">*</a></h2>
+<p>本文介绍了第一个使用无线电信号进行基于骨骼的动作识别的模型，并证明了该模型可以识别在墙壁和极端恶劣的光照条件下的动作和相互作用。 新模型可在由于隐私问题或可见性差而难以使用相机的环境中实现动作识别。 因此，它可以将动作识别带入人们的家中，并允许其集成到智能家居系统中。</p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: May 20, 2021
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 caijiqhx
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
+      
+        <script src="../../../../static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

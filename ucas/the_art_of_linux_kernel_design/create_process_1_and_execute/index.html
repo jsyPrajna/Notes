@@ -1,0 +1,4090 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://notes.caijiqhx.top/ucas/the_art_of_linux_kernel_design/create_process_1_and_execute/">
+      
+      
+        <meta name="author" content="caijiqhx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Create process 1 and execute - caijiqhx notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CSource+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              caijiqhx notes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Create process 1 and execute
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tools/vscode/" class="md-tabs__link">
+          常用工具
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../rust/" class="md-tabs__link">
+          Rust
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../cpp/" class="md-tabs__link">
+          C++
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../network/" class="md-tabs__link">
+          计算机网络
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../os/" class="md-tabs__link">
+          操作系统
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../database/" class="md-tabs__link">
+          数据库
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link md-tabs__link--active">
+          UCAS
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    caijiqhx notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="QHX's Notes" class="md-nav__link">
+      QHX's Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../TOP/" title="TOP" class="md-nav__link">
+      TOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      常用工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        常用工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/vscode/" title="Visual Studio Code 配置同步" class="md-nav__link">
+      Visual Studio Code 配置同步
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/manjaro/" title="Manjaro 从头配置" class="md-nav__link">
+      Manjaro 从头配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/gitbook/" title="Gitbook" class="md-nav__link">
+      Gitbook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/regex/" title="正则表达式" class="md-nav__link">
+      正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/mkdocs/" title="mkdocs" class="md-nav__link">
+      mkdocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/mkdocs_zh_search/" title="MkDocs 中文搜索" class="md-nav__link">
+      MkDocs 中文搜索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/vim/" title="vim" class="md-nav__link">
+      vim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      部署工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        部署工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/docker/docker_introduction/" title="Docker 简介" class="md-nav__link">
+      Docker 简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/docker/dockerfile/" title="Dockerfile" class="md-nav__link">
+      Dockerfile
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      调试工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        调试工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/ida/" title="IDA" class="md-nav__link">
+      IDA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Rust
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Rust
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rust 程序设计语言
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rust 程序设计语言
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/" title="The Rust Programming Language" class="md-nav__link">
+      The Rust Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x00/" title="0x00 Introduction" class="md-nav__link">
+      0x00 Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x01/" title="0x01 Getting Started" class="md-nav__link">
+      0x01 Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x02/" title="0x02 Guessing Game Tutorial" class="md-nav__link">
+      0x02 Guessing Game Tutorial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x03/" title="0x03 Common Programming Concepts" class="md-nav__link">
+      0x03 Common Programming Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x04/" title="0x04 Ownership" class="md-nav__link">
+      0x04 Ownership
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x05/" title="0x05 Structs" class="md-nav__link">
+      0x05 Structs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x06/" title="0x06 Enums and Pattern Matching" class="md-nav__link">
+      0x06 Enums and Pattern Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x07/" title="0x07 Managing Growing Projects with Packages, Crates and Modules" class="md-nav__link">
+      0x07 Managing Growing Projects with Packages, Crates and Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x08/" title="0x08 Common Collections" class="md-nav__link">
+      0x08 Common Collections
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Rustlings
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Rustlings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/" title="Rustlings" class="md-nav__link">
+      Rustlings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/move_semantics2/" title="Rustlings: move_semantics2" class="md-nav__link">
+      Rustlings: move_semantics2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/move_semantics3/" title="Rustlings: move_semantics3" class="md-nav__link">
+      Rustlings: move_semantics3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/" title="菜鸡的 C++ 学习" class="md-nav__link">
+      菜鸡的 C++ 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/memo/" title="C++ 备忘录" class="md-nav__link">
+      C++ 备忘录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/casting/" title="C++ 类型转换" class="md-nav__link">
+      C++ 类型转换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/rtti/" title="C++ 运行时类型识别" class="md-nav__link">
+      C++ 运行时类型识别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/unordered_set/" title="unordered_set" class="md-nav__link">
+      unordered_set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/custom_compare/" title="C++ 中自定义比较函数" class="md-nav__link">
+      C++ 中自定义比较函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      C++ 11/14 快速上手
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        C++ 11/14 快速上手
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/0/" title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/1/" title="语言可用性的强化" class="md-nav__link">
+      语言可用性的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/2/" title="语言运行期的强化" class="md-nav__link">
+      语言运行期的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/3/" title="对标准库的扩充：新增容器" class="md-nav__link">
+      对标准库的扩充：新增容器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/4/" title="对标准库的扩充：智能指针和引用计数" class="md-nav__link">
+      对标准库的扩充：智能指针和引用计数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/5/" title="对标准库的扩充：正则表达式" class="md-nav__link">
+      对标准库的扩充：正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/6/" title="对标准库的扩充：语言级线程支持" class="md-nav__link">
+      对标准库的扩充：语言级线程支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/7/" title="其他杂项" class="md-nav__link">
+      其他杂项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/8/" title="C++17 简介" class="md-nav__link">
+      C++17 简介
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/stl_learning/" title="STL 学习" class="md-nav__link">
+      STL 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      设计模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        设计模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/" title="设计模式" class="md-nav__link">
+      设计模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/basic/" title="设计模式预备知识" class="md-nav__link">
+      设计模式预备知识
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-3" type="checkbox" id="nav-4-9-3">
+    
+    <label class="md-nav__link" for="nav-4-9-3">
+      创建型模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-9-3">
+        创建型模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/simple_factory/" title="简单工厂模式" class="md-nav__link">
+      简单工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/factory_method/" title="工厂方法模式" class="md-nav__link">
+      工厂方法模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/abstract_factory/" title="抽象工厂模式" class="md-nav__link">
+      抽象工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/builder/" title="建造者模式" class="md-nav__link">
+      建造者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      计算机网络
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        计算机网络
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/" title="计算机网络" class="md-nav__link">
+      计算机网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/questions/" title="牛客网题目记录" class="md-nav__link">
+      牛客网题目记录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/tcp_and_udp/" title="TCP 和 UDP" class="md-nav__link">
+      TCP 和 UDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/protocols/" title="计算机网络协议" class="md-nav__link">
+      计算机网络协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/ip_addr/" title="IP 地址相关问题" class="md-nav__link">
+      IP 地址相关问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/devices/" title="各层网络设备" class="md-nav__link">
+      各层网络设备
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/http/" title="HTTP 学习" class="md-nav__link">
+      HTTP 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/http_status_code/" title="HTTP 状态码" class="md-nav__link">
+      HTTP 状态码
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      操作系统
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        操作系统
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/" title="操作系统" class="md-nav__link">
+      操作系统
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      os_lab
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        os_lab
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/" title="操作系统实验" class="md-nav__link">
+      操作系统实验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
+    
+    <label class="md-nav__link" for="nav-6-2-2">
+      lab1
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-2">
+        lab1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer1/" title="EXER1: 理解通过 make 生成执行文件的过程" class="md-nav__link">
+      EXER1: 理解通过 make 生成执行文件的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer2/" title="EXER2: 使用 qemu 执行并调试 lab1 中的软件" class="md-nav__link">
+      EXER2: 使用 qemu 执行并调试 lab1 中的软件
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer3/" title="EXER3: 分析 bootloader 进入保护模式的过程" class="md-nav__link">
+      EXER3: 分析 bootloader 进入保护模式的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer4/" title="EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程" class="md-nav__link">
+      EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer5/" title="EXER5: 实现函数调用堆栈跟踪函数" class="md-nav__link">
+      EXER5: 实现函数调用堆栈跟踪函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer6/" title="EXER6: 完善中断初始化和处理" class="md-nav__link">
+      EXER6: 完善中断初始化和处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/lab1/" title="Lab1 report" class="md-nav__link">
+      Lab1 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
+    
+    <label class="md-nav__link" for="nav-6-2-3">
+      lab2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-3">
+        lab2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-nav__link">
+      EXER1: 实现 first-fit 连续物理内存分配算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer2/" title="EXER2: 实现寻找虚拟地址对应的页表项" class="md-nav__link">
+      EXER2: 实现寻找虚拟地址对应的页表项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer3/" title="EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射" class="md-nav__link">
+      EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/lab2/" title="lab2 report" class="md-nav__link">
+      lab2 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-4" type="checkbox" id="nav-6-2-4">
+    
+    <label class="md-nav__link" for="nav-6-2-4">
+      lab3
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-4">
+        lab3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/exer1/" title="EXER1: 给未被映射的地址映射上物理页" class="md-nav__link">
+      EXER1: 给未被映射的地址映射上物理页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/exer2/" title="EXER2: 补充完成基于 FIFO 的页面替换算法" class="md-nav__link">
+      EXER2: 补充完成基于 FIFO 的页面替换算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/challenge/" title="Challenge: Extended Clock" class="md-nav__link">
+      Challenge: Extended Clock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/lab3/" title="lab3 report" class="md-nav__link">
+      lab3 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-5" type="checkbox" id="nav-6-2-5">
+    
+    <label class="md-nav__link" for="nav-6-2-5">
+      lab4
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-5">
+        lab4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer1/" title="EXER1: 分配并初始化一个进程控制块" class="md-nav__link">
+      EXER1: 分配并初始化一个进程控制块
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer2/" title="EXER2: 为新创建的内核线程分配资源" class="md-nav__link">
+      EXER2: 为新创建的内核线程分配资源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer3/" title="EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的" class="md-nav__link">
+      EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/lab4/" title="Lab4 report" class="md-nav__link">
+      Lab4 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-6" type="checkbox" id="nav-6-2-6">
+    
+    <label class="md-nav__link" for="nav-6-2-6">
+      lab5
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-6">
+        lab5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer1/" title="EXER1: 加载应用程序并执行" class="md-nav__link">
+      EXER1: 加载应用程序并执行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer2/" title="EXER2: 父进程复制自己的内存空间给子进程" class="md-nav__link">
+      EXER2: 父进程复制自己的内存空间给子进程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer3/" title="EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现" class="md-nav__link">
+      EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/lab5/" title="Lab5 report" class="md-nav__link">
+      Lab5 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-7" type="checkbox" id="nav-6-2-7">
+    
+    <label class="md-nav__link" for="nav-6-2-7">
+      lab6
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-7">
+        lab6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-nav__link">
+      EXER1: 使用 Round Robin 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/exer2/" title="EXER2: 实现 Stride Scheduling 调度算法" class="md-nav__link">
+      EXER2: 实现 Stride Scheduling 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/lab6/" title="Lab6 report" class="md-nav__link">
+      Lab6 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-8" type="checkbox" id="nav-6-2-8">
+    
+    <label class="md-nav__link" for="nav-6-2-8">
+      lab7
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-8">
+        lab7
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/exer1/" title="EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题" class="md-nav__link">
+      EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/exer2/" title="EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题" class="md-nav__link">
+      EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/lab7/" title="Lab7 report" class="md-nav__link">
+      Lab7 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-9" type="checkbox" id="nav-6-2-9">
+    
+    <label class="md-nav__link" for="nav-6-2-9">
+      lab8
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-9">
+        lab8
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/preview/" title="preview" class="md-nav__link">
+      preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/exer1/" title="EXER1: 完成读文件操作的实现" class="md-nav__link">
+      EXER1: 完成读文件操作的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/exer2/" title="EXER2: 完成基于文件系统的执行程序机制的实现" class="md-nav__link">
+      EXER2: 完成基于文件系统的执行程序机制的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/lab8/" title="Lab8 report" class="md-nav__link">
+      Lab8 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      数据库
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        数据库
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/" title="数据库" class="md-nav__link">
+      数据库
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/theory/" title="数据库系统原理" class="md-nav__link">
+      数据库系统原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/sql/" title="SQL" class="md-nav__link">
+      SQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/mysql/" title="MySQL" class="md-nav__link">
+      MySQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/sqlite.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
+    
+    <label class="md-nav__link" for="nav-8">
+      UCAS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        UCAS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="UCAS" class="md-nav__link">
+      UCAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../virtualization_overview/virtualization/" title="虚拟化概述" class="md-nav__link">
+      虚拟化概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      侧信道攻击
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        侧信道攻击
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../side_channel/side_channel.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../spectre/spectre/" title="Spectre" class="md-nav__link">
+      Spectre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-5" type="checkbox" id="nav-8-5">
+    
+    <label class="md-nav__link" for="nav-8-5">
+      ZombieLoad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-5">
+        ZombieLoad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-6" type="checkbox" id="nav-8-6">
+    
+    <label class="md-nav__link" for="nav-8-6">
+      QEMU/KVM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-6">
+        QEMU/KVM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../qemu_kvm/" title="QEMU/KVM 学习" class="md-nav__link">
+      QEMU/KVM 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../qemu_kvm/qemu_kvm_overview/" title="QEMU 与 KVM 概述" class="md-nav__link">
+      QEMU 与 KVM 概述
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-7" type="checkbox" id="nav-8-7" checked>
+    
+    <label class="md-nav__link" for="nav-8-7">
+      Linux Kernel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-7">
+        Linux Kernel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Linux Kernel 学习" class="md-nav__link">
+      Linux Kernel 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../boot_to_main/" title="从开机加电到执行 main 函数之前的过程" class="md-nav__link">
+      从开机加电到执行 main 函数之前的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../initial_and_create_process_0/" title="Initial and create process 0" class="md-nav__link">
+      Initial and create process 0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Create process 1 and execute
+      </label>
+    
+    <a href="./" title="Create process 1 and execute" class="md-nav__link md-nav__link--active">
+      Create process 1 and execute
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    进程 1 的创建
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-1" class="md-nav__link">
+    进程 0 创建进程 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task64-1" class="md-nav__link">
+    在 task[64] 中为进程 1 申请一个空闲位置并获取进程号
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy95process" class="md-nav__link">
+    调用 copy_process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    设置进程 1 的分页管理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-0" class="md-nav__link">
+    进程 1 共享进程 0 的文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-gdt" class="md-nav__link">
+    设置进程 1 在 GDT 中的表项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    进程 1 处于就绪态
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    内核第一次做进程调度
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    轮转到进程 1 执行
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    进程 1 为安装硬盘文件系统做准备
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hd95info" class="md-nav__link">
+    进程 1 设置硬盘的 hd_info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    读取硬盘中的引导块到缓冲区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    将找到的缓冲块与请求项挂接
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    进程 1 的创建
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#0-1" class="md-nav__link">
+    进程 0 创建进程 1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#task64-1" class="md-nav__link">
+    在 task[64] 中为进程 1 申请一个空闲位置并获取进程号
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy95process" class="md-nav__link">
+    调用 copy_process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    设置进程 1 的分页管理
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-0" class="md-nav__link">
+    进程 1 共享进程 0 的文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-gdt" class="md-nav__link">
+    设置进程 1 在 GDT 中的表项
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_3" class="md-nav__link">
+    进程 1 处于就绪态
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    内核第一次做进程调度
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1_4" class="md-nav__link">
+    轮转到进程 1 执行
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_5" class="md-nav__link">
+    进程 1 为安装硬盘文件系统做准备
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-hd95info" class="md-nav__link">
+    进程 1 设置硬盘的 hd_info
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    读取硬盘中的引导块到缓冲区
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    将找到的缓冲块与请求项挂接
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/caijiqhx/Notes/edit/master/docs/ucas/the_art_of_linux_kernel_design/create_process_1_and_execute.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <p>[toc]</p>
+<h1 id="1">进程 1 的创建及执行<a class="headerlink" href="#1" title="Permanent link">*</a></h1>
+<p>现在，我们已经有了一个名副其实的、3 特权级的进程——进程 0。下面将详细讲解进程 0 的第一项工作——创建进程 1。</p>
+<h2 id="1_1">进程 1 的创建<a class="headerlink" href="#1_1" title="Permanent link">*</a></h2>
+<p>进程 0 现在在 3 特权级状态，即进程状态。进程 0 的第一项工作就是作为父进程调用 fork 函数创建第一个子进程——进程 1。以后所有的进程都是基于父子进程创建机制由父进程创建出来的。</p>
+<h3 id="0-1">进程 0 创建进程 1<a class="headerlink" href="#0-1" title="Permanent link">*</a></h3>
+<p>创建进程即由父进程调用 fork 函数实现。代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// int fork() 系统调用，创建子进程</span>
+<span class="k">static</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="n">_syscall0</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="n">fork</span><span class="p">)</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">fork</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w">      </span><span class="cm">/* we count on this going ok */</span><span class="w"></span>
+<span class="w">        </span><span class="n">init</span><span class="p">();</span><span class="w">                             </span><span class="c1">// 在新建的子进程(任务1)中执行。</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>_syscalln 是 n 个参数的系统调用宏，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// include/uinstd.h</span>
+<span class="cp">#define __NR_fork   2</span>
+<span class="cp">#define _syscall0(type,name) \</span>
+<span class="cp">type name(void) \</span>
+<span class="cp">{ \</span>
+<span class="cp">long __res; \</span>
+<span class="cp">__asm__ volatile (&quot;int $0x80&quot; \</span>
+<span class="cp">    : &quot;=a&quot; (__res) \</span>
+<span class="cp">    : &quot;0&quot; (__NR_##name)); \</span>
+<span class="cp">if (__res &gt;= 0) \</span>
+<span class="cp">    return (type) __res; \</span>
+<span class="cp">errno = -__res; \</span>
+<span class="cp">return -1; \</span>
+<span class="cp">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>宏展开后即为对应系统调用的代码，此处为 fork，展开如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">fork</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">__res</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">__asm__</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;int $0x80&quot;</span><span class="w">       </span><span class="c1">// 系统调用入口</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;=a&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">__res</span><span class="p">)</span><span class="w">                  </span><span class="c1">// 返回值赋给 eax</span>
+<span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">__NR_fork</span><span class="p">));</span><span class="w">             </span><span class="c1">// 传入 fork 系统调用号 2, &quot;0&quot; 表示同上寄存器</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">__res</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">                      </span><span class="c1">// int 0x80 返回后执行，进程 1 的第一条指令</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="w"> </span><span class="n">__res</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">errno</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">__res</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>之前调用的 sched_init 函数使用 set_system_gate 宏设置了系统调用的终端服务程序 system_call，部分代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="nl">_system_call:</span>
+    <span class="nf">cmpl</span> <span class="no">$nr_system_calls-1</span><span class="p">,</span><span class="nv">%eax</span>    <span class="c1"># 调用号如果超出范围的话就在eax中置-1并退出</span>
+    <span class="nf">ja</span> <span class="no">bad_sys_call</span>
+    <span class="nf">push</span> <span class="nv">%ds</span>                        <span class="c1"># 保存原段寄存器值</span>
+    <span class="nf">push</span> <span class="nv">%es</span>
+    <span class="nf">push</span> <span class="nv">%fs</span>
+<span class="c1"># 一个系统调用最多可带有3个参数，也可以不带参数。下面入栈的ebx、ecx和edx中放着系统</span>
+<span class="c1"># 调用相应C语言函数的调用函数。这几个寄存器入栈的顺序是由GNU GCC规定的，</span>
+<span class="c1"># ebx 中可存放第1个参数，ecx中存放第2个参数，edx中存放第3个参数。</span>
+<span class="c1"># 系统调用语句可参见头文件include/unistd.h中的系统调用宏。</span>
+    <span class="nf">pushl</span> <span class="nv">%edx</span>
+    <span class="nf">pushl</span> <span class="nv">%ecx</span>      <span class="c1"># push %ebx,%ecx,%edx as parameters</span>
+    <span class="nf">pushl</span> <span class="nv">%ebx</span>      <span class="c1"># to the system call</span>
+    <span class="nf">movl</span> <span class="no">$0x10</span><span class="p">,</span><span class="nv">%edx</span>     <span class="c1"># set up ds,es to kernel space</span>
+    <span class="nf">mov</span> <span class="nv">%dx</span><span class="p">,</span><span class="nv">%ds</span>
+    <span class="nf">mov</span> <span class="nv">%dx</span><span class="p">,</span><span class="nv">%es</span>
+<span class="c1"># fs指向局部数据段(局部描述符表中数据段描述符)，即指向执行本次系统调用的用户程序的数据段。</span>
+<span class="c1"># 注意,在Linux 0.11 中内核给任务分配的代码和数据内存段是重叠的，他们的段基址和段限长相同。</span>
+    <span class="nf">movl</span> <span class="no">$0x17</span><span class="p">,</span><span class="nv">%edx</span>     <span class="c1"># fs points to local data space</span>
+    <span class="nf">mov</span> <span class="nv">%dx</span><span class="p">,</span><span class="nv">%fs</span>
+<span class="c1"># 下面这句操作数的含义是：调用地址=[_sys_call_table + %eax * 4]</span>
+<span class="c1"># sys_call_table[]是一个指针数组，定义在include/linux/sys.h中，该指针数组中设置了所有72</span>
+<span class="c1"># 个系统调用C处理函数地址。</span>
+    <span class="nf">call</span> <span class="no">_sys_call_table</span><span class="p">(,</span><span class="nv">%eax</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>        <span class="c1"># 间接调用指定功能C函数</span>
+    <span class="nf">pushl</span> <span class="nv">%eax</span>                          <span class="c1"># 把系统调用返回值入栈</span>
+</pre></div>
+</td></tr></table>
+
+<p>sys_call 作为系统调用的总入口，先保存现场、设置段寄存器的值，然后根据 eax 的值调用对应的处理函数。此处调用的就是 sys_fork，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="na">.align</span> <span class="mi">2</span>
+<span class="nl">_sys_fork:</span>
+    <span class="nf">call</span> <span class="no">_find_empty_process</span>
+    <span class="nf">testl</span> <span class="nv">%eax</span><span class="p">,</span><span class="nv">%eax</span>             <span class="c1"># 在eax中返回进程号pid。若返回负数则退出。</span>
+    <span class="nf">js</span> <span class="mi">1</span><span class="no">f</span>
+    <span class="nf">push</span> <span class="nv">%gs</span>
+    <span class="nf">pushl</span> <span class="nv">%esi</span>
+    <span class="nf">pushl</span> <span class="nv">%edi</span>
+    <span class="nf">pushl</span> <span class="nv">%ebp</span>
+    <span class="nf">pushl</span> <span class="nv">%eax</span>
+    <span class="nf">call</span> <span class="no">_copy_process</span>
+    <span class="nf">addl</span> <span class="no">$20</span><span class="p">,</span><span class="nv">%esp</span>               <span class="c1"># 丢弃这里所有压栈内容。</span>
+<span class="err">1:</span>  <span class="nf">ret</span>
+</pre></div>
+</td></tr></table>
+
+<p>下面就分析 sys_fork 具体做了什么。</p>
+<h3 id="task64-1">在 task[64] 中为进程 1 申请一个空闲位置并获取进程号<a class="headerlink" href="#task64-1" title="Permanent link">*</a></h3>
+<p>一上来就调用了 find_empty_process，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// kernel/fork.c</span>
+<span class="c1">// 为新进程取得不重复的进程号last_pid.函数返回在任务数组中的任务号(数组项)。</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">find_empty_process</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 首先获取新的进程号。如果last_pid溢出，则重新从1开始。</span>
+<span class="w">    </span><span class="c1">// 然后在task[64]中搜索刚设置的pid号是否已经被任何任务使用。</span>
+<span class="w">    </span><span class="c1">// 如果是则重新获得一个pid号。接着在任务数组中为新任务寻找一个空闲项，并回项号。</span>
+<span class="w">    </span><span class="c1">// last_pid是一个全局变量，不用返回。如果此时任务数组中64个项已经被全部占用，则返回出错码。</span>
+<span class="w">    </span><span class="nl">repeat</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="o">++</span><span class="n">last_pid</span><span class="p">)</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">last_pid</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">NR_TASKS</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">task</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">task</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">pid</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">last_pid</span><span class="p">)</span><span class="w"> </span><span class="k">goto</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">NR_TASKS</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w">         </span><span class="c1">// 任务0项被排除在外</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">task</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EAGAIN</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>函数做的事就是分配一个空闲的 pid 和 task[64] 项，返回 task 数组索引，如果没有则返回错误码。第一次调用的结果就是返回 1，即进程 1 的信息将存储在 task[64] 的第二项。返回后继续压栈，为调用 copy_process 做准备。</p>
+<h3 id="copy95process">调用 copy_process<a class="headerlink" href="#copy95process" title="Permanent link">*</a></h3>
+<p>进程 0 作为可以创建子进程的父进程，在内核中有进程 0 的 task_struct 和页表项等专属管理信息。进程 0 做了以下重要工作：</p>
+<ol>
+<li>为进程 1 创建 task_struct，将进程 0 的 task_struct 内容复制给进程 1；</li>
+<li>为进程 1 的 task_struct、tss 做个性化设置；</li>
+<li>为进程 1 创建第一个页表，将进程 0 的页表项内容赋给这个页表；</li>
+<li>进程 1 共享进程 0 的文件；</li>
+<li>设置进程 1 的 GDT 项；</li>
+<li>最后将进程 1 设置为就绪态，使其可以参与进程间的轮转。</li>
+</ol>
+<p>现在调用 copy_process，函数参数有很多，是从触发中断开始就积累的栈状态，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 复制进程</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">copy_process</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nr</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">ebp</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">edi</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">esi</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">gs</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">none</span><span class="p">,</span><span class="w">   </span>
+<span class="w">                 </span><span class="c1">// call instruction and after find_empty_process</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">ebx</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">ecx</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">edx</span><span class="p">,</span><span class="w">                                     </span><span class="c1">// system_call</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">fs</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">es</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">ds</span><span class="p">,</span><span class="w">                                        </span><span class="c1">// system_call</span>
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">eip</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">cs</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">eflags</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">esp</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">ss</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                </span><span class="c1">// hardware</span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">file</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span> <span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">get_free_page</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EAGAIN</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">task</span><span class="p">[</span><span class="n">nr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>先调用 get_free_page 分配内存，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 在主内存区中取空闲物理页面。如果已经没有可用物理内存页面，则返回0.</span>
+<span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">get_free_page</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="k">register</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">__res</span><span class="w"> </span><span class="k">asm</span><span class="p">(</span><span class="s">&quot;ax&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">__asm__</span><span class="p">(</span><span class="s">&quot;std ; repne ; scasb</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">   </span><span class="c1">// std 置方向位, 从高到低扫描; </span>
+<span class="w">                                    </span><span class="c1">// repne 重复执行直到 ecx==0 或 ZF==0; scasb 比较 al 和 [edi]</span>
+<span class="w">    </span><span class="s">&quot;jne 1f</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">                    </span><span class="c1">// 如果 mem_map 没有空闲，则退出。</span>
+<span class="w">    </span><span class="s">&quot;movb $1,1(%%edi)</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">          </span><span class="c1">// 1 =&gt; [1+edi], mem_map 找到的第一个空闲设为 1</span>
+<span class="w">                                    </span><span class="c1">// +1 是因为 scasb 会 dec edi</span>
+<span class="w">    </span><span class="s">&quot;sall $12,%%ecx</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">            </span><span class="c1">// 相对 LOW_MEM 的页面地址</span>
+<span class="w">    </span><span class="s">&quot;addl %2,%%ecx</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">             </span><span class="c1">// 加上 LOW_MEM, 实际物理地址</span>
+<span class="w">    </span><span class="s">&quot;movl %%ecx,%%edx</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;movl $1024,%%ecx</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">          </span><span class="c1">// 寄存器ecx置计数值1024</span>
+<span class="w">    </span><span class="s">&quot;leal 4092(%%edx),%%edi</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">    </span><span class="c1">// 页面末端地址 =&gt; edi</span>
+<span class="w">    </span><span class="s">&quot;rep ; stosl</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w">               </span><span class="c1">// eax =&gt; [edi], 清空页面</span>
+<span class="w">    </span><span class="s">&quot;movl %%edx,%%eax</span><span class="se">\n</span><span class="s">&quot;</span><span class="w">            </span><span class="c1">// 页面起始地址 =&gt; eax</span>
+<span class="w">    </span><span class="s">&quot;1:&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="s">&quot;=a&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">__res</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="s">&quot;i&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">LOW_MEM</span><span class="p">),</span><span class="s">&quot;c&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">PAGING_PAGES</span><span class="p">),</span><span class="w"></span>
+<span class="w">    </span><span class="s">&quot;D&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">mem_map</span><span class="o">+</span><span class="n">PAGING_PAGES</span><span class="mi">-1</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="o">:</span><span class="s">&quot;di&quot;</span><span class="p">,</span><span class="s">&quot;cx&quot;</span><span class="p">,</span><span class="s">&quot;dx&quot;</span><span class="p">);</span><span class="w">               </span><span class="c1">// 程序中改变过的寄存器</span>
+<span class="k">return</span><span class="w"> </span><span class="n">__res</span><span class="p">;</span><span class="w">           </span><span class="c1">// 返回空闲物理页面地址(若无空闲页面则返回0).</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>get_free_page 分配一个空闲页后挂接到 task[nr] 上，这个页的低地址段就是进程 1 的 task_struct，而高地址段，回顾进程 0 使用的 task_union，即为内核栈顶。</p>
+<p>申请空间后就将进程 0 的 task_struct 复制过来，并做出个性化设置，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="c1">// 注意此处的数据类型, 仅复制了 task_struct 而未复制 stack</span>
+<span class="w">   </span><span class="o">*</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">current</span><span class="p">;</span><span class="w">   </span><span class="cm">/* NOTE! this doesn&#39;t copy the supervisor stack */</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 随后对复制来的进程结构内容进行一些修改，作为新进程的任务结构。先将</span>
+<span class="w">    </span><span class="c1">// 进程的状态置为不可中断等待状态，以防止内核调度其执行。然后设置新进程</span>
+<span class="w">    </span><span class="c1">// 的进程号pid和父进程号father，并初始化进程运行时间片值等于其priority值</span>
+<span class="w">    </span><span class="c1">// 接着复位新进程的信号位图、报警定时值、会话(session)领导标志leader、进程</span>
+<span class="w">    </span><span class="c1">// 及其子进程在内核和用户态运行时间统计值，还设置进程开始运行的系统时间start_time.</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TASK_UNINTERRUPTIBLE</span><span class="p">;</span><span class="w">    </span><span class="c1">// 不可中断等待状态</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">pid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">last_pid</span><span class="p">;</span><span class="w">              </span><span class="c1">// find_empty_process 分配的 pid</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">father</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">pid</span><span class="p">;</span><span class="w">       </span><span class="c1">// 设置父进程</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">priority</span><span class="p">;</span><span class="w">       </span><span class="c1">// 运行时间片值</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">signal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                  </span><span class="c1">// 信号位图置0</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">alarm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                   </span><span class="c1">// 报警定时值(滴答数)</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">leader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">      </span><span class="cm">/* process leadership doesn&#39;t inherit */</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">utime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">stime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">        </span><span class="c1">// 用户态时间和和心态运行时间</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">cutime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">cstime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">      </span><span class="c1">// 子进程用户态和和心态运行时间</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jiffies</span><span class="p">;</span><span class="w">        </span><span class="c1">// 进程开始运行时间(当前时间滴答数) </span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// kernel/sched.c</span>
+<span class="k">struct</span> <span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="p">(</span><span class="n">init_task</span><span class="p">.</span><span class="n">task</span><span class="p">);</span><span class="w">    </span><span class="c1">// 当前任务指针(初始化指向任务0)</span>
+</pre></div>
+</td></tr></table>
+
+<p>下面会设置 tss 中各项的值，用到的都是之前压栈的寄存器值，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">back_link</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">esp0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PAGE_SIZE</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">     </span><span class="c1">// 任务内核态栈指针。</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ss0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x10</span><span class="p">;</span><span class="w">                      </span><span class="c1">// 内核态栈的段选择符, 即10000b, 对应GDT[2]</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">eip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eip</span><span class="p">;</span><span class="w">                       </span><span class="c1">// 指令代码指针</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">eflags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eflags</span><span class="p">;</span><span class="w">                 </span><span class="c1">// 标志寄存器</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">eax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">                         </span><span class="c1">// 这是当fork()返回时新进程会返回0的原因所在</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ecx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ecx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">edx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ebx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ebx</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">esp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ebp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ebp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">esi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esi</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">edi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">edi</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">es</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">es</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w">                </span><span class="c1">// 段寄存器仅16位有效</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">cs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cs</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ss</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ds</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">fs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fs</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">gs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gs</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffff</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">ldt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">_LDT</span><span class="p">(</span><span class="n">nr</span><span class="p">);</span><span class="w">                  </span><span class="c1">// 任务局部表描述符的选择符(LDT描述符在GDT中)</span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">.</span><span class="n">trace_bitmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x80000000</span><span class="p">;</span><span class="w">       </span><span class="c1">// 高16位有效 </span>
+<span class="p">...</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="1_2">设置进程 1 的分页管理<a class="headerlink" href="#1_2" title="Permanent link">*</a></h3>
+<p>要设置分页就要先设置分段，调用 copy_mem，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">copy_mem</span><span class="p">(</span><span class="n">nr</span><span class="p">,</span><span class="n">p</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">task</span><span class="p">[</span><span class="n">nr</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">free_page</span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">p</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">EAGAIN</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="c1">// 复制内存页表</span>
+<span class="c1">// 由于Linux系统采用了写时复制(copy on write)技术，因此这里仅为新进程设置自己的页目录表项和页表项，</span>
+<span class="c1">// 而没有实际为新进程分配物理内存页面。此时新进程与其父进程共享所有内存页面。</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">copy_mem</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">nr</span><span class="p">,</span><span class="k">struct</span> <span class="nc">task_struct</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">old_data_base</span><span class="p">,</span><span class="n">new_data_base</span><span class="p">,</span><span class="n">data_limit</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">old_code_base</span><span class="p">,</span><span class="n">new_code_base</span><span class="p">,</span><span class="n">code_limit</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 提取当前进程段基址、段限长信息</span>
+<span class="w">    </span><span class="n">code_limit</span><span class="o">=</span><span class="n">get_limit</span><span class="p">(</span><span class="mh">0x0f</span><span class="p">);</span><span class="w">     </span><span class="c1">// 1111b, 即 LDT[1]</span>
+<span class="w">    </span><span class="n">data_limit</span><span class="o">=</span><span class="n">get_limit</span><span class="p">(</span><span class="mh">0x17</span><span class="p">);</span><span class="w">     </span><span class="c1">// 10111b, 即 LDT[2] </span>
+<span class="w">    </span><span class="n">old_code_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_base</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">ldt</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="n">old_data_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_base</span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">ldt</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">old_data_base</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">old_code_base</span><span class="p">)</span><span class="w"> </span>
+<span class="w">        </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;We don&#39;t support separate I&amp;D&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">data_limit</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">code_limit</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;Bad data_limit&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">new_data_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_code_base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nr</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mh">0x4000000</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">start_code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new_code_base</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">set_base</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ldt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">new_code_base</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">set_base</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ldt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">new_data_base</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">copy_page_tables</span><span class="p">(</span><span class="n">old_data_base</span><span class="p">,</span><span class="n">new_data_base</span><span class="p">,</span><span class="n">data_limit</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;free_page_tables: from copy_mem</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">free_page_tables</span><span class="p">(</span><span class="n">new_data_base</span><span class="p">,</span><span class="n">data_limit</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="n">ENOMEM</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>使用宏获取和设置段基址和限长，其实还是按照描述符格式操作。Linux 0.11 的代码段和数据段重合，因此提取后需要先检查是否相等。设置新进程的段基址为 nr&lt;&lt;26，最后调用 copy_page_tables 复制页表。</p>
+<p><strong>要明确的是，Linux 0.11 中的所有进程共享一个页目录表。</strong> 一共 4G 空间，每个进程 64 MB，这样最大进程数恰好就是 64，这也是为什么 task 数组大小为 64。</p>
+<p>代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 复制页目录表项和页表项</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">copy_page_tables</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">from</span><span class="p">,</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">to</span><span class="p">,</span><span class="kt">long</span><span class="w"> </span><span class="n">size</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">from_page_table</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">to_page_table</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">this_page</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">from_dir</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">to_dir</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">nr</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">from</span><span class="o">&amp;</span><span class="mh">0x3fffff</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">to</span><span class="o">&amp;</span><span class="mh">0x3fffff</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;copy_page_tables called with wrong alignment&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 页目录表项在页目录表中的偏移地址，一项对应 4MB，所以偏移地址还要 4B 对齐 相当于 (addr&gt;&gt;22)&lt;&lt;2</span>
+<span class="w">    </span><span class="n">from_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="n">from</span><span class="o">&gt;&gt;</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffc</span><span class="p">);</span><span class="w"> </span><span class="cm">/* _pg_dir = 0 */</span><span class="w"></span>
+<span class="w">    </span><span class="n">to_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="n">to</span><span class="o">&gt;&gt;</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xffc</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">unsigned</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">size</span><span class="o">+</span><span class="mh">0x3fffff</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span><span class="w">      </span><span class="c1">// 复制的页表数 = 页目录项数，向上取整</span>
+<span class="w">    </span><span class="c1">// 下面开始对每个页目录项依次申请1页内存来保存对应的页表，并且开始页表项复制操作。</span>
+<span class="w">    </span><span class="c1">// 如果目的目录指定的页表已经存在(P=1)，则出错死机。</span>
+<span class="w">    </span><span class="c1">// 如果源目录项无效，即指定的页表不存在(P=1),则继续循环处理下一个页目录项。</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">size</span><span class="o">--&gt;</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">from_dir</span><span class="o">++</span><span class="p">,</span><span class="n">to_dir</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">*</span><span class="n">to_dir</span><span class="p">)</span><span class="w">            </span><span class="c1">// 页表项最低位为存在位</span>
+<span class="w">            </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;copy_page_tables: already exist&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">*</span><span class="n">from_dir</span><span class="p">))</span><span class="w"></span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="n">from_page_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mh">0xfffff000</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">*</span><span class="n">from_dir</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">to_page_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">get_free_page</span><span class="p">()))</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w">  </span><span class="cm">/* Out of memory, see freeing */</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// | 7表示对应页表映射的内存页面是用户级的，并且可读写、存在(Usr,R/W,Present).</span>
+<span class="w">        </span><span class="c1">// 然后针对当前处理的页目录项对应的页表，设置需要复制的页面项数。</span>
+<span class="w">        </span><span class="o">*</span><span class="n">to_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">to_page_table</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">nr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">from</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="o">?</span><span class="mh">0xA0</span><span class="o">:</span><span class="mi">1024</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// 此时对于当前页表，开始循环复制指定的nr个内存页面表项。</span>
+<span class="w">        </span><span class="c1">// 复位表项中R/W标志(位1置0)，即让页表对应的内存页面只读。</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">nr</span><span class="o">--</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">from_page_table</span><span class="o">++</span><span class="p">,</span><span class="n">to_page_table</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">this_page</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">from_page_table</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">this_page</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="n">this_page</span><span class="w"> </span><span class="o">&amp;=</span><span class="w"> </span><span class="o">~</span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="o">*</span><span class="n">to_page_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">this_page</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">this_page</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">LOW_MEM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="c1">// 主内存区中的源页表项所指内存页也为只读。</span>
+<span class="w">                </span><span class="o">*</span><span class="n">from_page_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">this_page</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">this_page</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">LOW_MEM</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">this_page</span><span class="w"> </span><span class="o">&gt;&gt;=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">mem_map</span><span class="p">[</span><span class="n">this_page</span><span class="p">]</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">invalidate</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="c1">// 写入cr3以刷新 TLB</span>
+<span class="cp">#define invalidate() \</span>
+<span class="cp">__asm__(&quot;movl %%eax,%%cr3&quot;::&quot;a&quot; (0))</span>
+</pre></div>
+</td></tr></table>
+
+<p>copy_page_tables 复制指定线性地址和长度内存对应的页目录项和页表项，而被复制的页目录和页表对应的原物理内存页面被两套页表映射而共享使用。首先要求 from 和 to 4M 对齐，因为一个页表管理的内存范围就是 4M。只有满足这个要求才能从保证从一个页表的第一项开始复制。然后根据源地址和目的地址计算起始目录指针，根据长度计算要复制的目录表项数，即页表数。</p>
+<p>之后申请空间来存放对应的页表，将申请的页面地址填入页目录项，同时设置 u、r/w、p 标志位。如果内核空间则只复制前 160 个页表项，对应 640KB 物理内存，否则需要复制整个页表的 1024 项，对应 4MB 内存。复制页表项要注意的是设置页面只读，这样才能用写时复制机制。如果页表所指的物理内存在 1MB 以上，那么需要设置内存页面映射数组 mem_map，计算页面号，增加引用计数。要注意的是主内存区中的共享物理页面的源页表项也要设置为只读。最后写 cr3 以刷新 TLB。</p>
+<p>至此，进程 1 还没有对应的程序，页表与进程 0 完全一致，等它有了自己的程序之后会重新组织自己的内存管理结构。</p>
+<h3 id="1-0">进程 1 共享进程 0 的文件<a class="headerlink" href="#1-0" title="Permanent link">*</a></h3>
+<p>回到 copy_process 函数，下面设置 task_struct 文件相关的成员，都是从父进程继承，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">NR_OPEN</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">f</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">filp</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="w"></span>
+<span class="w">            </span><span class="n">f</span><span class="o">-&gt;</span><span class="n">f_count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">pwd</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">pwd</span><span class="o">-&gt;</span><span class="n">i_count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">root</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">i_count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="o">-&gt;</span><span class="n">executable</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">executable</span><span class="o">-&gt;</span><span class="n">i_count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>父进程打开的文件，以及当前工作目录 inode、根目录 inode、执行文件 inode 的引用计数都 +1。</p>
+<h3 id="1-gdt">设置进程 1 在 GDT 中的表项<a class="headerlink" href="#1-gdt" title="Permanent link">*</a></h3>
+<p>将进程 1 的 TSS 和 LDT 挂接在 GDT 中，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="c1">// 程序然后把新进程设置成就绪态。另外在任务切换时，任务寄存器tr由CPU自动加载。</span>
+<span class="w">    </span><span class="n">set_tss_desc</span><span class="p">(</span><span class="n">gdt</span><span class="o">+</span><span class="p">(</span><span class="n">nr</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">FIRST_TSS_ENTRY</span><span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">tss</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">set_ldt_desc</span><span class="p">(</span><span class="n">gdt</span><span class="o">+</span><span class="p">(</span><span class="n">nr</span><span class="o">&lt;&lt;</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="n">FIRST_LDT_ENTRY</span><span class="p">,</span><span class="o">&amp;</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">ldt</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="n">p</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TASK_RUNNING</span><span class="p">;</span><span class="w">    </span><span class="cm">/* do this last, just in case */</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">last_pid</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="1_3">进程 1 处于就绪态<a class="headerlink" href="#1_3" title="Permanent link">*</a></h3>
+<p>最后，将进程 1 设置为就绪态，使其可以参加进程调度，返回进程号 1。至此，进程 1 的创建工作完成，进程 1 已具备了进程 0 的全部能力，可以在主机中正常允许。</p>
+<p>控制流返回到 sys_fork 中，在调整栈指针后返回到 system_call 继续执行，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span>    <span class="nf">call</span> <span class="no">_sys_call_table</span><span class="p">(,</span><span class="nv">%eax</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>        <span class="c1"># 间接调用指定功能C函数</span>
+    <span class="nf">pushl</span> <span class="nv">%eax</span>                          <span class="c1"># 把系统调用返回值入栈</span>
+
+    <span class="nf">movl</span> <span class="no">_current</span><span class="p">,</span><span class="nv">%eax</span>                   <span class="c1"># 取当前任务(进程)数据结构地址→eax</span>
+    <span class="nf">cmpl</span> <span class="no">$0</span><span class="p">,</span><span class="no">state</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>     <span class="c1"># state</span>
+    <span class="nf">jne</span> <span class="no">reschedule</span>
+    <span class="nf">cmpl</span> <span class="no">$0</span><span class="p">,</span><span class="no">counter</span><span class="p">(</span><span class="nv">%eax</span><span class="p">)</span>       <span class="c1"># counter</span>
+    <span class="nf">je</span> <span class="no">reschedule</span>
+<span class="c1"># 以下这段代码执行从系统调用C函数返回后，对信号进行识别处理。其他中断服务程序退出时也</span>
+<span class="c1"># 将跳转到这里进行处理后才退出中断过程，例如后面的处理器出错中断int 16.</span>
+<span class="nl">ret_from_sys_call:</span>
+<span class="c1"># 首先判别当前任务是否是初始任务task0,如果是则不比对其进行信号量方面的处理，直接返回。</span>
+    <span class="nf">movl</span> <span class="no">_current</span><span class="p">,</span><span class="nv">%eax</span>      <span class="c1"># task[0] cannot have signals</span>
+    <span class="nf">cmpl</span> <span class="no">_task</span><span class="p">,</span><span class="nv">%eax</span>
+    <span class="nf">je</span> <span class="mi">3</span><span class="no">f</span>                   <span class="c1"># 向前(forward)跳转到标号3处退出中断处理</span>
+    <span class="na">...</span>
+<span class="err">3:</span>  <span class="nf">popl</span> <span class="nv">%eax</span>                       <span class="c1"># eax中含有上面入栈系统调用的返回值</span>
+    <span class="nf">popl</span> <span class="nv">%ebx</span>
+    <span class="nf">popl</span> <span class="nv">%ecx</span>
+    <span class="nf">popl</span> <span class="nv">%edx</span>
+    <span class="nf">pop</span> <span class="nv">%fs</span>
+    <span class="nf">pop</span> <span class="nv">%es</span>
+    <span class="nf">pop</span> <span class="nv">%ds</span>
+    <span class="nf">iret</span>
+</pre></div>
+</td></tr></table>
+
+<p>将返回值即 pid 入栈，然后判断当前进程状态，如果不是就绪态或时间片用尽则进程调度。然后执行 ret_from_sys_call 程序，对于进程 0 则直接跳转到标号 3 返回，其他情况还需要进程信号量处理。最后就是恢复寄存器值，eax 值即为进程 1 的 pid，iret 中断返回，由硬件恢复另外几个寄存器。此时的 CS:EIP 即指向 fork 函数中的 if 语句一行，返回值为 1，则返回到 main 函数，fork 在父进程中返回非 0，所以不会执行 init 函数，而是进入 pause 循环。</p>
+<p>返回路径：<code>ret_from_sys_call =&gt; fork =&gt; main =&gt; pause</code></p>
+<h2 id="_1">内核第一次做进程调度<a class="headerlink" href="#_1" title="Permanent link">*</a></h2>
+<p>Linux 0.11 的进程调度机制中，通常有以下两种情况可以产生进程切换：</p>
+<ul>
+<li>允许进程允许的时间结束，时间片用尽；</li>
+<li>进程的运行停止，进程等待外设提供数据，或等待其他程序的运行结果，或进程已执行完毕。</li>
+</ul>
+<p>进程 0 比较特殊，切换到进程 1 既有第二种，又有怠速状态的意思。进程 0 执行 pause 循环，pause 也是系统调用，也通过 system_call 调用，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// kernel/sched.c</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">sys_pause</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">current</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TASK_INTERRUPTIBLE</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">schedule</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>将进程 0 设置为可中断等待状态，调用 schedule 函数进行函数切换，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="kt">void</span><span class="w"> </span><span class="nf">schedule</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">next</span><span class="p">,</span><span class="n">c</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">task_struct</span><span class="w"> </span><span class="o">**</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 检查 alarm，唤醒任何已得到信号的可中断任务。 </span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 中断主程序</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">NR_TASKS</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">task</span><span class="p">[</span><span class="n">NR_TASKS</span><span class="p">];</span><span class="w"></span>
+
+<span class="w">        </span><span class="c1">// 就绪态且counter最大</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">--</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!*--</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">state</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">TASK_RUNNING</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">counter</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">counter</span><span class="p">,</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">LAST_TASK</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">FIRST_TASK</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="o">--</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="w"></span>
+<span class="w">                </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">counter</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"></span>
+<span class="w">                        </span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">priority</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">switch_to</span><span class="p">(</span><span class="n">next</span><span class="p">);</span><span class="w">     </span><span class="c1">// 切换到Next任务并运行。</span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>两次遍历 task[64]，第一次遍历，只要指针不空，针对 task_struct 的 alarm 和 signal 进行处理，之后会讨论，此处不深究。第二次遍历所有进程，比较进程的状态和时间片，找出就绪态且 counter 最大的进程，调度执行，如果所有 counter 都为 0，则根据任务优先级更新每个任务的 counter 值。此时就只有进程 0 和进程 1，且 0 是可中断等待状态，不是就绪态，只有 1 是就绪态，所以就切换到进程 1，执行 switch_to，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 切换当前进程到进程 n</span>
+<span class="cp">#define switch_to(n) {\</span>
+<span class="cp">struct {long a,b;} __tmp; \</span>
+<span class="cp">__asm__(&quot;cmpl %%ecx,current\n\t&quot; \</span>
+<span class="cp">    &quot;je 1f\n\t&quot; \                               </span><span class="c1">// 先检测当前进程不是 n</span>
+<span class="w">    </span><span class="s">&quot;movw %%dx,%1</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">                        </span><span class="c1">// TSS 段选择符存入 tmp.b</span>
+<span class="w">    </span><span class="s">&quot;xchgl %%ecx,current</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">                 </span><span class="c1">// 交换 current = task[n], ecx = 切换出的任务</span>
+<span class="w">    </span><span class="s">&quot;ljmp *%0</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"> </span><span class="err">\</span><span class="w">                            </span><span class="c1">// 跳转到 tmp, a 是偏移, b 是段选择符</span>
+<span class="w">                                                </span><span class="c1">// 直接跳转到 TSS 段指定的进程执行</span>
+<span class="w">    </span><span class="s">&quot;cmpl %%ecx,last_task_used_math</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"> </span>\
+<span class="w">    </span><span class="s">&quot;jne 1f</span><span class="se">\n\t</span><span class="s">&quot;</span><span class="w"> </span>\
+<span class="w">    </span><span class="s">&quot;clts</span><span class="se">\n</span><span class="s">&quot;</span><span class="w"> </span>\
+<span class="w">    </span><span class="s">&quot;1:&quot;</span><span class="w"> </span>\
+<span class="w">    </span><span class="o">::</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="p">(</span><span class="o">*&amp;</span><span class="n">__tmp</span><span class="p">.</span><span class="n">a</span><span class="p">),</span><span class="s">&quot;m&quot;</span><span class="w"> </span><span class="p">(</span><span class="o">*&amp;</span><span class="n">__tmp</span><span class="p">.</span><span class="n">b</span><span class="p">),</span><span class="w"> </span>\
+<span class="w">    </span><span class="s">&quot;d&quot;</span><span class="w"> </span><span class="p">(</span><span class="n">_TSS</span><span class="p">(</span><span class="n">n</span><span class="p">)),</span><span class="s">&quot;c&quot;</span><span class="w"> </span><span class="p">((</span><span class="kt">long</span><span class="p">)</span><span class="w"> </span><span class="n">task</span><span class="p">[</span><span class="n">n</span><span class="p">]));</span><span class="w"> </span>\
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>switch_to 切换到进程 1 执行，构造 tmp 结构体存 TSS 段描述符，然后通过 ljmp 长跳转到 TSS 段。CPU 各个寄存器值保存在 TSS0 中，将 TSS1 以及 LDT1 段描述符恢复给 CPU 的各个寄存器，实现从 0 特权级的内核代码切换到 3 特权级的进程 1 代码指向。</p>
+<p>需要注意的是，pause 的调用是通过系统调用中断从 3 特权级的进程 0 代码翻转到 0 特权级的内核代码指向的，从 system_call 到 sys_pause，在其中调用 schedule 再调用 switch_to，在 switch_to 的 ljmp 跳转到进程 1 的代码执行。现在 switch_to 中 ljmp 后面的代码还未执行，system_call 的后半段也还没执行，系统调用中断还没返回。</p>
+<h2 id="1_4">轮转到进程 1 执行<a class="headerlink" href="#1_4" title="Permanent link">*</a></h2>
+<p>回顾进程 0 创建进程 1 的过程，前面 copy_process 中设置的 tss.eip 就是系统调用 fork 时硬件自动压栈的 EIP，即 int 0x80 下一行代码的位置，即 if 语句。进程 1 就从这里开始执行。此处的返回值就是进程 1 的 tss.eax，被设置为 0。返回到 main 函数中的 if(!fork()) 一行，就会执行 init 函数。</p>
+<p>返回路径：<code>fork =&gt; main =&gt; init</code></p>
+<p>init 函数功能主要是四部分，安装根文件系统；显示系统信息；运行系统初始资源配置文件 rc 中的命令；执行用户登录 shell 程序。</p>
+<p>init 函数先调用 setup，它也是一个系统调用，本章后续的内容都是它实现的。要注意的是进程 0 的 pause 函数还没返回，这里 setup 又产生了一个中断。</p>
+<h3 id="1_5">进程 1 为安装硬盘文件系统做准备<a class="headerlink" href="#1_5" title="Permanent link">*</a></h3>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="w">    </span><span class="c1">// setup()是一个系统调用。用于读取硬盘参数包括分区表信息并加载虚拟盘(若存在的话)</span>
+<span class="w">    </span><span class="c1">// 和安装根文件系统设备。该函数用25行上的宏定义，对应函数是sys_setup()，在块设备</span>
+<span class="w">    </span><span class="c1">// 子目录kernel/blk_drv/hd.c中。</span>
+<span class="w">    </span><span class="n">setup</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">drive_info</span><span class="p">);</span><span class="w">        </span><span class="c1">// drive_info结构是2个硬盘参数表</span>
+</pre></div>
+</td></tr></table>
+
+<p>调用 setup，参数是硬盘参数表，它是由 setup 程序加载到内存中，在 main 函数开头从内存读取它赋给 drive_info。setup 函数会根据硬盘设备信息安装根文件系统，如果之前初始化了虚拟盘则会将根文件系统加载到虚拟盘区。</p>
+<p>setup 系统调用最终就是调用 sys_setup 函数，代码很多，难度较大，但目的很单一，就是为安装文件系统做准备。大概经历三个步骤：</p>
+<ol>
+<li>根据机器系统数据设置硬盘参数；</li>
+<li>读取硬盘引导块；</li>
+<li>从引导块中获取信息。</li>
+</ol>
+<h4 id="1-hd95info">进程 1 设置硬盘的 hd_info<a class="headerlink" href="#1-hd95info" title="Permanent link">*</a></h4>
+<p>根据机器系统数据中的 drive_info，如硬盘柱面数、磁头数、扇区数，设置内核的 hd_info。代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#define MAX_HD      2</span>
+<span class="c1">// 硬盘参数，磁头数、每磁道扇区数、柱面数、写前预补偿柱面号、磁头着陆柱面号、控制字节</span>
+<span class="k">struct</span> <span class="nc">hd_i_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">head</span><span class="p">,</span><span class="n">sect</span><span class="p">,</span><span class="n">cyl</span><span class="p">,</span><span class="n">wpcom</span><span class="p">,</span><span class="n">lzone</span><span class="p">,</span><span class="n">ctl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">};</span><span class="w"></span>
+<span class="k">struct</span> <span class="nc">hd_i_struct</span><span class="w"> </span><span class="n">hd_info</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">}</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">NR_HD</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span> <span class="nc">hd_struct</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">start_sect</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">nr_sects</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"> </span><span class="n">hd</span><span class="p">[</span><span class="mi">5</span><span class="o">*</span><span class="n">MAX_HD</span><span class="p">]</span><span class="o">=</span><span class="p">{{</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">},};</span><span class="w"></span>
+
+<span class="cm">/* This may be used only once, enforced by &#39;static int callable&#39; */</span><span class="w"></span>
+<span class="c1">// 只在初始化时调用一次，用静态变量 callable 作为可调用标志</span>
+<span class="c1">// 系统设置函数</span>
+<span class="c1">// 参数 BIOS 是 main 函数里初始化的 drive_info 硬盘参数表结构指针，是由 setup.s 程序获取放到内存 0x90080 处</span>
+<span class="c1">// 本函数主要是读取 CMOS 和硬盘参数表信息，设置硬盘分区结构 hd，并尝试加载 RAM 虚拟盘和根文件系统</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">sys_setup</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">BIOS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">drive</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">cmos_disks</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">partition</span><span class="w"> </span><span class="o">*</span><span class="n">p</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 设置调用标志，控制只调用一次</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">callable</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">callable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 如果在 include/linux/config.h 中定义了 HD_TYPE，则 hd_info 已经设置好</span>
+<span class="w">    </span><span class="c1">// 否则需要读取 setup.s 程序放在内存中 0x90080 处的硬盘参数表</span>
+<span class="cp">#ifndef HD_TYPE</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">drive</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">drive</span><span class="o">&lt;</span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">drive</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">cyl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">BIOS</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">head</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="n">BIOS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">wpcom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">5</span><span class="o">+</span><span class="n">BIOS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">ctl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">8</span><span class="o">+</span><span class="n">BIOS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">lzone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">short</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">12</span><span class="o">+</span><span class="n">BIOS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd_info</span><span class="p">[</span><span class="n">drive</span><span class="p">].</span><span class="n">sect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="mi">14</span><span class="o">+</span><span class="n">BIOS</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">BIOS</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w">         </span><span class="c1">// 每个表长 16 字节</span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 判断硬盘数</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hd_info</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">cyl</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="n">NR_HD</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">else</span><span class="w"></span>
+<span class="w">        </span><span class="n">NR_HD</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="cp">#endif</span>
+<span class="w">    </span><span class="c1">// 硬盘信息 hd_info 设置好，现在设置硬盘分区结构 hd[]</span>
+<span class="w">    </span><span class="c1">// 数组的 [0] [5] 分别表示两个硬盘的整体参数，[1:4] [6:9] 则表示两个硬盘 4 个分区的参数</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">NR_HD</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">].</span><span class="n">start_sect</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">hd</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="mi">5</span><span class="p">].</span><span class="n">nr_sects</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hd_info</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">head</span><span class="o">*</span><span class="w"></span>
+<span class="w">                </span><span class="n">hd_info</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">sect</span><span class="o">*</span><span class="n">hd_info</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">cyl</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="c1">// CMOS 相关，省略</span>
+<span class="w">    </span><span class="c1">// 到此真正确定了系统中的硬盘个数 NR_HD</span>
+<span class="w">    </span><span class="c1">// 用 bread 读硬盘第一个扇区，读成功则将数据会被存放在缓冲块 bh，还要判断扇区末尾两个字节是否是 0xAA55</span>
+<span class="w">    </span><span class="c1">// 然后验证扇区中 0x1BE 偏移开始处的分区表是否有效，有效则存入 hd[] 中，最后释放缓冲区</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">drive</span><span class="o">=</span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">drive</span><span class="o">&lt;</span><span class="n">NR_HD</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">drive</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">bh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">bread</span><span class="p">(</span><span class="mh">0x300</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">drive</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">            </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Unable to read partition table of drive %d</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">drive</span><span class="p">);</span><span class="w"></span>
+<span class="w">            </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>读硬盘参数表设置 hd_info，然后要设置磁盘分区结构 hd[]，这个数组的 0、5 是两块硬盘的整体参数，而其他几项则是代表两块硬盘各最多 4 个分区的参数。</p>
+<h4 id="_2">读取硬盘中的引导块到缓冲区<a class="headerlink" href="#_2" title="Permanent link">*</a></h4>
+<p>硬盘的分区表信息存在引导块即 0 号块，一个块 1024 Bytes，真正有用的是 0 号扇区，调用 bread 函数将引导块读入缓冲区 bh 处，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 从设备上读取数据块。</span>
+<span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bread</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">bh</span><span class="o">=</span><span class="n">getblk</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;bread: getblk returned NULL</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_uptodate</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>bread 函数根据设备号和数据块号读取数据，首先在缓冲区申请一个缓冲块，调用 getblk 函数，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 取高速缓冲中指定的缓冲块</span>
+<span class="c1">// 检查指定（设备号和块号）的缓冲区是否已经在高速缓冲中。如果指定块已经在</span>
+<span class="c1">// 高速缓冲中，则返回对应缓冲区头指针退出；如果不在，就需要在高速缓冲中设置一个</span>
+<span class="c1">// 对应设备号和块好的新项。返回相应的缓冲区头指针。</span>
+<span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">getblk</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">repeat</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 搜索hash表，如果指定块已经在高速缓冲中，则返回对应缓冲区头指针，退出。</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">bh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hash_table</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>getblk 函数检查由设备号和块号指定的数据是否在缓冲区中，如果在就不用再到设备上读取，使用哈希表查找提高速度，调用 get_hash_table 函数，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 利用hash表在高速缓冲区中寻找指定的缓冲块。若找到则对该缓冲块上锁返回块头指针。</span>
+<span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">get_hash_table</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;;)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// 在高速缓冲中寻找给定设备和指定块的缓冲区块，如果没有找到则返回NULL。</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">bh</span><span class="o">=</span><span class="n">find_buffer</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)))</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// 对该缓冲块增加引用计数，并等待该缓冲块解锁。由于经过了睡眠状态，</span>
+<span class="w">        </span><span class="c1">// 因此有必要在验证该缓冲块的正确性，并返回缓冲块头指针。</span>
+<span class="w">        </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="o">++</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">wait_on_buffer</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dev</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_blocknr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="c1">// 如果在睡眠时该缓冲块所属的设备号或块设备号发生了改变，则撤消对它的</span>
+<span class="w">        </span><span class="c1">// 引用计数，重新寻找。</span>
+<span class="w">        </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="o">--</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>调用 find_buffer 找指定块，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#define _hashfn(dev,block) (((unsigned)(dev^block))%NR_HASH)</span>
+<span class="cp">#define hash(dev,block) hash_table[_hashfn(dev,block)]</span>
+<span class="k">static</span><span class="w"> </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">find_buffer</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">       </span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 搜索hash表，寻找指定设备号和块号的缓冲块。</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b_next</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b_dev</span><span class="o">==</span><span class="n">dev</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b_blocknr</span><span class="o">==</span><span class="n">block</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>设备号和块号通过哈希函数映射为索引插入到 hash_table 对应项的链表，查找就计算索引然后查那个位置的链表，第一次查找肯定是 NULL，就返回到 getblk 函数，在空闲链表中申请一个新的空闲缓冲块，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">getblk</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tmp</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+
+<span class="nl">repeat</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 搜索hash表，如果指定块已经在高速缓冲中，则返回对应缓冲区头指针，退出。</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">bh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_hash_table</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 扫描空闲数据块链表，寻找空闲缓冲区。</span>
+<span class="w">    </span><span class="c1">// 首先让tmp指向空闲链表的第一个空闲缓冲区头</span>
+<span class="w">    </span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">free_list</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">continue</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">bh</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">BADNESS</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="o">&lt;</span><span class="n">BADNESS</span><span class="p">(</span><span class="n">bh</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="n">bh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">BADNESS</span><span class="p">(</span><span class="n">tmp</span><span class="p">))</span><span class="w"></span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="cm">/* and repeat until we find something good */</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="o">-&gt;</span><span class="n">b_next_free</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">free_list</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 没有引用计数为 0 的块就睡眠等待唤醒</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">bh</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">sleep_on</span><span class="p">(</span><span class="o">&amp;</span><span class="n">buffer_wait</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 执行到这里，说明我们已经找到了一个比较合适的空闲缓冲块了。于是先等待该缓冲区</span>
+<span class="w">    </span><span class="c1">// 解锁。如果在我们睡眠阶段该缓冲区又被其他任务使用的话，只好重复上述寻找过程。</span>
+<span class="w">    </span><span class="n">wait_on_buffer</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 如果该缓冲区已被修改，则将数据写盘，并再次等待缓冲区解锁。同样地，若该缓冲区</span>
+<span class="w">    </span><span class="c1">// 又被其他任务使用的话，只好再重复上述寻找过程。</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dirt</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">sync_dev</span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dev</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">wait_on_buffer</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="k">goto</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 在高速缓冲hash表中检查指定设备和块的缓冲块是否乘我们睡眠之际已经被加入</span>
+<span class="w">    </span><span class="c1">// 进去。如果是的话，就再次重复上述寻找过程。</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">find_buffer</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="k">goto</span><span class="w"> </span><span class="n">repeat</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="c1">// 于是让我们占用此缓冲块。置引用计数为1，复位修改标志和有效(更新)标志。</span>
+<span class="w">    </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_count</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dirt</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_uptodate</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 从hash队列和空闲队列块链表中移出该缓冲区头，让该缓冲区用于指定设备和其上的指定块。</span>
+<span class="w">    </span><span class="c1">// 然后根据此新的设备号和块号重新插入空闲链表和hash队列新位置处。并最终返回缓冲头指针。</span>
+<span class="w">    </span><span class="n">remove_from_queues</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dev</span><span class="o">=</span><span class="n">dev</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_blocknr</span><span class="o">=</span><span class="n">block</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">insert_into_queues</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>free_list 就是在初始化缓冲区时建立的 buffer_head 链表，现在空闲链表里检索一个引用计数、脏位、锁定位都为 0 的缓冲块，如果未找到引用计数为 0 的块，则睡眠等待有空闲块可用，这里第一次调用肯定会找到合适的块，就先不看 sleep_on 函数。如果选定的块被加锁，就要睡眠等待，如果睡眠的时候这个块又被其他进程使用，那么就有好回到 repeat 处重新来，如果缓冲区已被修改则需要写回硬盘，再等待缓冲区解锁，同样，如果又被其他任务使用还得重来。还有就是睡眠等待过程中如果要读的块已经被读入到缓冲区，那么又不用读了，还是重来。</p>
+<p>一切都完成后，如果还是需要读入到缓冲区，那就将找到的空闲块引用计数 +1，然后将其对应的 buffer_head 从从 free_list 和 hash_table 的链表中摘下来，然后插入 free_list 的尾部以及新的 hash_table 项的链表中。    </p>
+<p><img alt="image-20201201192001203" src="../image-20201201192001203.png" /></p>
+<p>执行完 get_blk，返回到 bread 函数，获取了缓冲块，检查块中数据是否有效（已更新），第一次调用肯定不能直接用，所以还是要从硬盘中读，调用底层块设备读写函数，产生指定数据块被读入，代码如下</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// 从设备上读取数据块</span>
+<span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bread</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">dev</span><span class="p">,</span><span class="kt">int</span><span class="w"> </span><span class="n">block</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">bh</span><span class="o">=</span><span class="n">getblk</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="n">block</span><span class="p">)))</span><span class="w"></span>
+<span class="w">        </span><span class="n">panic</span><span class="p">(</span><span class="s">&quot;bread: getblk returned NULL</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_uptodate</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 否则我们就调用底层块设备读写ll_rw_block函数，产生读设备块请求。</span>
+<span class="w">    </span><span class="c1">// 然后等待指定数据块被读入，并等待缓冲区解锁。</span>
+<span class="w">    </span><span class="n">ll_rw_block</span><span class="p">(</span><span class="n">READ</span><span class="p">,</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">wait_on_buffer</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_uptodate</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">bh</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">brelse</span><span class="p">(</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<h4 id="_3">将找到的缓冲块与请求项挂接<a class="headerlink" href="#_3" title="Permanent link">*</a></h4>
+<p>调用 ll_rw_block 函数，将缓冲块与请求项结构挂接，代码如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">#define MAJOR(a) (((unsigned)(a))&gt;&gt;8)</span>
+<span class="c1">// 底层读写数据块函数 Low Level Read Write Block</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">ll_rw_block</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">rw</span><span class="p">,</span><span class="w"> </span><span class="k">struct</span> <span class="nc">buffer_head</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">bh</span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">major</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 判断缓冲块对应的设备是否存在以及设备请求项函数是否挂接正常</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">major</span><span class="o">=</span><span class="n">MAJOR</span><span class="p">(</span><span class="n">bh</span><span class="o">-&gt;</span><span class="n">b_dev</span><span class="p">))</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="n">NR_BLK_DEV</span><span class="w"> </span><span class="o">||</span><span class="w"></span>
+<span class="w">    </span><span class="o">!</span><span class="p">(</span><span class="n">blk_dev</span><span class="p">[</span><span class="n">major</span><span class="p">].</span><span class="n">request_fn</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">printk</span><span class="p">(</span><span class="s">&quot;Trying to read nonexistent block-device</span><span class="se">\n\r</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">make_request</span><span class="p">(</span><span class="n">major</span><span class="p">,</span><span class="n">rw</span><span class="p">,</span><span class="n">bh</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>这里的设备就是硬盘，对应的请求函数就是 do_hd_request，在硬盘初始化中设置。然后调用 make_request 函数将缓冲块与请求项建立关系。</p>
+<p>后面就是加载虚拟盘、安装根文件系统的操作。</p>
+<p>最后进程 1 通过 fork 创建进程 2，并使用 execve 将进程替换成 /bin/sh 程序，加载 rc。</p>
+<p>最后切换到 shell 执行，实现系统怠速。</p>
+<p>到此其实就了解了 Linux 的启动过程，但是感觉 0.11 太早期了，像页目录表还是 64 个进程共享，每个进程 64 MB，准备读一下《Linux 内核设计与实现》那本。</p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: January 25, 2021
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../initial_and_create_process_0/" title="Initial and create process 0" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Initial and create process 0
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 caijiqhx
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

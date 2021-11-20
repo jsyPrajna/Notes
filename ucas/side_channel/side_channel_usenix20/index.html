@@ -1,0 +1,3067 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://notes.caijiqhx.top/ucas/side_channel/side_channel_usenix20/">
+      
+      
+        <meta name="author" content="caijiqhx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>Side Channel - caijiqhx notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CSource+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#side-channel" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              caijiqhx notes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                Side Channel
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+<nav class="md-tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../tools/vscode/" class="md-tabs__link">
+          常用工具
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../rust/" class="md-tabs__link">
+          Rust
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../cpp/" class="md-tabs__link">
+          C++
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../network/" class="md-tabs__link">
+          计算机网络
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../os/" class="md-tabs__link">
+          操作系统
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../database/" class="md-tabs__link">
+          数据库
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../" class="md-tabs__link">
+          UCAS
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    caijiqhx notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="QHX's Notes" class="md-nav__link">
+      QHX's Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../TOP/" title="TOP" class="md-nav__link">
+      TOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      常用工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        常用工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/vscode/" title="Visual Studio Code 配置同步" class="md-nav__link">
+      Visual Studio Code 配置同步
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/manjaro/" title="Manjaro 从头配置" class="md-nav__link">
+      Manjaro 从头配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/gitbook/" title="Gitbook" class="md-nav__link">
+      Gitbook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/regex/" title="正则表达式" class="md-nav__link">
+      正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/mkdocs/" title="mkdocs" class="md-nav__link">
+      mkdocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/mkdocs_zh_search/" title="MkDocs 中文搜索" class="md-nav__link">
+      MkDocs 中文搜索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/vim/" title="vim" class="md-nav__link">
+      vim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      部署工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        部署工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/docker/docker_introduction/" title="Docker 简介" class="md-nav__link">
+      Docker 简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/docker/dockerfile/" title="Dockerfile" class="md-nav__link">
+      Dockerfile
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      调试工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        调试工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../tools/ida/" title="IDA" class="md-nav__link">
+      IDA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Rust
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Rust
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rust 程序设计语言
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rust 程序设计语言
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/" title="The Rust Programming Language" class="md-nav__link">
+      The Rust Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x00/" title="0x00 Introduction" class="md-nav__link">
+      0x00 Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x01/" title="0x01 Getting Started" class="md-nav__link">
+      0x01 Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x02/" title="0x02 Guessing Game Tutorial" class="md-nav__link">
+      0x02 Guessing Game Tutorial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x03/" title="0x03 Common Programming Concepts" class="md-nav__link">
+      0x03 Common Programming Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x04/" title="0x04 Ownership" class="md-nav__link">
+      0x04 Ownership
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x05/" title="0x05 Structs" class="md-nav__link">
+      0x05 Structs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x06/" title="0x06 Enums and Pattern Matching" class="md-nav__link">
+      0x06 Enums and Pattern Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x07/" title="0x07 Managing Growing Projects with Packages, Crates and Modules" class="md-nav__link">
+      0x07 Managing Growing Projects with Packages, Crates and Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/trpl/0x08/" title="0x08 Common Collections" class="md-nav__link">
+      0x08 Common Collections
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Rustlings
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Rustlings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/" title="Rustlings" class="md-nav__link">
+      Rustlings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/move_semantics2/" title="Rustlings: move_semantics2" class="md-nav__link">
+      Rustlings: move_semantics2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../rust/rustlings/move_semantics3/" title="Rustlings: move_semantics3" class="md-nav__link">
+      Rustlings: move_semantics3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/" title="菜鸡的 C++ 学习" class="md-nav__link">
+      菜鸡的 C++ 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/memo/" title="C++ 备忘录" class="md-nav__link">
+      C++ 备忘录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/casting/" title="C++ 类型转换" class="md-nav__link">
+      C++ 类型转换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/rtti/" title="C++ 运行时类型识别" class="md-nav__link">
+      C++ 运行时类型识别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/unordered_set/" title="unordered_set" class="md-nav__link">
+      unordered_set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/custom_compare/" title="C++ 中自定义比较函数" class="md-nav__link">
+      C++ 中自定义比较函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      C++ 11/14 快速上手
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        C++ 11/14 快速上手
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/0/" title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/1/" title="语言可用性的强化" class="md-nav__link">
+      语言可用性的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/2/" title="语言运行期的强化" class="md-nav__link">
+      语言运行期的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/3/" title="对标准库的扩充：新增容器" class="md-nav__link">
+      对标准库的扩充：新增容器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/4/" title="对标准库的扩充：智能指针和引用计数" class="md-nav__link">
+      对标准库的扩充：智能指针和引用计数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/5/" title="对标准库的扩充：正则表达式" class="md-nav__link">
+      对标准库的扩充：正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/6/" title="对标准库的扩充：语言级线程支持" class="md-nav__link">
+      对标准库的扩充：语言级线程支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/7/" title="其他杂项" class="md-nav__link">
+      其他杂项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/c++_11_14/8/" title="C++17 简介" class="md-nav__link">
+      C++17 简介
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/stl_learning/" title="STL 学习" class="md-nav__link">
+      STL 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      设计模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        设计模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/" title="设计模式" class="md-nav__link">
+      设计模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/basic/" title="设计模式预备知识" class="md-nav__link">
+      设计模式预备知识
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-3" type="checkbox" id="nav-4-9-3">
+    
+    <label class="md-nav__link" for="nav-4-9-3">
+      创建型模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-9-3">
+        创建型模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/simple_factory/" title="简单工厂模式" class="md-nav__link">
+      简单工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/factory_method/" title="工厂方法模式" class="md-nav__link">
+      工厂方法模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/abstract_factory/" title="抽象工厂模式" class="md-nav__link">
+      抽象工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../cpp/design_pattern/builder/" title="建造者模式" class="md-nav__link">
+      建造者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      计算机网络
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        计算机网络
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/" title="计算机网络" class="md-nav__link">
+      计算机网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/questions/" title="牛客网题目记录" class="md-nav__link">
+      牛客网题目记录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/tcp_and_udp/" title="TCP 和 UDP" class="md-nav__link">
+      TCP 和 UDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/protocols/" title="计算机网络协议" class="md-nav__link">
+      计算机网络协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/ip_addr/" title="IP 地址相关问题" class="md-nav__link">
+      IP 地址相关问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/devices/" title="各层网络设备" class="md-nav__link">
+      各层网络设备
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/http/" title="HTTP 学习" class="md-nav__link">
+      HTTP 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../network/http_status_code/" title="HTTP 状态码" class="md-nav__link">
+      HTTP 状态码
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      操作系统
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        操作系统
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/" title="操作系统" class="md-nav__link">
+      操作系统
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2">
+    
+    <label class="md-nav__link" for="nav-6-2">
+      os_lab
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        os_lab
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/" title="操作系统实验" class="md-nav__link">
+      操作系统实验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
+    
+    <label class="md-nav__link" for="nav-6-2-2">
+      lab1
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-2">
+        lab1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer1/" title="EXER1: 理解通过 make 生成执行文件的过程" class="md-nav__link">
+      EXER1: 理解通过 make 生成执行文件的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer2/" title="EXER2: 使用 qemu 执行并调试 lab1 中的软件" class="md-nav__link">
+      EXER2: 使用 qemu 执行并调试 lab1 中的软件
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer3/" title="EXER3: 分析 bootloader 进入保护模式的过程" class="md-nav__link">
+      EXER3: 分析 bootloader 进入保护模式的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer4/" title="EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程" class="md-nav__link">
+      EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer5/" title="EXER5: 实现函数调用堆栈跟踪函数" class="md-nav__link">
+      EXER5: 实现函数调用堆栈跟踪函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/exer6/" title="EXER6: 完善中断初始化和处理" class="md-nav__link">
+      EXER6: 完善中断初始化和处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab1/lab1/" title="Lab1 report" class="md-nav__link">
+      Lab1 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3">
+    
+    <label class="md-nav__link" for="nav-6-2-3">
+      lab2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-3">
+        lab2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-nav__link">
+      EXER1: 实现 first-fit 连续物理内存分配算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer2/" title="EXER2: 实现寻找虚拟地址对应的页表项" class="md-nav__link">
+      EXER2: 实现寻找虚拟地址对应的页表项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/exer3/" title="EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射" class="md-nav__link">
+      EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab2/lab2/" title="lab2 report" class="md-nav__link">
+      lab2 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-4" type="checkbox" id="nav-6-2-4">
+    
+    <label class="md-nav__link" for="nav-6-2-4">
+      lab3
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-4">
+        lab3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/exer1/" title="EXER1: 给未被映射的地址映射上物理页" class="md-nav__link">
+      EXER1: 给未被映射的地址映射上物理页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/exer2/" title="EXER2: 补充完成基于 FIFO 的页面替换算法" class="md-nav__link">
+      EXER2: 补充完成基于 FIFO 的页面替换算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/challenge/" title="Challenge: Extended Clock" class="md-nav__link">
+      Challenge: Extended Clock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab3/lab3/" title="lab3 report" class="md-nav__link">
+      lab3 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-5" type="checkbox" id="nav-6-2-5">
+    
+    <label class="md-nav__link" for="nav-6-2-5">
+      lab4
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-5">
+        lab4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer1/" title="EXER1: 分配并初始化一个进程控制块" class="md-nav__link">
+      EXER1: 分配并初始化一个进程控制块
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer2/" title="EXER2: 为新创建的内核线程分配资源" class="md-nav__link">
+      EXER2: 为新创建的内核线程分配资源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/exer3/" title="EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的" class="md-nav__link">
+      EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab4/lab4/" title="Lab4 report" class="md-nav__link">
+      Lab4 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-6" type="checkbox" id="nav-6-2-6">
+    
+    <label class="md-nav__link" for="nav-6-2-6">
+      lab5
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-6">
+        lab5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer1/" title="EXER1: 加载应用程序并执行" class="md-nav__link">
+      EXER1: 加载应用程序并执行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer2/" title="EXER2: 父进程复制自己的内存空间给子进程" class="md-nav__link">
+      EXER2: 父进程复制自己的内存空间给子进程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/exer3/" title="EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现" class="md-nav__link">
+      EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab5/lab5/" title="Lab5 report" class="md-nav__link">
+      Lab5 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-7" type="checkbox" id="nav-6-2-7">
+    
+    <label class="md-nav__link" for="nav-6-2-7">
+      lab6
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-7">
+        lab6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-nav__link">
+      EXER1: 使用 Round Robin 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/exer2/" title="EXER2: 实现 Stride Scheduling 调度算法" class="md-nav__link">
+      EXER2: 实现 Stride Scheduling 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab6/lab6/" title="Lab6 report" class="md-nav__link">
+      Lab6 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-8" type="checkbox" id="nav-6-2-8">
+    
+    <label class="md-nav__link" for="nav-6-2-8">
+      lab7
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-8">
+        lab7
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/exer1/" title="EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题" class="md-nav__link">
+      EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/exer2/" title="EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题" class="md-nav__link">
+      EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab7/lab7/" title="Lab7 report" class="md-nav__link">
+      Lab7 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-9" type="checkbox" id="nav-6-2-9">
+    
+    <label class="md-nav__link" for="nav-6-2-9">
+      lab8
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-9">
+        lab8
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/preview/" title="preview" class="md-nav__link">
+      preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/exer1/" title="EXER1: 完成读文件操作的实现" class="md-nav__link">
+      EXER1: 完成读文件操作的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/exer2/" title="EXER2: 完成基于文件系统的执行程序机制的实现" class="md-nav__link">
+      EXER2: 完成基于文件系统的执行程序机制的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../os/os_lab/lab8/lab8/" title="Lab8 report" class="md-nav__link">
+      Lab8 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      数据库
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        数据库
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/" title="数据库" class="md-nav__link">
+      数据库
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/theory/" title="数据库系统原理" class="md-nav__link">
+      数据库系统原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/sql/" title="SQL" class="md-nav__link">
+      SQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/mysql/" title="MySQL" class="md-nav__link">
+      MySQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../database/sqlite.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      UCAS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        UCAS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="UCAS" class="md-nav__link">
+      UCAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../virtualization_overview/virtualization/" title="虚拟化概述" class="md-nav__link">
+      虚拟化概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      侧信道攻击
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        侧信道攻击
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../side_channel.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../spectre/spectre/" title="Spectre" class="md-nav__link">
+      Spectre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-5" type="checkbox" id="nav-8-5">
+    
+    <label class="md-nav__link" for="nav-8-5">
+      ZombieLoad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-5">
+        ZombieLoad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-6" type="checkbox" id="nav-8-6">
+    
+    <label class="md-nav__link" for="nav-8-6">
+      QEMU/KVM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-6">
+        QEMU/KVM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../qemu_kvm/" title="QEMU/KVM 学习" class="md-nav__link">
+      QEMU/KVM 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../qemu_kvm/qemu_kvm_overview/" title="QEMU 与 KVM 概述" class="md-nav__link">
+      QEMU 与 KVM 概述
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-7" type="checkbox" id="nav-8-7">
+    
+    <label class="md-nav__link" for="nav-8-7">
+      Linux Kernel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-7">
+        Linux Kernel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../the_art_of_linux_kernel_design/" title="Linux Kernel 学习" class="md-nav__link">
+      Linux Kernel 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../the_art_of_linux_kernel_design/boot_to_main/" title="从开机加电到执行 main 函数之前的过程" class="md-nav__link">
+      从开机加电到执行 main 函数之前的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../the_art_of_linux_kernel_design/initial_and_create_process_0/" title="Initial and create process 0" class="md-nav__link">
+      Initial and create process 0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../the_art_of_linux_kernel_design/create_process_1_and_execute/" title="Create process 1 and execute" class="md-nav__link">
+      Create process 1 and execute
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#reloadrefresh" class="md-nav__link">
+    RELOAD+REFRESH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#abusing-cache-replacement-policies-to-perform-stealthy-cachce-attacks" class="md-nav__link">
+    Abusing Cache Replacement Policies to Perform Stealthy Cachce Attacks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    摘要
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contribution" class="md-nav__link">
+    Contribution
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#background-and-related-work" class="md-nav__link">
+    Background and related work
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    Cache 架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cache-replacement-policies" class="md-nav__link">
+    Cache replacement policies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    缓存攻击
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#flushreload" class="md-nav__link">
+    FLUSH+RELOAD
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primeprobe" class="md-nav__link">
+    PRIME+PROBE
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intel" class="md-nav__link">
+    恢复 Intel 缓存逐出策略
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    结论
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reloadrefresh_1" class="md-nav__link">
+    RELOAD+REFRESH
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#noise" class="md-nav__link">
+    Noise
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    与之前的方法比较
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#covert-channel" class="md-nav__link">
+    Covert Channel 隐蔽通道
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache-telepathy" class="md-nav__link">
+    Cache Telepathy
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#leveraging-shared-resource-attacks-to-learn-dnn-architectures" class="md-nav__link">
+    Leveraging Shared Resource Attacks to Learn DNN Architectures
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#introduction_1" class="md-nav__link">
+    Introduction
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#contribution_1" class="md-nav__link">
+    Contribution
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dnn" class="md-nav__link">
+    DNN
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnn_1" class="md-nav__link">
+    以往的隐私攻击都需要 DNN 架构
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    基于缓存的侧信道攻击
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    威胁模型
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    攻击概览
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dnn_2" class="md-nav__link">
+    将 DNN 映射到矩阵参数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    攻击矩阵乘法
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openblas" class="md-nav__link">
+    分析 OpenBLAS
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    定位探测地址
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    提取矩阵维度的过程
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gemm" class="md-nav__link">
+    GEMM 攻击的推广
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    环境配置
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/caijiqhx/Notes/edit/master/docs/ucas/side_channel/side_channel_usenix20.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="side-channel">Side Channel<a class="headerlink" href="#side-channel" title="Permanent link">*</a></h1>
+<blockquote>
+<p>Session of USENIX 2020</p>
+</blockquote>
+<h3 id="reloadrefresh">RELOAD+REFRESH<a class="headerlink" href="#reloadrefresh" title="Permanent link">*</a></h3>
+<h5 id="abusing-cache-replacement-policies-to-perform-stealthy-cachce-attacks">Abusing Cache Replacement Policies to Perform Stealthy Cachce Attacks<a class="headerlink" href="#abusing-cache-replacement-policies-to-perform-stealthy-cachce-attacks" title="Permanent link">*</a></h5>
+<h4 id="_1">摘要<a class="headerlink" href="#_1" title="Permanent link">*</a></h4>
+<p>缓存攻击检测主要依赖于：如果不改变 cache 状态并驱逐被观测进程的 cache 内容，就无法实现缓存攻击。</p>
+<p>巧妙地使用 cache 替换策略，就可以跟踪受害者进程的缓存访问而不必强制驱逐受害者数据。</p>
+<p>提出了恢复处理器缓存替换策略的方法论。</p>
+<h4 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">*</a></h4>
+<p>任何依赖于 secret 生成的缓存利用都可能被攻击。</p>
+<p>硬件防护未部署，系统层防护影响性能。</p>
+<p>对用户来说唯一看上去可行的方法就是检测攻击。</p>
+<p>使用硬件性能计数器 Hardware Performance Counter HPC 检测正在进行的微架构攻击。</p>
+<p>HPC 包括现代处理器中的寄存器，监控硬件事件，像 cache miss。</p>
+<p>检测的前提是攻击对受害者产生了可测量的影响。</p>
+<p>本文描述了一种攻击方法，实现从受害者处获取信息的同时保持受害者数据在 cache 中，因此不会显著影响受害者行为，检测更难。</p>
+<h5 id="contribution">Contribution<a class="headerlink" href="#contribution" title="Permanent link">*</a></h5>
+<ul>
+<li>引入测试现代处理器不同的缓存替换策略的方法论</li>
+<li>揭示了 4-8 代 intel CPU 使用的缓存替换策略</li>
+<li>扩展了对现代缓存的理解，为改进传统的缓存攻击奠定基础</li>
+<li>提出 RELOAD+REFRESH，利用 intel 缓存替换策略实现根据受害者的内存访问获取信息</li>
+<li>提出的攻击对受害者仅造成了可忽略的 cache miss，使得无法被当前的防护措施检测到。</li>
+</ul>
+<h4 id="background-and-related-work">Background and related work<a class="headerlink" href="#background-and-related-work" title="Permanent link">*</a></h4>
+<h5 id="cache">Cache 架构<a class="headerlink" href="#cache" title="Permanent link">*</a></h5>
+<p>low level, L1 and L2</p>
+<p>Last Level Cache, LLC L3</p>
+<p>intel 的 LLC 是分成若干 slice，由环形总线互连。每个元素的物理地址通过一个复杂的函数映射到 slice 中。</p>
+<p>L3 通常是 inclusive 的，容易保持缓存一致性。</p>
+<p>Skylake Server 结构使用了 non-inclusive 的 LLC。</p>
+<p>cache 是 w 路组相联，由 S 个 set，每个 set 是有 w 个 line，一个 line 是 64 bytes。</p>
+<p>物理地址分为 line 内偏移，低 6 位；set index，<span><span class="MathJax_Preview">log_2S</span><script type="math/tex">log_2S</script></span> 位；tag 剩余的位。</p>
+<p><img alt="image-20201118122412177" src="../image-20201118122412177.png" /></p>
+<p><img alt="" src="../741085_GE2EVF2PE7XM3A9.jpg" /></p>
+<h5 id="cache-replacement-policies">Cache replacement policies<a class="headerlink" href="#cache-replacement-policies" title="Permanent link">*</a></h5>
+<p>cache 满的时候决定那个元素要被逐出（写回内存）</p>
+<p>常规的策略：</p>
+<ul>
+<li>FIFO，LRU，NRU(LRU approximation)，LFU，CLOCK，pseudo-random</li>
+<li>LRU 类的策略对于工作集大于缓存大小的内存密集型工作或扫描（一次性突发请求）表现不佳</li>
+<li>适应工作负载变化的自适应算法</li>
+<li>ARC: LRU &amp; LFU</li>
+<li>CAR: LFU &amp; CLOCK</li>
+</ul>
+<p>保持逐出策略的同时修改插入策略也可以提高性能。</p>
+<ul>
+<li>LRU Insertion Policy</li>
+<li>BIP, Bimodal 有时候插入到 MRU 位置</li>
+<li>DIP，动态选择，看哪个造成的 cache miss 少</li>
+</ul>
+<p>利用 Re-reference Interval Prediction 的替换算法，每个 line 使用 2 bits，预测是否会被 re-referenced。需要替换时会逐出预测的最长间隔的 line，提出了 Static 和 Bimodal 两种，使用 set dueling 来决定哪个策略适合。</p>
+<p>intel 处理器，cache 替换策略称为 <strong>Quad-Age LRU</strong> 没有公开文档。</p>
+<p>逆向处理器 cache 策略的工作都是执行不同的内存访问序列，通过估算或测量 cache miss 来比较。但是他们没有解释缓存中的哪些具体元素会被换出。</p>
+<p>本文是首个全面描述现代 intel 处理器上实现的缓存替换策略，我们可以通过访问序列的信息准确确定 set 中的哪个元素会被换出。</p>
+<h5 id="_2">缓存攻击<a class="headerlink" href="#_2" title="Permanent link">*</a></h5>
+<p>缓存攻击通过监控缓存利用（hit 和 miss 的序列）还恢复受害者信息。</p>
+<p>当软件的内存访问模式是由 secret 决定时，攻击者就可以推断出敏感数据。</p>
+<p>传统的缓存攻击主要有几类：</p>
+<ul>
+<li>FLUSH+RELOAD</li>
+<li>PRIME+PROBE</li>
+<li>EVICT+TIME</li>
+</ul>
+<p>前两个及其变体分辨率较高。</p>
+<p>缓存攻击都是针对 LLC 的，基本都是三部分：</p>
+<ul>
+<li>initialization 攻击者准备缓存内容</li>
+<li>waiting 等待受害者执行</li>
+<li>recovering 攻击者通过缓存状态恢复信息</li>
+</ul>
+<h6 id="flushreload">FLUSH+RELOAD<a class="headerlink" href="#flushreload" title="Permanent link">*</a></h6>
+<p>依赖于共享内存，需要 memory deduplication 开启。</p>
+<p>用 clflush 去掉 target lines，等待受害者执行，最后测量之前 flushed 数据的 reload 时间。时间短就说明受害者访问了，因为又被换入了 cache。</p>
+<p>FLUSH+FLUSH 通过 clflush 时间来判断，避免访问缓存。</p>
+<h6 id="primeprobe">PRIME+PROBE<a class="headerlink" href="#primeprobe" title="Permanent link">*</a></h6>
+<p>不知道操作系统测信，理论上可以可应用到所有系统，还可以从动态分配数据回复信息。</p>
+<p>先用攻击者自己的数据填充到受害者数据所在的 cache，然后等待，最后 probe 需要的 set，通过时间变化找到受害者行为。</p>
+<p>通过限制计时器访问或者加入计时噪音防御，变体 PRIME+ABORT 可以克服（使用 TSX）。</p>
+<p><img alt="img" src="../741085_G4FYHK48723FAA8.png" /></p>
+<p><img alt="img" src="../741085_WRKYGHZJC5Z3URK.png" /></p>
+<h4 id="intel">恢复 Intel 缓存逐出策略<a class="headerlink" href="#intel" title="Permanent link">*</a></h4>
+<p>软件模拟硬件。</p>
+<p>使用自己的数据填充一个 set，访问这个数据然后触发一个需要的 cache miss，观察哪个元素被逐出。</p>
+<p>需要构造一个驱逐集（w 路组相联中，找到 w 个不同的地址，这些地址都映射到同一个特定的 set）和一个冲突集（另一个驱逐集，映射到同一个 set，地址不同）。</p>
+<p>前人的工作已经恢复了地址映射函数，或者描述了如何构造驱逐集。</p>
+<p>当 <span><span class="MathJax_Preview">N_{core} = 2^n</span><script type="math/tex">N_{core} = 2^n</script></span> 时，就可以使用 hash func 计算 set 和 slice 号，其他情况可以直接构造驱逐集。</p>
+<p>要注意的是，访问顺序对推断逐出策略非常重要，因此我们使用 lfence 充当一个屏障，确保实际的内存访问顺序是顺序的。以防止乱序执行</p>
+<p>实验设计如下：</p>
+<p><img alt="image-20201107155916267" src="../image-20201107155916267.png" /></p>
+<p>先确定，当缓存有空间的时候不会逐出数据。先用驱逐集填充一个 set，然后随机 flush 掉一个 line，然后填入冲突集中的一个 line，这时候 set 里得应该就是 驱逐集 w-1 个外加冲突集的一个，测量访问驱逐集那 w-1 个的时间就可以确定它们都还在 cache 里，而冲突集的那个是被加载到 flush 掉的那个位置。</p>
+<p>恢复替换策略的过程就是将实际的数据演化过程与各种策略的理论过程进行比较。</p>
+<p>使用两个 w 大的数组 address_array 模拟研究的那个 set，用来存这个 set 里数据的地址。control_array 是决定哪个地址要被逐出的控制位。需要实现函数，更新 address_array, control_array 以及给出逐出的候选地址。这些都基于测试的替换策略实现。</p>
+<p>initialize_set 都是确保测试的 set 是空的，先 fill 然后 flush all。address_array 包括驱逐集的地址以及初始化的控制位。</p>
+<p>以测试 NRU 为例。每个 line 使用一个 bit 作为控制位，当访问时置位，如果某次置位使得所有的控制位都为 1，则全部清零。冲突时，NRU 会逐出第一个控制位为 0 的。所以实验中的 control_array 的可能值就是 -1, 0, 1。通过 testDataEvicted 测试逐出的是否是 NRU 预测的元素（即 getEvictionCandidate 的返回值）。</p>
+<h5 id="_3">结论<a class="headerlink" href="#_3" title="Permanent link">*</a></h5>
+<p>最后测试发现，不同的处理器虽然缓存插入的策略有所不同，但是缓存替换的策略都是相同的。</p>
+<p>即 <strong>Quad-Age LRU</strong>，如下图，检索到就 decrease，先淘汰 age=3 的，插入的时候设定一个初始的 age。没有 age=3 的就全体递增，从头开始淘汰。</p>
+<p><img alt="image-20201107173137498" src="../image-20201107173137498.png" /></p>
+<p>各个机器上只是在插入的 age 初始值不同。4 5 代的有 mode1=2, mode2=3，而之后的都是 mode1=2</p>
+<p>以下是 cache 的模拟流程</p>
+<p><img alt="image-20201107173610925" src="../image-20201107173610925.png" /></p>
+<h4 id="reloadrefresh_1">RELOAD+REFRESH<a class="headerlink" href="#reloadrefresh_1" title="Permanent link">*</a></h4>
+<p>有了共享机制，如果攻击者知道了替换策略，那么他就可以把受害者可能用到的数据 target 放到 cache 某个 set 的特定位置。而 set 中数据的位置和 age 都是可以通过访问顺序控制的，进而又能够确定特定的替换候选，那么攻击者就可以把 target 设置为候选。如果受害者使用了 target，那么它的 age 减小，就不再是候选。攻击者可以强制制造一个 cache miss，然后检查 target 是否还在 cache 中。如果还在，说明受害者访问了，攻击者也就得到了想要的信息。同时受害者是从 cache 里访问的，也没有触发 cache miss。这就是 RELOAD+REFRESH。</p>
+<p>linux 使用了 kernel same-page merging 提高内存的利用率。攻击者需要先通过逆向获取想要监控的地址，还需要构造与其映射到同一 set 上的驱逐集。</p>
+<p>下图描述了攻击的步骤以及 cache 可能的状态。</p>
+<p><img alt="image-20201107174958548" src="../image-20201107174958548.png" /></p>
+<p>首先插入把 target 插入到第一个，然后把驱逐集里的 w-1 个都填充到后面。剩下的一个用来触发冲突。因为低级的 cache 路数要小于 LLC，当填充后面元素的时候会把 target 从低级 cache 里替换掉。</p>
+<p>这样之后 target 就变成了逐出的候选。然后攻击者等待受害者执行。如果受害者访问了 target，那么 set 里的第二个元素就变成了逐出候选。如果没访问，target 还是候选。然后攻击者访问驱逐集剩下的那个来触发冲突，就会替换掉候选。然后再访问 target，时间短就说明 target 没被替换，即受害者访问了 target。然后需要通过 REFRESH 将 cache 恢复到初始状态，把触发冲突的那个再从 cache中换出来，用于下一轮。</p>
+<p>而当 cache 使用 mode2=3 时，前几步都相同，最后是需要判断攻击者和受害者是否在同一个 core 上。如果不在，那么其他元素 age=3，target 还是候选，就不需要 refresh 了。另一方面，如果是在同一个核，就需要 refresh，因为 target 在低级缓存里还存在。而 reload 的时间可以判断受害者和攻击者是否在同一个 core 上。</p>
+<p>另外，mode2=3 不需要共享内存就可以进行可检测的快速跨核心 cache 攻击。攻击者用自己的数据填充 set，所有的 age=3，候选就是第一个。如果受害者使用了数据，那么候选就被替换。而受害者之后使用这个数据都会从低级缓存中取，则 L3 cache 中的 age 不变。那么攻击者只需要访问第一个元素就可以知道受害者是否访问 target。</p>
+<p><img alt="image-20201107181302834" src="../image-20201107181302834.png" /></p>
+<p><img alt="image-20201107181312849" src="../image-20201107181312849.png" /></p>
+<p>以上为 RELOAD+REFRESH 的步骤。</p>
+<p>先填充 target 和 w-1 个驱逐集元素，然后等待受害者执行，最后执行 RELOAD 和 REFRESH 步骤。</p>
+<p>RELOAD 得到受害者访问的信息，REFRESH 用来做好恢复信息的准备。</p>
+<p>RELOAD 不需要 flush target，除非受害者不访问。而为了避免用 if，就直接 flush。时间短意味着受害者访问。</p>
+<p>REFRESH 的代码是针对 12 路组相联的，因为 target 和驱逐集的第一个元素已经在 cache 里了，限制只需要把剩下的元素的 age 减到 2 就行了。为了避免乱序执行，使用了链表的方式访问这些数据。这个函数就行 PRIME+PROBE 里的 probe 截断。refresh 的时间还可以用来检测是否又其他的进程在用这个set。</p>
+<h5 id="noise">Noise<a class="headerlink" href="#noise" title="Permanent link">*</a></h5>
+<p>攻击依赖于元素插入到 cache set 的时间以达到对受害者避免 cache miss，对攻击者可以知晓 target 是否被访问。如果其他的进程使用了映射在同一个 cache slice 的数据，那么攻击的效率会降低，还可能会触发一些检测机制。</p>
+<p>前面提到 refresh 步骤的时间可以用来判断是否存在有其他进程访问这个 set 的情况。攻击者可以稍微改一下方式。如果产生噪声的进程仅使用了一个地址，那么攻击者可以轻松处理，规避检测同时获取信息。诀窍就是把 target 放在 set 的另一个位置，比如就第二个。如果别人用到了映射到这个 set 的任何一个数据，那么被替换的数据就是 set 中的第一个数据了。当攻击者触发冲突时，候选就还是 target（受害者访问 target）或者第三个元素。通过 reload 获取信息，然后必须从第三个元素开始 refresh，把 noise 逐出 cache。</p>
+<h4 id="_4">与之前的方法比较<a class="headerlink" href="#_4" title="Permanent link">*</a></h4>
+<h5 id="covert-channel">Covert Channel 隐蔽通道<a class="headerlink" href="#covert-channel" title="Permanent link">*</a></h5>
+<p>为了研究这个攻击的分辨率，将其与以前的两种攻击比较。我们用类似的方法在两个进程之间构造了一个隐蔽通道。</p>
+<p>sender 通过访问共享库内存地址传输 1，不访问传输 0。一旦访问了内存位置，等待固定时间，再次读取数据。receiver 通过上述的技术监控缓存的利用确定传输的是 0 还是 1。</p>
+<p>PRIME+PROBE 攻击按照不同的方式进行。不适用避免替换策略变化的 zig-zag 模式。使用这种方式会增加误报数量，因为有时无法从 cache 中删除数据。我们以相同的顺序访问 w 大小的驱逐集，元素以链表形式访问。如果缓存的初始状态已知，这意味着我们最多需要 2 次 probe 来从cache 中驱逐数据，防止对目标的访问发生在探测截断的中间。</p>
+<h3 id="cache-telepathy">Cache Telepathy<a class="headerlink" href="#cache-telepathy" title="Permanent link">*</a></h3>
+<h5 id="leveraging-shared-resource-attacks-to-learn-dnn-architectures">Leveraging Shared Resource Attacks to Learn DNN Architectures<a class="headerlink" href="#leveraging-shared-resource-attacks-to-learn-dnn-architectures" title="Permanent link">*</a></h5>
+<h4 id="abstract">Abstract<a class="headerlink" href="#abstract" title="Permanent link">*</a></h4>
+<p>DNN 引起良好的精度得以迅速普及。一个 DNN 的架构（超参数）决定了它的准确率和性能，通常是保密的。攻击云中的 DNN 而获取其架构具有潜在的商业价值。</p>
+<p>本文提出了 Cache Telepathy，利用缓存侧信道获取 DNN 架构的有效机制。攻击基于 DNN 的推理很大程度上依赖于 tiled GEMM，DNN 的架构参数决定了 GEMM 的调用数量和矩阵维数。这些都可以从缓存侧信道泄露。</p>
+<p>使用 Prime+Probe 和 Flush+Reload 攻击运行在 OpenBLAS 和 Intel MKL 库的 VGG 和 ResNet DNN。VGG-16 搜索空间从 <span><span class="MathJax_Preview">5.4 \times 10^{12}</span><script type="math/tex">5.4 \times 10^{12}</script></span> 减到 16，ResNet-50 从 <span><span class="MathJax_Preview">6\times 10^{46}</span><script type="math/tex">6\times 10^{46}</script></span> 减到 512。</p>
+<h4 id="introduction_1">Introduction<a class="headerlink" href="#introduction_1" title="Permanent link">*</a></h4>
+<p>MLaaS，提供 DNN 的基础设施。可信客户像 MLaas 服务提供商提交 DNN 或训练数据，服务提供商托管 DNN，允许源程的非可信用户提交 DNN 查询并收费。攻击者在现代 CPU 上通过缓存侧信道攻击获取云上 DNN 的参数信息。</p>
+<h5 id="contribution_1">Contribution<a class="headerlink" href="#contribution_1" title="Permanent link">*</a></h5>
+<ol>
+<li>分析 DNN 超参数与 GEMM 调用及其参数的映射关系</li>
+<li>实现了第一次使用缓存侧信道攻击来提取 CPU 上的 DNN 架构</li>
+<li>评估了对 VGG 和 ResNet DNN 的攻击</li>
+</ol>
+<h4 id="background">Background<a class="headerlink" href="#background" title="Permanent link">*</a></h4>
+<h5 id="dnn">DNN<a class="headerlink" href="#dnn" title="Permanent link">*</a></h5>
+<p>深度神经网络 DNN 是一种 ML 算法，使用了多层非线性处理单元进行特征提取和转换。主要有全连接神经网络（多层感知器）和 CNN。</p>
+<p>DNN 架构，即 超参数，给定了网络结构：</p>
+<ol>
+<li>层数</li>
+<li>层类型，全连接、卷积、池</li>
+<li>层之间的连接，包括顺序和非顺序连接。非顺序的可能是把前两层的输出相加作为下一层的输入。</li>
+<li>每层的超参数，每层的神经元数，过滤器数量、大小、步长。</li>
+<li>每层的激活函数</li>
+</ol>
+<p>每层 DNN 的计算都涉及到对输入神经元的乘积累加 multiply-accumulate，DNN 权重用来指定运算此属。全连接的层中，每条边就是一个带权值的 MACC，卷积层的每个过滤器就是一个多维的权重数组。用作滑动窗口计算神经元点积。</p>
+<p>DNN 训练阶段就是从网络结构和训练集开始，试图找到 DNN 的权值以最小化预测误差。训练在 GPU 上进行，而推理阶段一般就在 CPU 上进行。</p>
+<h5 id="dnn_1">以往的隐私攻击都需要 DNN 架构<a class="headerlink" href="#dnn_1" title="Permanent link">*</a></h5>
+<p>主要有三种 DNN 的隐私攻击，目标不同，都需要知道 DNN 结构。</p>
+<ul>
+<li>模型提取攻击，攻击者想要获取与原网络足够相近的网络。开始知道 DNN 结构，创建一个合成的数据集，从原网络请求分类结果，使用这些结果用原结构训练出网络。</li>
+<li>成员推断攻击，推理原训练集的组成，数据样本在训练集中的概率。也需要知道 DNN 结构，创建多个合成数据集，根据这个结构训练出多个网络，在这些网络上运行推理，其中一些输入是在训练集中，一些不在。然后比较结果找出训练集中的数据输出的模式。这些信息用于推断原训练集的组成。特别的，给定一个数据样本，它们在原网络上推理，获取输出查看这个输出是否与之前获得的模式匹配，越匹配就说明越有可能存在于原训练集。</li>
+<li>超参数窃取攻击，窃取 ML 算法中使用的损失函数和正则化项。先通过模型提取攻击获取 DNN 权值，然后找到最小化训练预测始误的损失函数。</li>
+</ul>
+<h5 id="_5">基于缓存的侧信道攻击<a class="headerlink" href="#_5" title="Permanent link">*</a></h5>
+<ul>
+<li>Flush+Reload 要求攻击者与受害者共享敏感数据，可以通过页面重复数据消除技术 page de-duplication 实现。flush &rarr; wait &rarr; reload</li>
+<li>Prime+Probe 不要求页共享。构造冲突地址集（驱逐集）。先填充驱逐集到 cache，wait，最后 probe，判断受害者是否访问了 line。</li>
+</ul>
+<h5 id="_6">威胁模型<a class="headerlink" href="#_6" title="Permanent link">*</a></h5>
+<p>缓存计时攻击以快速减小 DNN 结构的搜索空间，依赖于以下的假设。</p>
+<ul>
+<li>黑盒执行，黑河攻击中，攻击者只能通过官方查询接口访问 DNN。攻击者实现不知道 DNN，包括超参数、权重和训练集。</li>
+<li>假设攻击者进程可以使用现有的一些技术与运行 DNN 推理的受害者进程定位到同一个处理器芯片上。现在的 MLaaS 允许用户上传自己的代码进行训练和推理。攻击者可以将自己伪装成 MLaaS 进程，而云调度程序很难区分。</li>
+<li>攻击者可以分析受害者使用的 ML 框架和线性代数库。</li>
+</ul>
+<h4 id="_7">攻击概览<a class="headerlink" href="#_7" title="Permanent link">*</a></h4>
+<p>Cache Telepathy 的目标就是大幅减小目标 DNN 架构的搜索空间。先讨论攻击如何帮助其他的 DNN 隐私攻击，然后概述攻击过程。</p>
+<p>为其他攻击提供基本的初始化步骤。</p>
+<p><img alt="image-20201108143444583" src="../image-20201108143444583.png" /></p>
+<p>攻击基于两点：</p>
+<ul>
+<li>首先，DNN 推理严重依赖 GEMM。分析了 GEMM 在 ML 框架中的应用，给出了 DNN 超参数与矩阵参数之间的映射关系。</li>
+<li>其次，高性能的 GEMM 算法易受缓存侧信道攻击，因为它们都是通过矩阵 tiling 在缓存层次进行调整。也就是把矩阵分块，避免 cache conflict。当分块大小公开或者容易推断时，攻击者可以利用缓存侧信道计算块数从而知道矩阵维度。</li>
+</ul>
+<p>Cache Telepathy 包括缓存攻击和后续处理步骤。首先通过缓存攻击监控矩阵乘法获取矩阵参数。然后基于 DNN 超参数与矩阵参数的映射关系逆向 DNN 架构。最后对剩余未发现超参数的可能值剪枝，生成一个搜索空间。如果我们生成合理数量的候选结构，其超参数与原网络相同或相似，则攻击成功。</p>
+<h4 id="dnn_2">将 DNN 映射到矩阵参数<a class="headerlink" href="#dnn_2" title="Permanent link">*</a></h4>
+<p>DNN 超参数如何映射到矩阵参数。对于顺序连接的 DNN。</p>
+<p>经过一顿分析，得到下表：</p>
+<p><img alt="image-20201108150046007" src="../image-20201108150046007.png" /></p>
+<p>看不懂就直接跳过了，直接看攻击构造部分。</p>
+<h4 id="_8">攻击矩阵乘法<a class="headerlink" href="#_8" title="Permanent link">*</a></h4>
+<p>设计侧信道攻击来获取矩阵乘法参数。</p>
+<p>先分析最近的 BLAS 库，这些库都优化了分块矩阵乘法。介绍如何从 OpenBLAS 的 GEMM 实现获取信息，然后再以 MKL 为例推广到其他库。</p>
+<h5 id="openblas">分析 OpenBLAS<a class="headerlink" href="#openblas" title="Permanent link">*</a></h5>
+<p><code>gemm_nn</code> 计算 <span><span class="MathJax_Preview">C=\alpha A\cdot B + \beta C</span><script type="math/tex">C=\alpha A\cdot B + \beta C</script></span>，维度分别为 [m,k], [k, n], [m,n]。目的就是提取 m, n, k</p>
+<p>针对现代的多级缓存层次结构进行优化，使用 Goto's 算法，如下图。</p>
+<p><img alt="image-20201108150608481" src="../image-20201108150608481.png" /></p>
+<p>底部的宏内核执行基本操作，将矩阵 A 中的 [P, Q] 块与 B 中的 [Q, R] 块相乘。用汇编写的，通过考虑 CPU 管道结构和寄存器可用性进行优化。块大小使得 A 的 [P, Q] 适合 L2 cache，[Q, R]  适合 L3 cache。</p>
+<p>三层循环，三个循环遍历。</p>
+<p><img alt="image-20201108153829790" src="../image-20201108153829790.png" /></p>
+<p><img alt="image-20201108153128113" src="../image-20201108153128113.png" /></p>
+<p>内层通过展开循环加速。</p>
+<h5 id="_9">定位探测地址<a class="headerlink" href="#_9" title="Permanent link">*</a></h5>
+<p>要知道 m, n, k，首先要知道上面四个循环的遍历值，然后用两个公式来算。</p>
+<p>我们知道 P, Q, R, UNROLL，开源代码里都有。</p>
+<p>使用 <code>itcopy, oncopy, kernel</code> 函数的地址作为探索地址。</p>
+<p><img alt="image-20201108154113500" src="../image-20201108154113500.png" /></p>
+<h5 id="_10">提取矩阵维度的过程<a class="headerlink" href="#_10" title="Permanent link">*</a></h5>
+<p>通过计算 DCG, Dynamic Call Graph 提取矩阵维度</p>
+<h4 id="gemm">GEMM 攻击的推广<a class="headerlink" href="#gemm" title="Permanent link">*</a></h4>
+<p>攻击可以推广到其他的 BLAS 库，因为都用了分块矩阵乘。</p>
+<h4 id="_11">环境配置<a class="headerlink" href="#_11" title="Permanent link">*</a></h4>
+<p>攻击实施，使用 F+R 和 P+P，攻击者和受害者在不同的物理核上，共享 LLC。</p>
+<p>在 F+R 中，攻击者和受害者t通过 page de-duplication 共享 BLAS 库。攻击者探测 itcopy 和 oncopy 中的地址。根据模型，并不需要探测 kernel 函数的地址。</p>
+<p>P+P 攻击 LLC，构造两个冲突集，都是每 2000 周期探测。</p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: July 1, 2021
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 caijiqhx
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="../../../static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

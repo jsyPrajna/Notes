@@ -1,0 +1,3347 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://notes.caijiqhx.top/os/os_lab/lab2/preview/">
+      
+      
+        <meta name="author" content="caijiqhx">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>PREVIEW - caijiqhx notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/application.1b62728e.css">
+      
+        <link rel="stylesheet" href="../../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,400,400i,700%7CSource+Code+Pro&display=fallback">
+        <style>body,input{font-family:"Noto Sans","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Source Code Pro","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../../static/css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="red">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#preview" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              caijiqhx notes
+            </span>
+            <span class="md-header-nav__topic">
+              
+                PREVIEW
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../.." class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../tools/vscode/" class="md-tabs__link">
+          常用工具
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../rust/" class="md-tabs__link">
+          Rust
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../cpp/" class="md-tabs__link">
+          C++
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../network/" class="md-tabs__link">
+          计算机网络
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../" class="md-tabs__link md-tabs__link--active">
+          操作系统
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../database/" class="md-tabs__link">
+          数据库
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../../ucas/" class="md-tabs__link">
+          UCAS
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://notes.caijiqhx.top" title="caijiqhx notes" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    caijiqhx notes
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/caijiqhx/Notes/" title="前往 Github 仓库" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    caijiqhx/Notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../.." title="QHX's Notes" class="md-nav__link">
+      QHX's Notes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../TOP/" title="TOP" class="md-nav__link">
+      TOP
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      常用工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        常用工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vscode/" title="Visual Studio Code 配置同步" class="md-nav__link">
+      Visual Studio Code 配置同步
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/manjaro/" title="Manjaro 从头配置" class="md-nav__link">
+      Manjaro 从头配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/gitbook/" title="Gitbook" class="md-nav__link">
+      Gitbook
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/regex/" title="正则表达式" class="md-nav__link">
+      正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs/" title="mkdocs" class="md-nav__link">
+      mkdocs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/mkdocs_zh_search/" title="MkDocs 中文搜索" class="md-nav__link">
+      MkDocs 中文搜索
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/vim/" title="vim" class="md-nav__link">
+      vim
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-8" type="checkbox" id="nav-2-8">
+    
+    <label class="md-nav__link" for="nav-2-8">
+      部署工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-8">
+        部署工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/docker_introduction/" title="Docker 简介" class="md-nav__link">
+      Docker 简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/docker/dockerfile/" title="Dockerfile" class="md-nav__link">
+      Dockerfile
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-9" type="checkbox" id="nav-2-9">
+    
+    <label class="md-nav__link" for="nav-2-9">
+      调试工具
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-9">
+        调试工具
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../tools/ida/" title="IDA" class="md-nav__link">
+      IDA
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Rust
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Rust
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/" title="Rust" class="md-nav__link">
+      Rust
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rust 程序设计语言
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rust 程序设计语言
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/" title="The Rust Programming Language" class="md-nav__link">
+      The Rust Programming Language
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x00/" title="0x00 Introduction" class="md-nav__link">
+      0x00 Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x01/" title="0x01 Getting Started" class="md-nav__link">
+      0x01 Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x02/" title="0x02 Guessing Game Tutorial" class="md-nav__link">
+      0x02 Guessing Game Tutorial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x03/" title="0x03 Common Programming Concepts" class="md-nav__link">
+      0x03 Common Programming Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x04/" title="0x04 Ownership" class="md-nav__link">
+      0x04 Ownership
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x05/" title="0x05 Structs" class="md-nav__link">
+      0x05 Structs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x06/" title="0x06 Enums and Pattern Matching" class="md-nav__link">
+      0x06 Enums and Pattern Matching
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x07/" title="0x07 Managing Growing Projects with Packages, Crates and Modules" class="md-nav__link">
+      0x07 Managing Growing Projects with Packages, Crates and Modules
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/trpl/0x08/" title="0x08 Common Collections" class="md-nav__link">
+      0x08 Common Collections
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Rustlings
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Rustlings
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/" title="Rustlings" class="md-nav__link">
+      Rustlings
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics2/" title="Rustlings: move_semantics2" class="md-nav__link">
+      Rustlings: move_semantics2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../rust/rustlings/move_semantics3/" title="Rustlings: move_semantics3" class="md-nav__link">
+      Rustlings: move_semantics3
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      C++
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        C++
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/" title="菜鸡的 C++ 学习" class="md-nav__link">
+      菜鸡的 C++ 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/memo/" title="C++ 备忘录" class="md-nav__link">
+      C++ 备忘录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/casting/" title="C++ 类型转换" class="md-nav__link">
+      C++ 类型转换
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/rtti/" title="C++ 运行时类型识别" class="md-nav__link">
+      C++ 运行时类型识别
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/unordered_set/" title="unordered_set" class="md-nav__link">
+      unordered_set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/custom_compare/" title="C++ 中自定义比较函数" class="md-nav__link">
+      C++ 中自定义比较函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-7" type="checkbox" id="nav-4-7">
+    
+    <label class="md-nav__link" for="nav-4-7">
+      C++ 11/14 快速上手
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-7">
+        C++ 11/14 快速上手
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/0/" title="简介" class="md-nav__link">
+      简介
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/1/" title="语言可用性的强化" class="md-nav__link">
+      语言可用性的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/2/" title="语言运行期的强化" class="md-nav__link">
+      语言运行期的强化
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/3/" title="对标准库的扩充：新增容器" class="md-nav__link">
+      对标准库的扩充：新增容器
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/4/" title="对标准库的扩充：智能指针和引用计数" class="md-nav__link">
+      对标准库的扩充：智能指针和引用计数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/5/" title="对标准库的扩充：正则表达式" class="md-nav__link">
+      对标准库的扩充：正则表达式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/6/" title="对标准库的扩充：语言级线程支持" class="md-nav__link">
+      对标准库的扩充：语言级线程支持
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/7/" title="其他杂项" class="md-nav__link">
+      其他杂项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/c++_11_14/8/" title="C++17 简介" class="md-nav__link">
+      C++17 简介
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/stl_learning/" title="STL 学习" class="md-nav__link">
+      STL 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+    
+    <label class="md-nav__link" for="nav-4-9">
+      设计模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-9">
+        设计模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/" title="设计模式" class="md-nav__link">
+      设计模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/basic/" title="设计模式预备知识" class="md-nav__link">
+      设计模式预备知识
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-3" type="checkbox" id="nav-4-9-3">
+    
+    <label class="md-nav__link" for="nav-4-9-3">
+      创建型模式
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-9-3">
+        创建型模式
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/simple_factory/" title="简单工厂模式" class="md-nav__link">
+      简单工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/factory_method/" title="工厂方法模式" class="md-nav__link">
+      工厂方法模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/abstract_factory/" title="抽象工厂模式" class="md-nav__link">
+      抽象工厂模式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../cpp/design_pattern/builder/" title="建造者模式" class="md-nav__link">
+      建造者模式
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      计算机网络
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        计算机网络
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/" title="计算机网络" class="md-nav__link">
+      计算机网络
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/questions/" title="牛客网题目记录" class="md-nav__link">
+      牛客网题目记录
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/tcp_and_udp/" title="TCP 和 UDP" class="md-nav__link">
+      TCP 和 UDP
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/protocols/" title="计算机网络协议" class="md-nav__link">
+      计算机网络协议
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/ip_addr/" title="IP 地址相关问题" class="md-nav__link">
+      IP 地址相关问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/devices/" title="各层网络设备" class="md-nav__link">
+      各层网络设备
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http/" title="HTTP 学习" class="md-nav__link">
+      HTTP 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../network/http_status_code/" title="HTTP 状态码" class="md-nav__link">
+      HTTP 状态码
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      操作系统
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        操作系统
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../" title="操作系统" class="md-nav__link">
+      操作系统
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2" type="checkbox" id="nav-6-2" checked>
+    
+    <label class="md-nav__link" for="nav-6-2">
+      os_lab
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-2">
+        os_lab
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="操作系统实验" class="md-nav__link">
+      操作系统实验
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-2" type="checkbox" id="nav-6-2-2">
+    
+    <label class="md-nav__link" for="nav-6-2-2">
+      lab1
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-2">
+        lab1
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer1/" title="EXER1: 理解通过 make 生成执行文件的过程" class="md-nav__link">
+      EXER1: 理解通过 make 生成执行文件的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer2/" title="EXER2: 使用 qemu 执行并调试 lab1 中的软件" class="md-nav__link">
+      EXER2: 使用 qemu 执行并调试 lab1 中的软件
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer3/" title="EXER3: 分析 bootloader 进入保护模式的过程" class="md-nav__link">
+      EXER3: 分析 bootloader 进入保护模式的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer4/" title="EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程" class="md-nav__link">
+      EXER4: 分析 bootloader 加载 ELF 格式的 OS 的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer5/" title="EXER5: 实现函数调用堆栈跟踪函数" class="md-nav__link">
+      EXER5: 实现函数调用堆栈跟踪函数
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/exer6/" title="EXER6: 完善中断初始化和处理" class="md-nav__link">
+      EXER6: 完善中断初始化和处理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab1/lab1/" title="Lab1 report" class="md-nav__link">
+      Lab1 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-3" type="checkbox" id="nav-6-2-3" checked>
+    
+    <label class="md-nav__link" for="nav-6-2-3">
+      lab2
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-3">
+        lab2
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        PREVIEW
+      </label>
+    
+    <a href="./" title="PREVIEW" class="md-nav__link md-nav__link--active">
+      PREVIEW
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实验流程概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    探测系统物理内存布局
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    以页为单位管理物理内存
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    物理内存页分配算法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    实现分页机制
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    段页式管理的基本概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    系统执行中地址映射的三个阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    建立虚拟页和物理页帧的地址映射关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    自映射机制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    建立段页式管理中的需要考虑的关键问题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-nav__link">
+      EXER1: 实现 first-fit 连续物理内存分配算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exer2/" title="EXER2: 实现寻找虚拟地址对应的页表项" class="md-nav__link">
+      EXER2: 实现寻找虚拟地址对应的页表项
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../exer3/" title="EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射" class="md-nav__link">
+      EXER3: 释放某虚地址所在的页并取消对应二级页表项的映射
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../challenge/" title="Challenge" class="md-nav__link">
+      Challenge
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lab2/" title="lab2 report" class="md-nav__link">
+      lab2 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-4" type="checkbox" id="nav-6-2-4">
+    
+    <label class="md-nav__link" for="nav-6-2-4">
+      lab3
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-4">
+        lab3
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/preview/" title="PREVIEW" class="md-nav__link">
+      PREVIEW
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/exer1/" title="EXER1: 给未被映射的地址映射上物理页" class="md-nav__link">
+      EXER1: 给未被映射的地址映射上物理页
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/exer2/" title="EXER2: 补充完成基于 FIFO 的页面替换算法" class="md-nav__link">
+      EXER2: 补充完成基于 FIFO 的页面替换算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/challenge/" title="Challenge: Extended Clock" class="md-nav__link">
+      Challenge: Extended Clock
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab3/lab3/" title="lab3 report" class="md-nav__link">
+      lab3 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-5" type="checkbox" id="nav-6-2-5">
+    
+    <label class="md-nav__link" for="nav-6-2-5">
+      lab4
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-5">
+        lab4
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer1/" title="EXER1: 分配并初始化一个进程控制块" class="md-nav__link">
+      EXER1: 分配并初始化一个进程控制块
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer2/" title="EXER2: 为新创建的内核线程分配资源" class="md-nav__link">
+      EXER2: 为新创建的内核线程分配资源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/exer3/" title="EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的" class="md-nav__link">
+      EXER3: 阅读代码，理解 proc_run 函数和它调用的函数如何完成进程切换的
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab4/lab4/" title="Lab4 report" class="md-nav__link">
+      Lab4 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-6" type="checkbox" id="nav-6-2-6">
+    
+    <label class="md-nav__link" for="nav-6-2-6">
+      lab5
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-6">
+        lab5
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer1/" title="EXER1: 加载应用程序并执行" class="md-nav__link">
+      EXER1: 加载应用程序并执行
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer2/" title="EXER2: 父进程复制自己的内存空间给子进程" class="md-nav__link">
+      EXER2: 父进程复制自己的内存空间给子进程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/exer3/" title="EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现" class="md-nav__link">
+      EXER3: 阅读分析源代码，理解进程执行 fork/exec/wait/exit 的实现，以及系统调用的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab5/lab5/" title="Lab5 report" class="md-nav__link">
+      Lab5 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-7" type="checkbox" id="nav-6-2-7">
+    
+    <label class="md-nav__link" for="nav-6-2-7">
+      lab6
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-7">
+        lab6
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab6/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab6/exer1/" title="EXER1: 使用 Round Robin 调度算法" class="md-nav__link">
+      EXER1: 使用 Round Robin 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab6/exer2/" title="EXER2: 实现 Stride Scheduling 调度算法" class="md-nav__link">
+      EXER2: 实现 Stride Scheduling 调度算法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab6/lab6/" title="Lab6 report" class="md-nav__link">
+      Lab6 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-8" type="checkbox" id="nav-6-2-8">
+    
+    <label class="md-nav__link" for="nav-6-2-8">
+      lab7
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-8">
+        lab7
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/preview/" title="Preview" class="md-nav__link">
+      Preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/exer1/" title="EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题" class="md-nav__link">
+      EXER1: 理解内核级信号量的实现和基于内核级信号量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/exer2/" title="EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题" class="md-nav__link">
+      EXER2: 完成内核级条件变量和基于内核级条件变量的哲学家就餐问题
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab7/lab7/" title="Lab7 report" class="md-nav__link">
+      Lab7 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-2-9" type="checkbox" id="nav-6-2-9">
+    
+    <label class="md-nav__link" for="nav-6-2-9">
+      lab8
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-6-2-9">
+        lab8
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/preview/" title="preview" class="md-nav__link">
+      preview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/exer1/" title="EXER1: 完成读文件操作的实现" class="md-nav__link">
+      EXER1: 完成读文件操作的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/exer2/" title="EXER2: 完成基于文件系统的执行程序机制的实现" class="md-nav__link">
+      EXER2: 完成基于文件系统的执行程序机制的实现
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../lab8/lab8/" title="Lab8 report" class="md-nav__link">
+      Lab8 report
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      数据库
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        数据库
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/" title="数据库" class="md-nav__link">
+      数据库
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/theory/" title="数据库系统原理" class="md-nav__link">
+      数据库系统原理
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sql/" title="SQL" class="md-nav__link">
+      SQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/mysql/" title="MySQL" class="md-nav__link">
+      MySQL
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../database/sqlite.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      UCAS
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        UCAS
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/" title="UCAS" class="md-nav__link">
+      UCAS
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/virtualization_overview/virtualization/" title="虚拟化概述" class="md-nav__link">
+      虚拟化概述
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-3" type="checkbox" id="nav-8-3">
+    
+    <label class="md-nav__link" for="nav-8-3">
+      侧信道攻击
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-3">
+        侧信道攻击
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/side_channel/side_channel.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/spectre/spectre/" title="Spectre" class="md-nav__link">
+      Spectre
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-5" type="checkbox" id="nav-8-5">
+    
+    <label class="md-nav__link" for="nav-8-5">
+      ZombieLoad
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-5">
+        ZombieLoad
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/zombieload/zombieload_script.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-6" type="checkbox" id="nav-8-6">
+    
+    <label class="md-nav__link" for="nav-8-6">
+      QEMU/KVM
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-6">
+        QEMU/KVM
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/qemu_kvm/" title="QEMU/KVM 学习" class="md-nav__link">
+      QEMU/KVM 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/qemu_kvm/qemu_kvm_overview/" title="QEMU 与 KVM 概述" class="md-nav__link">
+      QEMU 与 KVM 概述
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-7" type="checkbox" id="nav-8-7">
+    
+    <label class="md-nav__link" for="nav-8-7">
+      Linux Kernel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-8-7">
+        Linux Kernel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/" title="Linux Kernel 学习" class="md-nav__link">
+      Linux Kernel 学习
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/boot_to_main/" title="从开机加电到执行 main 函数之前的过程" class="md-nav__link">
+      从开机加电到执行 main 函数之前的过程
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/initial_and_create_process_0/" title="Initial and create process 0" class="md-nav__link">
+      Initial and create process 0
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../../ucas/the_art_of_linux_kernel_design/create_process_1_and_execute/" title="Create process 1 and execute" class="md-nav__link">
+      Create process 1 and execute
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    实验流程概述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    探测系统物理内存布局
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    以页为单位管理物理内存
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    物理内存页分配算法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    实现分页机制
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    段页式管理的基本概念
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    系统执行中地址映射的三个阶段
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    建立虚拟页和物理页帧的地址映射关系
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    自映射机制
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    建立段页式管理中的需要考虑的关键问题
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/caijiqhx/Notes/edit/master/docs/os/os_lab/lab2/preview.md" title="编辑此页" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                <h1 id="preview">PREVIEW<a class="headerlink" href="#preview" title="Permanent link">*</a></h1>
+<p>lab2 的练习 1 上来就是写分配内存算法，但开始并不知道 ucore 是怎样对内存操作的，还是需要根据参考资料学习一下先导知识。</p>
+<p>本次实验包含三个部分：</p>
+<ol>
+<li>首先了解如何发现系统中的物理内存；</li>
+<li>然后了解如何建立对物理内存的初步管理，即了解连续物理内存管理；</li>
+<li>最后了解页表相关的操作，即如何建立页表来实现虚拟内存到物理内存之间的映射，对段页式内存管理机制有一个比较全面的了解。</li>
+</ol>
+<h2 id="_1">实验流程概述<a class="headerlink" href="#_1" title="Permanent link">*</a></h2>
+<ol>
+<li>bootloader 探测物理内存分布和大小</li>
+<li>kern 入口为 kern_entry，为执行 kern_init 设置堆栈</li>
+<li>kern_init 调用 pmm_init 完成物理内存的管理</li>
+</ol>
+<h2 id="_2">探测系统物理内存布局<a class="headerlink" href="#_2" title="Permanent link">*</a></h2>
+<p>一般来说，获取内存大小的方法由 BIOS 中断调用和直接探测两种，BIOS 中断调用方法是一般只能在实模式下完成，而直接探测方法必须在保护模式下完成。通过 BIOS 中断获取内存布局有三种方式，都是基于 INT 15h 中断，参数分别为 88h e801h e820h。在本实验中，我们通过 e820h 中断获取内存信息。中断必须在实模式下使用，所以我们在 bootloader 进入保护模式之前调用这个 BIOS 中断，并且把 e820 映射结构保存在物理地址 0x8000 处。</p>
+<p>BIOS 通过系统内存映射地址描述符 (Address Ranger Descriptor) 格式来表示系统物理内存布局：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Offset  Size    Description
+00h     8bytes  base address
+08h     8bytes  length in bytes
+10h     4bytes  type of address range
+大小为 20 字节
+</pre></div>
+</td></tr></table>
+
+<p>其中内存的类型有以下几个：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span>Values for System Memory Map address type:
+01h     memory, available to OS
+02h     reserved, not available (e.g. system ROM, memory-mapped device)
+03h     ACPI Reclaim Memory (usable by OS after reading ACPI tables)
+04h     ACPI NVS Memory (OS is required to save this memory between NVS sessions)
+other   not defined yet -- treat as Reserved
+
+ACPI Advanced Configuration and Power Interface 高级配置和电源接口
+初步了解可参考知乎专栏 https://zhuanlan.zhihu.com/p/25893464
+</pre></div>
+</td></tr></table>
+
+<p>下面学习 <code>int 15h</code> 的参数和返回值：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span>参数：
+eax     e820h
+edx     534D4150h (&#39;SMAP&#39;)，签名
+ebx     如果是第一次调用或内存区域扫描完毕，则为0；如果不是，则存放上次调用之后的计数值
+ecx     保存地址范围描述符的内存大小，应该大于等于20字节；
+es:di   指向保存地址范围描述符结构的缓冲区，BIOS 把信息写入这个结构的起始地址。
+
+返回值：
+CF      若INT 15中断执行成功，则不置位，否则置位
+eax     534D4150h (&#39;SMAP&#39;)
+es:di   指向保存地址范围描述符的缓冲区，此时缓冲区内的数据已由 BIOS 填写完毕
+ebx     下一个地址范围描述符的计数地址
+ecx     返回 BIO S往 ES:DI 处写的地址范围描述符的字节大小
+ah      失败时保存出错代码
+</pre></div>
+</td></tr></table>
+
+<p>可见，通过 <code>int 15h</code> 中断向 es:di 中一段地址循环地填入地址描述符信息，从而探测所有的内存块，将所有的描述符保存到一个缓冲区，其定义如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">e820map</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">nr_map</span><span class="p">;</span><span class="w"> </span><span class="c1">// 统计描述符的数目</span>
+<span class="w">    </span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">type</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="n">__attribute__</span><span class="p">((</span><span class="n">packed</span><span class="p">))</span><span class="w"> </span><span class="n">map</span><span class="p">[</span><span class="n">E820MAX</span><span class="p">];</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>ucore 中的内存探测是在 bootasm.S 中实现的：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span>probe_memory:
+    movl $0, 0x8000     # 位于0x8000处的 struct e820map 的成员变量 nr_map 置零
+    xorl %ebx, %ebx
+    movw $0x8004, %di   # 表示设置调用 INT 15h BIOS 中断后，BIOS 返回的映射地址描述符的起始地址
+start_probe:
+    movl $0xE820, %eax  # INT 15 的中断调用参数
+    movl $20, %ecx      # 设置地址范围描述符的大小为 20 字节，其大小等于 struct e820map 的成员变量 map 的大小
+    movl $SMAP, %edx
+    int $0x15           # 调用 int 15h 中断，要求 BIOS 返回一个用地址范围描述符表示的内存段信息
+    jnc cont            # 如果 eflags 的 CF 位为0，则表示还有内存段需要探测
+    movw $12345, 0x8000 # 探测有问题，结束探测
+    jmp finish_probe
+cont:
+    addw $20, %di       # 设置下一个 BIOS 返回的映射地址描述符的起始地址
+    incl 0x8000         # 递增 struct e820map 的成员变量 nr_map
+    cmpl $0, %ebx       # 如果 INT 0x15 返回的 ebx 为零，表示探测结束，否则继续探测
+    jnz start_probe
+finish_probe:
+</pre></div>
+</td></tr></table>
+
+<p>以上的汇编代码执行后就在 0x8000 处按照 struct e820map 的定义填充了物理内存信息。在 page_init 中读入这个结构体实现对物理内存的管理。</p>
+<h2 id="_3">以页为单位管理物理内存<a class="headerlink" href="#_3" title="Permanent link">*</a></h2>
+<p>在获得可用物理内存范围后，系统以物理页作为最小单位管理物理内存，每个物理页用一个 Page 结构管理。</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">Page</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">ref</span><span class="p">;</span><span class="w">                        </span><span class="c1">// page frame&#39;s reference counter</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">flags</span><span class="p">;</span><span class="w">                 </span><span class="c1">// array of flags that describe the status of the page frame</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">property</span><span class="p">;</span><span class="w">          </span><span class="c1">// the num of free block, used in first fit pm manager</span>
+<span class="w">    </span><span class="n">list_entry_t</span><span class="w"> </span><span class="n">page_link</span><span class="p">;</span><span class="w">         </span><span class="c1">// free list link</span>
+<span class="p">};</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>各个参数：</p>
+<ol>
+<li>ref: 该页被页表的引用次数。在某页表中有一个页表项设置了一个虚拟页到这个 Page 管理的物理页的映射关系，就会把 Page 的 ref 加一；反之，若页表项取消，即映射关系解除，就会把 Page 的 ref 减一；</li>
+<li>flags: 物理页的状态标记：</li>
+</ol>
+<p><code>C
+   #define PG_reserved                 0
+   #define PG_property                 1</code></p>
+<p>目前用了两个 bit。bit 0 表示此页是否被保留给 kernel，置 1 时即被保留，无法动态分配与释放。bit 1 表示此页是否 free。</p>
+<ol>
+<li>property: 记录地址连续的空闲页的个数。用到此成员变量的页即为一块空闲空间中最小地址的物理页 Head Page。这个变量名起得很迷，对于不同算法有不同的含义。</li>
+<li>page_link: 把多个连续空闲内存块链接在一起的双向链表指针，也只是有 Head Page 才用到。以此成员变量来链接比它地址小和大的其他连续空闲内存块。</li>
+</ol>
+<p>初始情况下，所有空闲的物理页都是连续的，就形成了一个大的连续空闲内存块。但随着物理页的分配和释放，大的连续空闲内存块就会分裂为不连续的多个小连续空闲内存块。为了管理这些内存块，定义一个 <code>free_area_t</code> 数据结构，包含了一个 list_entry 结构的双向链表指针和记录当前空闲页个数的无符号整型变量 <code>nr_free</code>：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="k">struct</span> <span class="nc">list_entry</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">list_entry</span><span class="w"> </span><span class="o">*</span><span class="n">prev</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="p">;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
+
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="nc">list_entry</span><span class="w"> </span><span class="n">list_entry_t</span><span class="p">;</span><span class="w"></span>
+
+<span class="cm">/* free_area_t - maintains a doubly linked list to record free (unused) pages */</span><span class="w"></span>
+<span class="k">typedef</span><span class="w"> </span><span class="k">struct</span> <span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">list_entry_t</span><span class="w"> </span><span class="n">free_list</span><span class="p">;</span><span class="w">         </span><span class="c1">// the list header</span>
+<span class="w">    </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">nr_free</span><span class="p">;</span><span class="w">           </span><span class="c1">// # of free pages in this free list</span>
+<span class="p">}</span><span class="w"> </span><span class="n">free_area_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>ucore 以两个数据结构管理以页为单位的物理内存空间。以下为物理内存管理初始化的代码：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">// ./kern/mm/pmm.c</span>
+<span class="cm">/* pmm_init - initialize the physical memory management */</span><span class="w"></span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="nf">page_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">struct</span> <span class="nc">e820map</span><span class="w"> </span><span class="o">*</span><span class="n">memmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span> <span class="nc">e820map</span><span class="w"> </span><span class="o">*</span><span class="p">)(</span><span class="mh">0x8000</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">KERNBASE</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">maxpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="n">cprintf</span><span class="p">(</span><span class="s">&quot;e820map:</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 遍历输出通过 INT 15h 探测到的物理内存空间</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">nr_map</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="n">cprintf</span><span class="p">(</span><span class="s">&quot;  memory: %08llx, [%08llx, %08llx], type = %d.</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">                </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">type</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">E820_ARM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maxpa</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">KMEMSIZE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">maxpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maxpa</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">KMEMSIZE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">maxpa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KMEMSIZE</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">extern</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">end</span><span class="p">[];</span><span class="w"> </span><span class="c1">// end 即为 bss 段的结束，也就是存放 Page 结构体开始的地址</span>
+
+<span class="w">    </span><span class="n">npage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maxpa</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">;</span><span class="w"> </span><span class="c1">// 物理页的个数</span>
+<span class="w">    </span><span class="n">pages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">struct</span> <span class="nc">Page</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ROUNDUP</span><span class="p">((</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"> </span><span class="c1">// 向上取整到整个页</span>
+
+<span class="w">    </span><span class="c1">// 先将所有的物理页标记为保留</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">npage</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">SetPageReserved</span><span class="p">(</span><span class="n">pages</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 将 pages + sizeof(struct Page) * npage 以上的地址为空闲的可分配地址</span>
+<span class="w">    </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">freemem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PADDR</span><span class="p">((</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="n">pages</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="nc">Page</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">npage</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// 将虚拟地址转换为物理地址</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">nr_map</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">memmap</span><span class="o">-&gt;</span><span class="n">map</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">E820_ARM</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">freemem</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">freemem</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">KMEMSIZE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">KMEMSIZE</span><span class="p">;</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">begin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUNDUP</span><span class="p">(</span><span class="n">begin</span><span class="p">,</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="n">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUNDDOWN</span><span class="p">(</span><span class="n">end</span><span class="p">,</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">begin</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">end</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="c1">// 默认指向了 ./kern/mm/default_pmm.c 中的 default_init_memmap</span>
+<span class="w">                    </span><span class="c1">// 将 ref 和 flags 都置零，后设置 base 指向的 head page 的 flags.PG_property 和 property</span>
+<span class="w">                    </span><span class="c1">// 最后将空闲的内存块添加到 free_area 指向的双向链表中</span>
+<span class="w">                    </span><span class="n">init_memmap</span><span class="p">(</span><span class="n">pa2page</span><span class="p">(</span><span class="n">begin</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">begin</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"></span>
+<span class="w">                </span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="_4">物理内存页分配算法<a class="headerlink" href="#_4" title="Permanent link">*</a></h2>
+<p>根据以上的基础知识，我们就可以实现 first-fit 算法，完成练习 1，具体过程见 exer1.md。</p>
+<h2 id="_5">实现分页机制<a class="headerlink" href="#_5" title="Permanent link">*</a></h2>
+<h3 id="_6">段页式管理的基本概念<a class="headerlink" href="#_6" title="Permanent link">*</a></h3>
+<p>逻辑地址---Segmentation&rarr;线性地址---Paging&rarr;物理地址。</p>
+<p>线性地址分为 Directory、Table、Offset 三部分，通过二级页表实现，一级页表的起始地址存放在 cr3 寄存器。</p>
+<p><img alt="seg_page" src="../seg_page.png" /></p>
+<p><img alt="page" src="../page.png" /></p>
+<h3 id="_7">系统执行中地址映射的三个阶段<a class="headerlink" href="#_7" title="Permanent link">*</a></h3>
+<p>lab1 中只是简单的段映射，虚拟地址和物理地址都是从 0x100000 开始， vir addr = linear addr = phy addr。</p>
+<p>lab2 中在 ./tools/kernel.ld 中定义了起始虚拟地址 0xC0100000，入口由 kern_init 改为 kern_entry，对应的物理地址同样是 0x100000 开始。</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">ENTRY</span><span class="p">(</span><span class="n">kern_entry</span><span class="p">)</span><span class="w"></span>
+
+<span class="n">SECTIONS</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* Load the kernel at this address: &quot;.&quot; means the current address */</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0xC0100000</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="p">.</span><span class="nl">text</span> <span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="o">*</span><span class="p">(.</span><span class="n">text</span><span class="w"> </span><span class="p">.</span><span class="n">stub</span><span class="w"> </span><span class="p">.</span><span class="n">text</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="p">.</span><span class="n">gnu</span><span class="p">.</span><span class="n">linkonce</span><span class="p">.</span><span class="n">t</span><span class="p">.</span><span class="o">*</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>可见 lab1 和 lab2 在地址映射机制上的不同，而 lab2 在不同阶段的地址映射机制也不尽相同。</p>
+<ol>
+<li>第一阶段（开启保护模式，创建启动段表）是 bootloader 阶段，即从 bootasm.S 的 start 函数到执行 ucore 的 kern_entry 之前：</li>
+</ol>
+<p>vir addr = linear addr = phy addr</p>
+<ol>
+<li>第二阶段（创建初始页目录表，开启分页模式）从 kern_entry 函数开始，到 pmm_init 函数被执行之前。</li>
+</ol>
+<p>在 ./kern/init/entry.S 中设置好了页目录表和页表项，将 0~4M 的线性地址一一映射到物理地址</p>
+<p>```assembly
+   __boot_pgdir:
+   .globl __boot_pgdir
+       # map va 0 ~ 4M to pa 0 ~ 4M (temporary)
+       .long REALLOC(__boot_pt1) + (PTE_P | PTE_U | PTE_W)
+       .space (KERNBASE &gt;&gt; PGSHIFT &gt;&gt; 10 &lt;&lt; 2) - (. - __boot_pgdir) # pad to PDE of KERNBASE
+       # map va KERNBASE + (0 ~ 4M) to pa 0 ~ 4M
+       .long REALLOC(__boot_pt1) + (PTE_P | PTE_U | PTE_W)
+       .space PGSIZE - (. - __boot_pgdir) # pad to PGSIZE</p>
+<p># 1024 × 4KB
+   .set i, 0
+   __boot_pt1:
+   .rept 1024
+       .long i * PGSIZE + (PTE_P | PTE_W)
+       .set i, i + 1
+   .endr
+   ```</p>
+<p>首先将页目录表的起始地址填入 cr3，然后将 cr0 的 CR0_PG 置位，计算机进入了分页模式。</p>
+<p>此时的地址映射机制为：</p>
+<ul>
+<li>0~4MB: vir addr = linear addr = phy addr</li>
+<li>KERNBASE(0xC0000000) + 0~4MB: vir addr = linear addr = phy addr + KERNBASE(0xC0000000)</li>
+</ul>
+<p>这仅比第一阶段增加了内核基址的偏移，作为范围仅是 0~4M。此时的 EIP 还在 0~4M 的低虚拟地址运行，接下来需要一个跳转来使内核跳转到高虚拟地址：</p>
+<p><code>assembly
+   # update eip
+   # now, eip = 0x1.....
+   leal next, %eax
+   # set eip = KERNBASE + 0x1.....
+   jmp *%eax</code></p>
+<p>跳转完成后，将 boot_pgdir 的第一个页目录表项清零来取消之前的映射关系。</p>
+<p><code>assembly
+   # unmap va 0 ~ 4M, it's temporary mapping
+   xorl %eax, %eax
+   movl %eax, __boot_pgdir</code></p>
+<p>最后，第二阶段的虚拟地址 0~4M 的地址映射机制被设置为：vir addr = linear addr = phy addr + KERNBASE。第二阶段主要就是把 EIP 迁移到高虚拟地址，到但是只映射了 0~4M。</p>
+<ol>
+<li>第三阶段（完善段表和页表）pmm_init 函数补充页目录表项，从 0~4M 扩充到 0~KMEMSIZE。然后更新了段映射机制，使用了新的段表，包括内核态和用户态的代码段和数据段描述符以及 TSS 段描述符。</li>
+</ol>
+<p>这时就形成了我们期望的虚拟地址、线性地址以及物理地址的映射关系：vir addr = linear addr = phy addr + 0xC000000</p>
+<h3 id="_8">建立虚拟页和物理页帧的地址映射关系<a class="headerlink" href="#_8" title="Permanent link">*</a></h3>
+<p>pmm_init 是内存管理的总体控制函数，主要工作包括：</p>
+<ol>
+<li>init_pmm_manager: 初始化物理内存页管理器框架，即将 default_pmm.c 中定义的 default_pmm_manager 赋值给 pmm_manager。初始化之后的 pmm 就可以分配释放物理内存。同时应用了内存分配算法。</li>
+<li>page_init: 初始化管理空闲内存的双向链表 free_list。</li>
+<li>check_alloc_page: 调用 pmm_manager-&gt;check 检查物理内存页分配算法</li>
+<li>boot_map_segment: 建立二级页表，使能分页机制</li>
+<li>gdt_init: 设置新的全局段描述符表</li>
+<li>check_boot_pgdir: 检查页表</li>
+<li>通过自映射机制完成页表的打印输出</li>
+</ol>
+<p>建立二级页表</p>
+<p>整个页目录表和页表所占空间大小取决于二级页表要管理和映射的物理页数，在 ucore 中定义了内存大小为 <code>KMEMSIZE = 0x38000000</code>，即 896MB。计算一下，物理页大小为 4KB，则我们需要以 0x38000 个物理页管理这些内存。</p>
+<p>完成了前两个阶段的地址映射后，为了把 0~KMEMSIZE 的物理地址一一映射到页目录项和页表项的内容，其大致流程如下：</p>
+<ol>
+<li>指向页目录表项的指针已存储在 boot_pgdir 变量中。</li>
+<li>映射 0~4MB 的首个页表已填充好。</li>
+<li>调用 boot_map_segment 函数进一步建立映射关系，具体过程以页为单位进行设置，即 linear addr = phy addr + KERNBASE</li>
+</ol>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="c1">//boot_map_segment - setup&amp;enable the paging mechanism</span>
+<span class="c1">// parameters</span>
+<span class="c1">//  la:   linear address of this memory need to map (after x86 segment map) 32位 线性地址</span>
+<span class="c1">//  size: memory size</span>
+<span class="c1">//  pa:   physical address of this memory 32位 物理地址</span>
+<span class="c1">//  perm: permission of this memory</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"></span>
+<span class="nf">boot_map_segment</span><span class="p">(</span><span class="n">pde_t</span><span class="w"> </span><span class="o">*</span><span class="n">pgdir</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">la</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">pa</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">perm</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">PGOFF</span><span class="p">(</span><span class="n">la</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PGOFF</span><span class="p">(</span><span class="n">pa</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUNDUP</span><span class="p">(</span><span class="n">size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">PGOFF</span><span class="p">(</span><span class="n">la</span><span class="p">),</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">la</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUNDDOWN</span><span class="p">(</span><span class="n">la</span><span class="p">,</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">pa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ROUNDDOWN</span><span class="p">(</span><span class="n">pa</span><span class="p">,</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">--</span><span class="p">,</span><span class="w"> </span><span class="n">la</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">,</span><span class="w"> </span><span class="n">pa</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">PGSIZE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">pte_t</span><span class="w"> </span><span class="o">*</span><span class="n">ptep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_pte</span><span class="p">(</span><span class="n">pgdir</span><span class="p">,</span><span class="w"> </span><span class="n">la</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="n">assert</span><span class="p">(</span><span class="n">ptep</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="w">        </span><span class="o">*</span><span class="n">ptep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pa</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_P</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">perm</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<p>页目录表项内容 = (页表起始地址 &amp; ~0x0FFF) | PTE_U | PTE_W | PTE_P
+页表项内容 = (pa &amp; ~0x0FFF) | PTE_P | PTE_W</p>
+<p>boot_map_segment 完成映射的函数就是 get_pte，这也是练习 2 要修改的函数。根据注释可以实现即可。</p>
+<ol>
+<li>建立好一一映射的二级页表结构后，分页机制已初始化完毕。然后执行 gdt_init 函数后，新的段页式映射已经建立好了。</li>
+</ol>
+<p>最终的内核虚拟地址空间如下：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cm">/* *</span>
+<span class="cm"> * Virtual memory map:                                          Permissions</span>
+<span class="cm"> *                                                              kernel/user</span>
+<span class="cm"> *</span>
+<span class="cm"> *     4G ------------------&gt; +---------------------------------+</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            |         Empty Memory (*)        |</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            +---------------------------------+ 0xFB000000</span>
+<span class="cm"> *                            |   Cur. Page Table (Kern, RW)    | RW/-- PTSIZE</span>
+<span class="cm"> *     VPT -----------------&gt; +---------------------------------+ 0xFAC00000</span>
+<span class="cm"> *                            |        Invalid Memory (*)       | --/--</span>
+<span class="cm"> *     KERNTOP -------------&gt; +---------------------------------+ 0xF8000000</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            |    Remapped Physical Memory     | RW/-- KMEMSIZE</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *     KERNBASE ------------&gt; +---------------------------------+ 0xC0000000</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            |                                 |</span>
+<span class="cm"> *                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+<span class="cm"> * (*) Note: The kernel ensures that &quot;Invalid Memory&quot; is *never* mapped.</span>
+<span class="cm"> *     &quot;Empty Memory&quot; is normally unmapped, but user programs may map pages</span>
+<span class="cm"> *     there if desired.</span>
+<span class="cm"> *</span>
+<span class="cm"> * */</span><span class="w"></span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="_9">自映射机制<a class="headerlink" href="#_9" title="Permanent link">*</a></h2>
+<p>boot_map_segment 函数建立了一一映射关系的页目录表项和页表项，映射关系为：</p>
+<p>vir addr (KERNBASE~KERNBASE+KMEMSIZE) = phy addr (0~KMEMSIZE)</p>
+<p>如果我们这时需要按虚拟地址的地址顺序显示整个页目录表和页表的内容，则要查找页目录表的页目录表项内容，根据页目录表项内容找到页表的物理地址，再转换成对应的虚地址，然后访问页表的虚地址，搜索整个页表的每个页目录项。</p>
+<p>把页目录表和页表放在一个连续的 4MB 虚拟地址空间中，并设置页目录表自身的虚地址&lt;==&gt;物理地址映射关系。这样在已知页目录表起始虚地址的情况下，通过连续扫描这特定的 4MB 虚拟地址空间，就很容易访问每个页目录表项和页表项内容。</p>
+<p>首先定义了一个常量 <code>VPT = 0xFAC00000</code>，其低 12 位和中 10 位为 0。在 pmm.c 中有以下代码：</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="n">pte_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vpt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pte_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">VPT</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// vpd 的高 10 位和中 10 位相等，都是十进制的 1003，即 vpd = 0xFAFEB000</span>
+<span class="c1">// 确保 vpd 的值就是目录页表项的起始虚地址，且 vpt 就是页目录表中第一个页目录表指向的页表的起始虚地址。</span>
+<span class="n">pde_t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">vpd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">pde_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">PGADDR</span><span class="p">(</span><span class="n">PDX</span><span class="p">(</span><span class="n">VPT</span><span class="p">),</span><span class="w"> </span><span class="n">PDX</span><span class="p">(</span><span class="n">VPT</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span>
+
+
+<span class="c1">// recursively insert boot_pgdir in itself</span>
+<span class="c1">// to form a virtual page table at virtual address VPT</span>
+<span class="n">boot_pgdir</span><span class="p">[</span><span class="n">PDX</span><span class="p">(</span><span class="n">VPT</span><span class="p">)]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PADDR</span><span class="p">(</span><span class="n">boot_pgdir</span><span class="p">)</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_P</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PTE_W</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// boot_pgdir[1003]存储了 boot_pgdir 的物理地址，二级页表则再次以 boot_pgdir 页表查找，对应的物理地址恰好是 boot_pgdir 的物理地址。</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="_10">建立段页式管理中的需要考虑的关键问题<a class="headerlink" href="#_10" title="Permanent link">*</a></h2>
+<ol>
+<li>如何在建立页表的过程中维护全局段描述符表（GDT）和页表的关系，确保 ucore 能够在各个时间段上都能正常寻址？</li>
+</ol>
+<p>在建立页表的时候，此时还是链接时由 bootloader 生成的 GDT.在建立页表完成后，需要更新全局 GDT.这才真正开启了分页机制。</p>
+<ol>
+<li>对于哪些物理内存空间需要建立页映射关系？</li>
+</ol>
+<p>可用的物理空间，起始地址是 bss 段的起始地址。</p>
+<ol>
+<li>具体的页映射关系是什么？</li>
+</ol>
+<p><code>C
+   // +--------10------+-------10-------+---------12----------+
+   // | Page Directory |   Page Table   | Offset within Page  |
+   // |      Index     |     Index      |                     |
+   // +----------------+----------------+---------------------+
+   //  \--- PDX(la) --/ \--- PTX(la) --/ \---- PGOFF(la) ----/
+   //  \----------- PPN(la) -----------/
+   //
+   // The PDX, PTX, PGOFF, and PPN macros decompose linear addresses as shown.
+   // To construct a linear address la from PDX(la), PTX(la), and PGOFF(la),
+   // use PGADDR(PDX(la), PTX(la), PGOFF(la)).</code></p>
+<ol>
+<li>
+<p>页目录表的起始地址设置在哪里？</p>
+</li>
+<li>
+<p>页表的起始地址设置在哪里，需要多大空间？</p>
+</li>
+</ol>
+<p>页表的理论连续虚拟空间为 0xFAC00000 ~ 0xFB000000，大小为 4MB。有 1M 个 PTE，即可以映射 4GB 的地址空间。由于 ucore 的 KERNTOP 为 <code>vpt + 0xF8000000/0x1000*4 = 0xFAC00000 + 0xF8000*4 = 0xFAFE0000</code></p>
+<ol>
+<li>如何设置页目录表项的内容？</li>
+</ol>
+<p>boot_pgdir[PDX(la)] = pa &amp; ~0x0FFF | PTE_U | PTE_W | PTE_P;</p>
+<ol>
+<li>如何设置页表项的内容？</li>
+</ol>
+<p>通过 get_pte 函数。</p>
+                
+                  
+                
+                
+                  
+                  <hr>
+                  <div class="md-source-date">
+                    <small>
+                      
+                        最后更新: March 10, 2020
+                      
+                    </small>
+                  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../lab1/lab1/" title="Lab1 report" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                Lab1 report
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../exer1/" title="EXER1: 实现 first-fit 连续物理内存分配算法" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                EXER1: 实现 first-fit 连续物理内存分配算法
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2020 caijiqhx
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../../.."}})</script>
+      
+        <script src="../../../../static/js/extra.js"></script>
+      
+        <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>
