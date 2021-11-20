@@ -39,7 +39,6 @@ markdown_extensions:
     custom_checkbox: true
 - pymdownx.tilde
 nav:
-- 0TOP.md
 - cpp:
   - c++_11_14:
     - cpp/c++_11_14/0.md
@@ -203,6 +202,7 @@ nav:
   - tools/typora.md
   - tools/vim.md
   - tools/vscode.md
+- TOP.md
 - ucas:
   - amd_sev:
     - ucas/amd_sev/amd_memory_encryption.md

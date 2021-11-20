@@ -10,7 +10,7 @@
 
 点击色块可更换主题的主色
 
-<<div class="tx-switch">
+<div class="tx-switch">
 <button data-md-color-primary="red"><code>Red</code></button>
 <button data-md-color-primary="pink"><code>Pink</code></button>
 <button data-md-color-primary="purple"><code>Purple</code></button>
