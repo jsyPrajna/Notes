@@ -2,9 +2,12 @@ copyright: Copyright &copy; 2020 - 2021 caijiqhx
 extra_css:
 - static/css/extra.css
 extra_javascript:
+- https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js
 - static/js/extra.js
 - https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML
 markdown_extensions:
+- abbr
+- attr_list
 - admonition
 - md_in_html
 - codehilite:
@@ -24,10 +27,13 @@ markdown_extensions:
     emoji_index: !!python/name:materialx.emoji.twemoji ''
 - pymdownx.highlight
 - pymdownx.inlinehilite
+- pymdownx.snippets
 - pymdownx.keys
 - pymdownx.magiclink
 - pymdownx.mark
 - pymdownx.smartsymbols
+- pymdownx.tabbed:
+    alternate_style: true
 - pymdownx.superfences:
     custom_fences:
     - class: mermaid
@@ -39,8 +45,10 @@ markdown_extensions:
     custom_checkbox: true
 - pymdownx.tilde
 nav:
+- index.md
 - 0TOP.md
 - cpp:
+  - cpp/index.md
   - c++_11_14:
     - cpp/c++_11_14/0.md
     - cpp/c++_11_14/1.md
@@ -54,13 +62,12 @@ nav:
   - cpp/casting.md
   - cpp/custom_compare.md
   - design_pattern:
+    - cpp/design_pattern/index.md
     - cpp/design_pattern/abstract_factory.md
     - cpp/design_pattern/basic.md
     - cpp/design_pattern/builder.md
     - cpp/design_pattern/factory_method.md
-    - cpp/design_pattern/index.md
     - cpp/design_pattern/simple_factory.md
-  - cpp/index.md
   - cpp/memo.md
   - cpp/rtti.md
   - cpp/stl_learning.md
@@ -70,12 +77,11 @@ nav:
   - database/mysql.md
   - database/sql.md
   - database/theory.md
-- index.md
 - network:
+  - network/index.md
   - network/devices.md
   - network/http.md
   - network/http_status_code.md
-  - network/index.md
   - network/ip_addr.md
   - network/network_protocol_security.md
   - network/protocols.md
@@ -141,9 +147,9 @@ nav:
   - python/index.md
   - python/pandas.md
   - Python_100_days:
+    - python/Python_100_days/index.md
     - python/Python_100_days/01-15.md
     - python/Python_100_days/16-20.md
-    - python/Python_100_days/index.md
   - python/python_cheatsheet.md
   - python/python_json.md
   - python/python_mail.md
@@ -154,10 +160,11 @@ nav:
     - rust/rustlings/move_semantics2.md
     - rust/rustlings/move_semantics3.md
   - rust_by_example:
+    - rust/rust_by_example/index.md
     - rust/rust_by_example/day1.md
     - rust/rust_by_example/day2.md
-    - rust/rust_by_example/index.md
   - trpl:
+    - rust/trpl/index.md
     - rust/trpl/0x00.md
     - rust/trpl/0x01.md
     - rust/trpl/0x02.md
@@ -169,7 +176,6 @@ nav:
     - rust/trpl/0x08.md
     - rust/trpl/0x09.md
     - rust/trpl/0x0A.md
-    - rust/trpl/index.md
 - security:
   - bamboofox:
     - security/bamboofox/index.md
@@ -195,6 +201,7 @@ nav:
   - tools/manjaro.md
   - mkdocs:
     - tools/mkdocs/mkdocs.md
+    - tools/mkdocs/mkdocs_material.md
     - tools/mkdocs/mkdocs_zh_search.md
   - tools/regex.md
   - tools/shell.md
@@ -204,11 +211,13 @@ nav:
   - tools/vim.md
   - tools/vscode.md
 - ucas:
+  - ucas/index.md
   - amd_sev:
     - ucas/amd_sev/amd_memory_encryption.md
     - images:
       - amd_memory_encryption.assets: []
   - dl_hw:
+    - ucas/dl_hw/index.md
     - dl_hw1:
       - ucas/dl_hw/dl_hw1/dlhw1.md
       - ucas/dl_hw/dl_hw1/hw1_OK-VQA_translation.md
@@ -218,19 +227,17 @@ nav:
     - dl_hw3:
       - ucas/dl_hw/dl_hw3/dlhw3.md
       - ucas/dl_hw/dl_hw3/hw3_talnet-translation.md
-    - ucas/dl_hw/index.md
   - hypervisor-tutorial:
     - ucas/hypervisor-tutorial/index.md
     - ucas/hypervisor-tutorial/part-01.md
-  - ucas/index.md
   - papers:
+    - ucas/papers/index.md
     - epti:
       - epti.assets: []
       - ucas/papers/epti/epti.md
     - flush+reload:
       - flush+reload.assets: []
       - ucas/papers/flush+reload/flush+reload.md
-    - ucas/papers/index.md
     - llc_prime+probe:
       - llc_prime+probe.assets: []
       - ucas/papers/llc_prime+probe/llc_prime+probe.md
@@ -261,9 +268,9 @@ nav:
   - spectre:
     - ucas/spectre/spectre.md
   - the_art_of_linux_kernel_design:
+    - ucas/the_art_of_linux_kernel_design/index.md
     - ucas/the_art_of_linux_kernel_design/boot_to_main.md
     - ucas/the_art_of_linux_kernel_design/create_process_1_and_execute.md
-    - ucas/the_art_of_linux_kernel_design/index.md
     - ucas/the_art_of_linux_kernel_design/initial_and_create_process_0.md
     - ucas/the_art_of_linux_kernel_design/interprocess_communication.md
   - virtualization_overview:
@@ -292,6 +299,7 @@ theme:
   - search.suggest
   - search.highlight
   - search.share
+  - content.code.annotate
   font:
     code: Source Code Pro
     text: Noto Sans
