@@ -1,26 +1,26 @@
 window.MathJax = {
   tex2jax: {
     inlineMath: [["\\(", "\\)"]],
-    displayMath: [["\\[", "\\]"]]
+    displayMath: [["\\[", "\\]"]],
   },
   TeX: {
     TagSide: "right",
     TagIndent: ".8em",
     MultLineWidth: "85%",
     equationNumbers: {
-      autoNumber: "AMS"
+      autoNumber: "AMS",
     },
     unicode: {
-      fonts: "STIXGeneral,'Arial Unicode MS'"
-    }
+      fonts: "STIXGeneral,'Arial Unicode MS'",
+    },
   },
   showProcessingMessages: false,
-  messageStyle: "none"
+  messageStyle: "none",
 };
 
 window.addEventListener(
   "load",
-  function() {
+  function () {
     var p = localStorage.getItem("data-md-color-primary");
     if (p) {
       document.body.setAttribute("data-md-color-primary", p);
@@ -29,6 +29,12 @@ window.addEventListener(
     if (a) {
       document.body.setAttribute("data-md-color-accent", a);
     }
+    var s = localStorage.getItem("data-md-color-scheme");
+    if (s) {
+      document.body.setAttribute("data-md-color-scheme", s);
+    }
   },
   false
 );
+
+pangu.spacingPageBody();
