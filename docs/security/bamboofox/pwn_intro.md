@@ -10,7 +10,7 @@ pwn 的基础就是栈漏洞的利用
 
 ### GOT & PLT
 
-<img src="image-20200716102311703.png" alt="image-20200716102311703" style="zoom:80%;" />
+![](image-20200716102311703.png)
 
 Global Offset Table，外部函数地址表
 

@@ -107,7 +107,7 @@ Line Fill Buffers 是 CPU 用来跟踪未完成的内存请求的内部缓冲区
 
 ### 攻击概览
 
-<img src="image-20210120160535798.png" alt="image-20210120160535798" style="zoom:80%;" />
+![](image-20210120160535798.png)
 
 RIDL 攻击原理如图。首先受害者代码在一个安全域中运行，load 或 store secret。运行时 CPU 就会使用一些内部缓冲区，如 Line Fill Buffers。然后，攻击者执行 load 指令，处理器就会推测性地使用 LFBs 中的 in-flight 数据而不是真正有效的数据，没有地址的限制。最后，推测性地加载数据作为 Flush+Reload 缓冲区的索引，攻击者就可以提取秘密值。（也可以用其他的隐蔽信道
 

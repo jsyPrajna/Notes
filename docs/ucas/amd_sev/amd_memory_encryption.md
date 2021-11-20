@@ -6,7 +6,7 @@
 
 ### 概述
 
-<img src="images/amd_memory_encryption.assets/image-20210908092020282.png" alt="image-20210908092020282" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210908092020282.png)
 
  内存控制器中包含 AES 引擎，写入内存时加密，读内存时解密。
 
@@ -34,7 +34,7 @@ C-bit 的使用让内存加密更灵活，只需要加密敏感数据，可以�
 
 可以通过把 NPT 表项的 C-bit 都置位来加密 VM，可以抵抗恶意的服务提供商。
 
-<img src="images/amd_memory_encryption.assets/image-20210909210656114.png" alt="image-20210909210656114" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210909210656114.png)
 
 ### SME 注意事项
 
@@ -58,11 +58,11 @@ TSME 可以通过 BIOS 设置在支持的平台上开启，一旦 TSME 开启，
 
 Secure Encrypted Virtualization, SEV 是 AMD 架构中的新特性，旨在更好地处理现代系统的复杂性和隔离需求。SEV 利用密码学增强隔离性，加密代码和数据，并启用了一种全新的安全模型，在这个模型中，可以通过加密方式保护代码免受更高特权级代码如 Hypervisor 的影响。
 
-<img src="images/amd_memory_encryption.assets/image-20210910094806711.png" alt="image-20210910094806711" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910094806711.png)
 
 ### SEV 安全模型
 
-<img src="images/amd_memory_encryption.assets/image-20210910095416827.png" alt="image-20210910095416827" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910095416827.png)
 
 传统的系统使用特权级环模型，高权限代码可以完全访问低权限代码。
 
@@ -80,7 +80,7 @@ SEV 使用的内存加密可以提供与 SME 相同的安全优势，用于物�
 
 SEV 通过从硬件层面提供更好的安全隔离提高云计算的安全等级。SEV 可以保护使用中的数据，即使云数据中心中的恶意管理人员也无法访问托管 VM 中的数据。
 
-<img src="images/amd_memory_encryption.assets/image-20210910140039932.png" alt="image-20210910140039932" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910140039932.png)
 
 #### 沙箱
 
@@ -104,7 +104,7 @@ SEV 使用与 SME 相同的高性能加密引擎，也使用页表项的 C-bit �
 
 SEV 的一个关键特性是 Guest 可以选择将哪些数据内存页设为私有，通过标准 CPU 页表实现，完全由 Guest 控制。私有内存使用 Guest 专用的密钥加密，而共享内存可以使用 Hypervisor 密钥加密。一般情况下，Guest 会将所有代码和数据映射为私有，指定公开的共享页面除外。安全起见，SEV 硬件需要一些内存（指令页和页表）始终是私有的，以保护 VM。
 
-<img src="images/amd_memory_encryption.assets/image-20210910145134915.png" alt="image-20210910145134915" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910145134915.png)
 
 #### 密钥管理
 
@@ -114,11 +114,11 @@ SEV 固件执行三个主要安全属性：平台身份验证、已启动 Guest 
 
 对平台进行身份验证可防止恶意软件或设备伪装成合法平台。平台的真实性由其身份密钥证明。此密钥由 AMD 签名，以证明该平台是具有 SEV 功能的可信 AMD 平台。密钥还由平台拥有者签名，以向 Guest 拥有者或远程平台上的其他固件展示机器的管理和拥有者。
 
-<img src="images/amd_memory_encryption.assets/image-20210910205930461.png" alt="image-20210910205930461" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910205930461.png)
 
 Guest 启动证明向 Guest 所有者证明它们的 Guest 在启用 SEV 的情况下安全地启动。SEV 相关 Guest 状态各种组件（包括初始内存内容）的签名由固件提供给所有者，以验证 Guest 是否处于预期状态。Guest 所有者可以据此确保 Hypervisor 在向 Guest 传输机密信息之前不会干扰 SEV 的初始化。过程举例如下图。首先，所有者向云计算系统提供 Guest Image，固件协助启动 Guest，并返回一个度量结果。如果所有者认可度量结果，它就会提供进一步的敏感信息给 Guest，允许它继续启动。
 
-<img src="images/amd_memory_encryption.assets/image-20210910210036219.png" alt="image-20210910210036219" style="zoom:80%;" />
+![](images/amd_memory_encryption.assets/image-20210910210036219.png)
 
 Guest 的机密性是通过使用只有 SEV 固件知道的内存加密密钥来加密内存实现的。SEV 管理接口不允许在未正确验证接收方的情况下将内存加密密钥（或者任何其他敏感 SEV 状态）导出到固件之外。这可以防止 Hypervisor 获取对密钥的访问权限，从而访问 Guest 数据。
 
