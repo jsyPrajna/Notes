@@ -153,6 +153,7 @@ nav:
   - python/python_cheatsheet.md
   - python/python_json.md
   - python/python_mail.md
+  - python/python_pathlib.md
 - rust:
   - rust/index.md
   - rustlings:
@@ -188,10 +189,6 @@ nav:
     - security/pwnable/week3.md
     - security/pwnable/week4.md
     - security/pwnable/week5.md
-- static:
-  - backup: []
-  - css: []
-  - js: []
 - tools:
   - docker:
     - tools/docker/dockerfile.md
@@ -214,8 +211,6 @@ nav:
   - ucas/index.md
   - amd_sev:
     - ucas/amd_sev/amd_memory_encryption.md
-    - images:
-      - amd_memory_encryption.assets: []
   - dl_hw:
     - ucas/dl_hw/index.md
     - dl_hw1:
@@ -233,19 +228,15 @@ nav:
   - papers:
     - ucas/papers/index.md
     - epti:
-      - epti.assets: []
       - ucas/papers/epti/epti.md
     - flush+reload:
-      - flush+reload.assets: []
       - ucas/papers/flush+reload/flush+reload.md
     - llc_prime+probe:
-      - llc_prime+probe.assets: []
       - ucas/papers/llc_prime+probe/llc_prime+probe.md
     - ridl:
       - ucas/papers/ridl/index.md
       - ucas/papers/ridl/RIDL.md
     - zombieload:
-      - zombieload.assets: []
       - ucas/papers/zombieload/zombieload.md
       - ucas/papers/zombieload/zombieload_script.md
   - ucas/prml.md
