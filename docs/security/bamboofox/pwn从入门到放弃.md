@@ -63,7 +63,7 @@ ret
 
 函数第一次调用时才会绑定
 
-<img src="image-20200718172533568.png" alt="image-20200718172533568" style="zoom:75%;" />
+![](image-20200718172533568.png)
 
 第一次执行 puts——puts plt 程序之内——puts got 跳到 lib 获取函数地址
 
@@ -93,7 +93,7 @@ GOT 存的是函数在 lib 中的地址，修改 GOT 就可以条转到指定的
 
 ### ROP chain
 
-<img src="image-20200719082552455.png" alt="image-20200719082552455" style="zoom:80%;" />
+![](image-20200719082552455.png)
 
 构造 ROP 链控制寄存器的值
 

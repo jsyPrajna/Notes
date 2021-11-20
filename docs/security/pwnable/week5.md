@@ -8,7 +8,7 @@
 - 函数参数直接放在接下来的栈上
 - 用 pop-ret 清除用过的参数
 
-<img src="image-20200721061423245.png" alt="image-20200721061423245" style="zoom:67%;" />
+![](image-20200721061423245.png)
 
 ### 使用 libc 里的函数
 
@@ -89,5 +89,5 @@ r.interactive()
 
 ### Stack Migration 构造长 ROP chain
 
-<img src="image-20200721101237783.png" alt="image-20200721101237783" style="zoom:75%;" />
+![](image-20200721101237783.png)
 

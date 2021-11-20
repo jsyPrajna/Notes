@@ -8,22 +8,22 @@
 
   Lares 架构：
 
-  <img src="image-20210625092416419.png" alt="image-20210625092416419" style="zoom: 50%;" />
+  ![](image-20210625092416419.png)
 
   SIM 架构：
 
-  <img src="image-20210625092514290.png" alt="image-20210625092514290" style="zoom: 50%;" />
+  ![](image-20210625092514290.png)
 
 - out-of-VM，即在完全在虚拟机外部进行监控，需要进行语义重构以弥合语义鸿沟。根据语义知识的来源又主要分为两类：
   - 软件结构知识，从 OS 源码、内核符号表等出获取。相关工作有 Livewire、XenAccess、LibVMI 等，主要思路其实就是读取内存然后根据符号表等先验知识分析内存。
   
     Livewire 架构：
   
-    <img src="image-20210625093001837.png" alt="image-20210625093001837" style="zoom: 50%;" />
+    ![](image-20210625093001837.png)
   
     LibVMI 架构：
   
-    <img src="./libvmi.png" alt="img" style="zoom: 50%;" />
+    ![](./libvmi.png)
   
   - 硬件架构知识，寄存器值、硬件事件等。根据虚拟机修改 CR3 时触发 VM Exit 陷入 hypervisor 可以检测到进程创建或切换，通过强制触发 VM Exit 监控系统调用。
   

@@ -39,8 +39,8 @@
 读完这篇文章，我能觉得本文提出的这个新的数据集相当于给 VQA 这个领域带来新的挑战。我认为本文引入 KO-VQA 数据集的理由很充分，一个好的 VQA 系统确实需要不仅从给定的问题和图像本身获取信息，还要能整合外部信息。引入 ArticleNet 来辅助现有的 VQA 系统工作，优点是可以单独训练 ArticleNet，不需要和 VQA 模型一起训练。但是文章里 ArticleNet 的数据来源只是维基百科，后续应该可以通过扩充数据来源检索现实世界中更多符合条件的数据来辅助 VQA 系统作答。
 
 <center class="half">
-<img id="figure_1" src="image-20210509122142139.png" alt="image-20210509122142139" style="zoom: 25%;" />
-<img id="figure_3" src="image-20210509123418156.png" alt="image-20210509123418156" style="zoom: 25%;"/>
-<img id="articlenet" src="image-20210509124412841.png" alt="image-20210509124412841" style="zoom: 25%;" />
-<img id="table_2" src="image-20210509124608531.png" alt="image-20210509124608531" style="zoom: 30%;" />
+![](image-20210509122142139.png)
+![](image-20210509123418156.png)
+![](image-20210509124412841.png)
+![](image-20210509124608531.png)
 </center>
