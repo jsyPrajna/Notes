@@ -1,6 +1,6 @@
-[toc]
-
 # AMD Memory Encryption
+
+[pdf](./AMD_Memory_Encryption_Whitepaper_v7-Public.pdf)
 
 ## Secure Memory Encryption, SME
 
@@ -26,7 +26,7 @@ AES 密钥每次重启会随机生成，由 AMD Secure Processor, AMD-SP 管理�
 
 把所有内存页的 C-bit 都置位，加密所有的内存。OS、Hypervisor 和 VM 都使用相同的密钥加密，支持 DMA，对设备而言，加密内存访问只是 C-bit 置位的普通访问。
 
-> DMA? linux 中的 DMA? 虚拟化环境下的 DMA?
+> DMA、IOMMU；设备虚拟化、VFIO、Virtio
 
 #### 部分加密
 
@@ -40,9 +40,11 @@ C-bit 的使用让内存加密更灵活，只需要加密敏感数据，可以�
 
 首先是硬件不会保证加密和未加密页面副本之间的一致性。因此软件在修改 C-bit 时必须在页表修改之前从 cache 中刷新页面。
 
-> 内存加密后 Cache 中的数据也是加密的吗？
+> 加密引擎在 SoC 和存储系统之间，而 Cache 整合在 SoC 中，那 Cache 里的数据是 ~~加密后的~~ 未加密的明文，具体还要看 AMD 手册。
 >
-> 是以什么形式加密的？如何保证任意局部数据加解密结果相同？
+> [Does anyone know what mode of AES that SEV (or SME) uses? I have been reading th... | Hacker News (ycombinator.com)](https://news.ycombinator.com/item?id=23831597)
+>
+> AES 标准的分块大小为 128 bits，AMD 并未明确密钥长度以及加密模式。
 
 另外，设备向加密内存发出 DMA，但是它们也需要将 C-bit 置位，无法在 32 位旧设备上完成。软件可以利用 IOMMU 将设备请求地址重映射到设置了 C-bit 的位置。
 
@@ -92,7 +94,13 @@ SEV 可以构建安全沙箱环境，软件在环境中执行，与系统上其�
 
 SEV 是 AMD-V 架构（AMD 硬件虚拟化架构）的扩展，开启后，SEV 使用 VM ASID 标记所有代码和数据来指示数据源于或用于哪个 VM。在 SOC 内部，标签始终与数据一起保存，防止该数据被所有者以外的任何人使用。在 SOC 外部，128 位的 AES 加密保护数据。数据离开或进入 SOC 时，硬件使用标签相关的密钥加密或解密数据。
 
-> ASID？
+> AMD: Address Space IDentifier, ASID
+>
+> Intel: Process-Context IDentifier
+>
+> 主要用于 TLB
+>
+> [Translation lookaside buffer - Wikipedia](https://en.wikipedia.org/wiki/Translation_lookaside_buffer#PCID)
 >
 > [x86 - How many bits there are in a TLB ASID tag for Intel processors? And how to handle 'ASID overflow'? - Stack Overflow](https://stackoverflow.com/questions/52813239/how-many-bits-there-are-in-a-tlb-asid-tag-for-intel-processors-and-how-to-handl)
 

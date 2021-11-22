@@ -209,8 +209,6 @@ nav:
   - tools/vscode.md
 - ucas:
   - ucas/index.md
-  - amd_sev:
-    - ucas/amd_sev/amd_memory_encryption.md
   - dl_hw:
     - ucas/dl_hw/index.md
     - dl_hw1:
@@ -225,6 +223,10 @@ nav:
   - hypervisor-tutorial:
     - ucas/hypervisor-tutorial/index.md
     - ucas/hypervisor-tutorial/part-01.md
+  - linux_kernel:
+    - ucas/linux_kernel/gcc_inline_assembly.md
+    - ucas/linux_kernel/kgdb.md
+    - ucas/linux_kernel/pcid.md
   - papers:
     - ucas/papers/index.md
     - epti:
@@ -258,12 +260,35 @@ nav:
     - ucas/side_channel/side_channel_usenix20.md
   - spectre:
     - ucas/spectre/spectre.md
+  - tee:
+    - amd_sev:
+      - ucas/tee/amd_sev/amd_manual_sev.md
+      - ucas/tee/amd_sev/amd_memory_encryption.md
+      - ucas/tee/amd_sev/amd_sev-es.md
+      - ucas/tee/amd_sev/amd_sev-snp.md
+      - ucas/tee/amd_sev/amd_sev_attacks.md
+      - ucas/tee/amd_sev/asid-based_isolation.md
+      - ucas/tee/amd_sev/a_comparison_study_of_intel_sgx_and_amd_memory_encryption.md
+      - ucas/tee/amd_sev/cipherleaks.md
+      - ucas/tee/amd_sev/crossline.md
+      - ucas/tee/amd_sev/enclavisor.md
+      - ucas/tee/amd_sev/fault_injection.md
+    - intel_tdx:
+      - ucas/tee/intel_tdx/intel_tdx.md
+    - ucas/tee/sok_a_study_of_using_hardware-assisted_isolated_execution_environments_for_security.md
   - the_art_of_linux_kernel_design:
     - ucas/the_art_of_linux_kernel_design/index.md
     - ucas/the_art_of_linux_kernel_design/boot_to_main.md
     - ucas/the_art_of_linux_kernel_design/create_process_1_and_execute.md
     - ucas/the_art_of_linux_kernel_design/initial_and_create_process_0.md
     - ucas/the_art_of_linux_kernel_design/interprocess_communication.md
+  - virtualization:
+    - ucas/virtualization/apicv.md
+    - ucas/virtualization/device_virtualization.md
+    - ucas/virtualization/dma_and_iommu.md
+    - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/virtio_vhost.md
+    - ucas/virtualization/vt-d.md
   - virtualization_overview:
     - ucas/virtualization_overview/virtualization.md
   - virtual_machine_introspection:

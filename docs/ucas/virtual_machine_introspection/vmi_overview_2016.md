@@ -1,8 +1,6 @@
 # 虚拟机自省技术研究与应用进展[^1]
 
- [toc]
-
-
+ 
 
 **Virtual Machine Introspection, VMI**
 
