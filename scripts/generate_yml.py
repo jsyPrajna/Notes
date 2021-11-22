@@ -22,19 +22,17 @@ def generate():
 def recursive_scan(path):
     file_list = []
 
-    # if has index.md, firstly add it and then remove it from subpath list
-    subpath_list = [sub_path for sub_path in path.iterdir()]
-
-    index_file = path / "index.md";
-    if index_file.is_file():
+    md_list = list(path.glob("*.md"))
+    index_file = path / "index.md"
+    if index_file in md_list:
         file_list.append(str(index_file.relative_to(str(docs_root_path))).replace("\\", "/"))
-        subpath_list.remove(index_file)
+        md_list.remove(index_file)
 
-    for sub_path in subpath_list:
-        if sub_path.is_dir() and not (list(sub_path.rglob("*.md")) == []):
-            file_list.append({sub_path.name: recursive_scan(sub_path)})
-        elif sub_path.is_file() and sub_path.suffix == md_suffix:
-            file_list.append(str(sub_path.relative_to(str(docs_root_path))).replace("\\", "/"))
+    for md in md_list:
+        file_list.append(str(md.relative_to(str(docs_root_path))).replace("\\", "/"))
+
+    file_list.extend([{sub_path.name: recursive_scan(sub_path)} for sub_path in path.iterdir() if sub_path.is_dir() and not (list(sub_path.rglob("*.md")) == [])])
+
     return file_list
 
 if __name__ == '__main__':
