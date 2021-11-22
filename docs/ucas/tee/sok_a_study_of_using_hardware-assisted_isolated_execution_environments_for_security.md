@@ -1,6 +1,6 @@
 # SoK: Hardware-assisted Isolated Execution Environments for Security
 
-[pdf](./[[HASP%202016]%20SoK%20A%20Study%20of%20Using%20Hardwareassisted%20Isolated%20Execution%20Environments%20for%20Security%20HASP.pdf])
+[pdf](./[HASP%202016]%20SoK%20A%20Study%20of%20Using%20Hardwareassisted%20Isolated%20Execution%20Environments%20for%20Security%20HASP.pdf)
 
 硬件辅助隔离执行环境（Hardware-assisted Isolated Execution Environment, HIEE）被广泛用于构建有效且高效的防御工具。各个厂商推出了多种 HIEE，Intel ME、ARM TrustZone、Intel SGX 等。本文对现有（2016）的 HIEE 进行分析和比较，并探索其防御和攻击使用场景。
 

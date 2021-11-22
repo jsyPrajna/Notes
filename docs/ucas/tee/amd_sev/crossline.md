@@ -1,6 +1,6 @@
 # CROSSLINE: Breaking "Security-by-Crash" based Memory Isolation in AMD SEV
 
-[pdf](./[[CCS%202021]%20CROSSLINE%20Breaking%20Security-by-Crash%20based%20Memory%20Isolation%20in%20AMD%20SEV.pdf])
+[pdf](./[CCS%202021]%20CROSSLINE%20Breaking%20Security-by-Crash%20based%20Memory%20Isolation%20in%20AMD%20SEV.pdf)
 
 文章首次揭示了 AMD 如何*不适当地*使用 ASID 控制 VM 访问加密内存页、缓存行和 TLB 条目。提出 CrossLine 攻击，攻击者启动攻击者 VM 并修改 ASID 冒充受害者 VM。两个变体：V1 可以解密受害者的页表或页表项格式的内存块；V2 通过执行受害虚拟机的指令构造加密和解密的 oracle。可以在 SEV 和 SEV-ES 上成功实施攻击。
 
