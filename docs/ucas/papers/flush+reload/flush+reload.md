@@ -72,7 +72,7 @@ CRT-RSA 是解密函数实现的一种优化，把 $d$ 拆分成两部分 $d_q, 
 
 使用快速幂算法，跟踪快速幂算法可以恢复指数。
 
-<img src="./flush+reload.assets/image-20210802081957905.png" alt="image-20210802081957905" style="zoom:80%;" />
+![](./flush+reload.assets/image-20210802081957905.png)
 
 ### FLUSH+RELOAD
 

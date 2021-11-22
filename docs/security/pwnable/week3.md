@@ -1,6 +1,6 @@
 # Week 3
 
-<img src="image-20200714153056309.png" alt="image-20200714153056309" style="zoom:67%;" />
+![](image-20200714153056309.png)
 
 - [pwnable kr](http://pwnable.kr)
 - [pwnable tw](http://pwnable.tw)

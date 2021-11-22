@@ -8,7 +8,7 @@ Intel VM-Function 系列指令允许用户在多个地址空间之间跨多个�
 
 本文借助 CPU 硬件特性 VM-Function 以及 RDTSC 指令模拟，避免 Hypercall 的频繁使用，将调用时产生的 VM Exit 开销降至最低。利用 VMFUNC 的 0 号功能为目标虚拟机（target virtual machine, TVM）切换备用扩展页表，维持了内存的一致性，避免 VMI 程序运行时对虚拟机执行的中断，同时实现了监控的透明化。使用按需触发的理念，通过重载 VMFUNC 指令和 Xentrace 的功能，Hypervisor 向 Dom0 注入虚拟中断，VMI 程序的按需启动实现高效的触发与信息传递机制，最大程序避免 VMI 程序常驻 Dom0 导致的资源消耗。总体设计如下图。
 
-<img src="image-20210624000808358.png" alt="image-20210624000808358" style="zoom: 80%;" />
+![](image-20210624000808358.png)
 
 为了向 Hypervisor 传递 TVM 的自省请求，使用 VMFUNC 所切换的 EPTP 索引作为传递信息的载体来通知 Hypervisor。具体来说，当 TVM 在用户态执行 VMFUNC 后，EPTP 值发生变化，Hypervisor 能够在 RDTSC 模拟指令代码中感知 EPTP 索引的变化，进而判断是否开启针对 TVM 的 VMI 程序。在执行 VMI 时，TVM 的原有页表可以被用作 VMI 程序的监控对象。TVM 上的应用程序可在 EPTP switching 之后的新 EPT 上无缝地继续执行，而页表切换只需 $10^{-7}$ 秒级的时间开销，极大降低 VMI 程序对虚拟机运行时的影响。
 
@@ -16,7 +16,7 @@ Intel VM-Function 系列指令允许用户在多个地址空间之间跨多个�
 
 使用 VMFUNC 的 0 号功能 EPTP switching 之前，Hypervisor 需要为 TVM 创建备用的 EPT 页表。通过创建过个相同的 EPT 确保虚拟机内存访问的一致性。VMFUNC 指令以 EAX 作为功能号。每个 EPTP 指向一个四级页目录表，Xen 架构中的 VMFUNC 寻址和 GPA 到 HPA 转换过程（EPT walking）过程如下。
 
-<img src="image-20210624004936771.png" alt="image-20210624004936771" style="zoom:80%;" />
+![](image-20210624004936771.png)
 
 当 TVM 中的应用执行 VMFUNC 指令时，将执行 EPTP 切换例程，新的 EPTP 将被加载到 VMCS 的 EPTP 字段。Hypervisor 通过传入的新 EPTP 值计算当前 EPTP 索引值。通过 ECX 的不同值来区分用户正常的 VMFUNC 请求与 VMI 请求。
 
@@ -40,7 +40,7 @@ Xentrace 是 Xen 自带的一个工具，可以辅助进行测试、调优、底
 
 VMI-as-a-Service 的架构如下图。
 
-<img src="image-20210624012725468.png" alt="image-20210624012725468" style="zoom:80%;" />
+![](image-20210624012725468.png)
 
 三个模块，VMFUNC 感知模块、参数传递模块和 VMI 启动模块。
 
