@@ -326,7 +326,6 @@ theme:
   language: zh
   logo: static/githubcat.jpg
   name: material
-  custom_dir: material
   palette:
   - accent: red
     primary: teal
