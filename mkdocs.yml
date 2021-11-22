@@ -1,7 +1,9 @@
 copyright: Copyright &copy; 2020 - 2021 caijiqhx
 extra_css:
 - static/css/extra.css
+- static/css/main.bf3dc0a9.min.css
 extra_javascript:
+- static/js/bundle.525231ca.min.js
 - https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js
 - static/js/extra.js
 - https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML
@@ -324,6 +326,7 @@ theme:
   language: zh
   logo: static/githubcat.jpg
   name: material
+  custom_dir: material
   palette:
   - accent: red
     primary: teal
