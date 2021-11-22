@@ -681,11 +681,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://notes.caijiqhx.top/ucas/amd_sev/amd_memory_encryption/</loc>
-         <lastmod>2021-11-22</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://notes.caijiqhx.top/ucas/dl_hw/</loc>
          <lastmod>2021-11-22</lastmod>
          <changefreq>daily</changefreq>
@@ -727,6 +722,21 @@
     </url>
     <url>
          <loc>https://notes.caijiqhx.top/ucas/hypervisor-tutorial/part-01/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/linux_kernel/gcc_inline_assembly/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/linux_kernel/kgdb/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/linux_kernel/pcid/</loc>
          <lastmod>2021-11-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -831,6 +841,71 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/sok_a_study_of_using_hardware-assisted_isolated_execution_environments_for_security/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/a_comparison_study_of_intel_sgx_and_amd_memory_encryption/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/amd_manual_sev/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/amd_memory_encryption/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/amd_sev-es/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/amd_sev-snp/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/amd_sev_attacks/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/asid-based_isolation/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/cipherleaks/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/crossline/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/enclavisor/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/amd_sev/fault_injection/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/tee/intel_tdx/intel_tdx/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://notes.caijiqhx.top/ucas/the_art_of_linux_kernel_design/</loc>
          <lastmod>2021-11-22</lastmod>
          <changefreq>daily</changefreq>
@@ -877,6 +952,36 @@
     </url>
     <url>
          <loc>https://notes.caijiqhx.top/ucas/virtual_machine_introspection/vmi_overview_2016/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/apicv/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/device_virtualization/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/dma_and_iommu/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/interrupt_virtualization/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/virtio_vhost/</loc>
+         <lastmod>2021-11-22</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://notes.caijiqhx.top/ucas/virtualization/vt-d/</loc>
          <lastmod>2021-11-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
