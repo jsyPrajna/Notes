@@ -1,22 +1,29 @@
 # DMA and IOMMU
 
-[IOMMU(一)-简单介绍](https://zhuanlan.zhihu.com/p/336616452)
+[IOMMU(一)-简单介绍 - 知乎](https://zhuanlan.zhihu.com/p/336616452)
 
-[IOMMU(二)-从配置说起](https://zhuanlan.zhihu.com/p/365408539)
+[Intel IOMMU Introduction · kernelgo](https://kernelgo.org/intel_iommu.html)
 
-### Direct Memory Access, DMA
+[14. Linux IOMMU Support — The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/x86/intel-iommu.html)
 
-CPU 和外设速度的差距不允许用 CPU 传输数据，所以有了 DMA。CPU 告知 DMA 引擎起始地址和数据大小，DMA 引擎传输完成后中断 CPU。
+[Linux x86-64 IOMMU 详解（一）—— IOMMU 简介](https://blog.csdn.net/qq_34719392/article/details/114834467)
 
-CPU 使用虚拟地址访存，通过 MMU 转换成物理地址。而外设访存要用总线地址，由总线控制器把总线地址定位到物理内存。DMA 内存由 CPU 分配，CPU 需要把虚拟地址转换成总线地址，然后 DMA 引擎进行 DMA 操作，最后内存由 CPU 回收。DMA 的 Cache 一致性由体系结构保证。
+[Linux x86-64 IOMMU 详解（五）—— Intel IOMMU 初始化流程](https://blog.csdn.net/qq_34719392/article/details/117563480)
 
-DMA 只是外设的数据传输通道，外设驱动通过调用内核 DMA API 完成操作，内存映射、数据对齐、缓存一致性都由内核 DMA API 实现。
+DMA & IOMMU 要点：
 
-外设通过 DMA 将数据传输到内核，用户态再系统调用把数据传输到用户态，开销较大。想在用户态使用 DMA，首先要获取物理地址，可以通过 */proc/self/pagemap* 获取。另一个问题是如何保证虚拟地址对应的物理地址一定存在于内存中并且固定在内存中的同一个物理地址。特别是将虚拟地址固定到物理地址。
+- DMA 是为了不用 CPU 传输数据，CPU 告知 DMA 引擎起始地址和数据大小，DMA 引擎传输完成后中断通知 CPU。DMA 下设备可以访问整个物理地址空间，存在安全隐患。
 
-> [VFIO - “Virtual Function I/O” — The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/driver-api/vfio.html)
->
-> 将设备暴露到用户态
+  ![](images/dma_and_iommu.assets/image-20211124163329.png)
+
+- IOMMU 通过地址转换解决安全问题，可以实现用户态驱动和虚拟机设备直通。另外，可以将连续的虚拟地址映射到不连续的物理内存片段，在此之前设备访问的物理空间必须是连续的。
+
+  ![](images/dma_and_iommu.assets/image-20211124162518.png)
+
+  ![](images/dma_and_iommu.assets/image-20211124162632.png)
+
+- 内核对 Intel IOMMU 初始化流程
+
 
 ### IOMMU
 
