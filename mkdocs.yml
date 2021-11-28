@@ -228,8 +228,11 @@ nav:
     - ucas/hypervisor-tutorial/part-01.md
   - linux_kernel:
     - ucas/linux_kernel/gcc_inline_assembly.md
+    - ucas/linux_kernel/initcall.md
     - ucas/linux_kernel/kgdb.md
+    - ucas/linux_kernel/makefile.md
     - ucas/linux_kernel/pcid.md
+    - ucas/linux_kernel/syscall.md
   - papers:
     - ucas/papers/index.md
     - epti:
@@ -286,9 +289,10 @@ nav:
     - ucas/the_art_of_linux_kernel_design/interprocess_communication.md
   - virtualization:
     - ucas/virtualization/apicv.md
-    - ucas/virtualization/device_virtualization.md
+    - ucas/virtualization/device_basic.md
     - ucas/virtualization/dma_and_iommu.md
     - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
     - ucas/virtualization/vt-d.md
   - virtualization_overview:

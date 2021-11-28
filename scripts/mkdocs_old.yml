@@ -1,0 +1,341 @@
+copyright: Copyright &copy; 2020 - 2021 caijiqhx
+extra_css:
+- static/css/extra.css
+- static/css/main.bf3dc0a9.min.css
+extra_javascript:
+- static/js/bundle.525231ca.min.js
+- https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js
+- static/js/extra.js
+- https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML
+markdown_extensions:
+- abbr
+- attr_list
+- admonition
+- md_in_html
+- codehilite:
+    guess_lang: false
+    linenums: true
+- def_list
+- footnotes
+- meta
+- toc:
+    permalink: '*'
+- pymdownx.arithmatex
+- pymdownx.caret
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.emoji:
+    emoji_generator: !!python/name:materialx.emoji.to_svg ''
+    emoji_index: !!python/name:materialx.emoji.twemoji ''
+- pymdownx.highlight
+- pymdownx.inlinehilite
+- pymdownx.snippets
+- pymdownx.keys
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.tabbed:
+    alternate_style: true
+- pymdownx.superfences:
+    custom_fences:
+    - class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format ''
+      name: mermaid
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.tilde
+nav:
+- index.md
+- 0TOP.md
+- cpp:
+  - cpp/index.md
+  - cpp/casting.md
+  - cpp/custom_compare.md
+  - cpp/memo.md
+  - cpp/rtti.md
+  - cpp/stl_learning.md
+  - cpp/unordered_set.md
+  - c++_11_14:
+    - cpp/c++_11_14/0.md
+    - cpp/c++_11_14/1.md
+    - cpp/c++_11_14/2.md
+    - cpp/c++_11_14/3.md
+    - cpp/c++_11_14/4.md
+    - cpp/c++_11_14/5.md
+    - cpp/c++_11_14/6.md
+    - cpp/c++_11_14/7.md
+    - cpp/c++_11_14/8.md
+  - design_pattern:
+    - cpp/design_pattern/index.md
+    - cpp/design_pattern/abstract_factory.md
+    - cpp/design_pattern/basic.md
+    - cpp/design_pattern/builder.md
+    - cpp/design_pattern/factory_method.md
+    - cpp/design_pattern/simple_factory.md
+- database:
+  - database/index.md
+  - database/mysql.md
+  - database/sql.md
+  - database/theory.md
+- network:
+  - network/index.md
+  - network/devices.md
+  - network/http.md
+  - network/http_status_code.md
+  - network/ip_addr.md
+  - network/network_protocol_security.md
+  - network/protocols.md
+  - network/questions.md
+  - network/tcp_and_udp.md
+  - tinyhttpd:
+    - network/tinyhttpd/index.md
+- os:
+  - os/index.md
+  - os_lab:
+    - os/os_lab/index.md
+    - os/os_lab/lab0.md
+    - lab1:
+      - os/os_lab/lab1/challenge.md
+      - os/os_lab/lab1/exer1.md
+      - os/os_lab/lab1/exer2.md
+      - os/os_lab/lab1/exer3.md
+      - os/os_lab/lab1/exer4.md
+      - os/os_lab/lab1/exer5.md
+      - os/os_lab/lab1/exer6.md
+      - os/os_lab/lab1/lab1.md
+    - lab2:
+      - os/os_lab/lab2/challenge.md
+      - os/os_lab/lab2/exer1.md
+      - os/os_lab/lab2/exer2.md
+      - os/os_lab/lab2/exer3.md
+      - os/os_lab/lab2/lab2.md
+      - os/os_lab/lab2/preview.md
+    - lab3:
+      - os/os_lab/lab3/challenge.md
+      - os/os_lab/lab3/exer1.md
+      - os/os_lab/lab3/exer2.md
+      - os/os_lab/lab3/lab3.md
+      - os/os_lab/lab3/preview.md
+    - lab4:
+      - os/os_lab/lab4/exer1.md
+      - os/os_lab/lab4/exer2.md
+      - os/os_lab/lab4/exer3.md
+      - os/os_lab/lab4/lab4.md
+      - os/os_lab/lab4/preview.md
+    - lab5:
+      - os/os_lab/lab5/exer1.md
+      - os/os_lab/lab5/exer2.md
+      - os/os_lab/lab5/exer3.md
+      - os/os_lab/lab5/lab5.md
+      - os/os_lab/lab5/preview.md
+    - lab6:
+      - os/os_lab/lab6/exer1.md
+      - os/os_lab/lab6/exer2.md
+      - os/os_lab/lab6/lab6.md
+      - os/os_lab/lab6/preview.md
+    - lab7:
+      - os/os_lab/lab7/exer1.md
+      - os/os_lab/lab7/exer2.md
+      - os/os_lab/lab7/lab7.md
+      - os/os_lab/lab7/preview.md
+    - lab8:
+      - os/os_lab/lab8/exer1.md
+      - os/os_lab/lab8/exer2.md
+      - os/os_lab/lab8/lab8.md
+      - os/os_lab/lab8/preview.md
+- python:
+  - python/index.md
+  - python/pandas.md
+  - python/python_cheatsheet.md
+  - python/python_json.md
+  - python/python_mail.md
+  - python/python_pathlib.md
+  - Python_100_days:
+    - python/Python_100_days/index.md
+    - python/Python_100_days/01-15.md
+    - python/Python_100_days/16-20.md
+- rust:
+  - rust/index.md
+  - rustlings:
+    - rust/rustlings/index.md
+    - rust/rustlings/move_semantics2.md
+    - rust/rustlings/move_semantics3.md
+  - rust_by_example:
+    - rust/rust_by_example/index.md
+    - rust/rust_by_example/day1.md
+    - rust/rust_by_example/day2.md
+  - trpl:
+    - rust/trpl/index.md
+    - rust/trpl/0x00.md
+    - rust/trpl/0x01.md
+    - rust/trpl/0x02.md
+    - rust/trpl/0x03.md
+    - rust/trpl/0x04.md
+    - rust/trpl/0x05.md
+    - rust/trpl/0x06.md
+    - rust/trpl/0x07.md
+    - rust/trpl/0x08.md
+    - rust/trpl/0x09.md
+    - rust/trpl/0x0A.md
+- security:
+  - security/ctf-wiki_rop.md
+  - security/linux_rootkit.md
+  - bamboofox:
+    - security/bamboofox/index.md
+    - security/bamboofox/pwn_intro.md
+    - "security/bamboofox/pwn\u4ECE\u5165\u95E8\u5230\u653E\u5F03.md"
+  - pwnable:
+    - security/pwnable/index.md
+    - security/pwnable/week3.md
+    - security/pwnable/week4.md
+    - security/pwnable/week5.md
+- tools:
+  - tools/gitbook.md
+  - tools/ida.md
+  - tools/manjaro.md
+  - tools/regex.md
+  - tools/shell.md
+  - tools/software_router.md
+  - tools/tmux.md
+  - tools/typora.md
+  - tools/vim.md
+  - tools/vscode.md
+  - docker:
+    - tools/docker/dockerfile.md
+    - tools/docker/docker_introduction.md
+  - mkdocs:
+    - tools/mkdocs/mkdocs.md
+    - tools/mkdocs/mkdocs_material.md
+    - tools/mkdocs/mkdocs_zh_search.md
+- ucas:
+  - ucas/index.md
+  - ucas/prml.md
+  - dl_hw:
+    - ucas/dl_hw/index.md
+    - dl_hw1:
+      - ucas/dl_hw/dl_hw1/dlhw1.md
+      - ucas/dl_hw/dl_hw1/hw1_OK-VQA_translation.md
+    - dl_hw2:
+      - ucas/dl_hw/dl_hw2/dlhw2.md
+      - ucas/dl_hw/dl_hw2/hw2_RF-action_translation.md
+    - dl_hw3:
+      - ucas/dl_hw/dl_hw3/dlhw3.md
+      - ucas/dl_hw/dl_hw3/hw3_talnet-translation.md
+  - hypervisor-tutorial:
+    - ucas/hypervisor-tutorial/index.md
+    - ucas/hypervisor-tutorial/part-01.md
+  - linux_kernel:
+    - ucas/linux_kernel/gcc_inline_assembly.md
+    - ucas/linux_kernel/kgdb.md
+    - ucas/linux_kernel/pcid.md
+  - papers:
+    - ucas/papers/index.md
+    - epti:
+      - ucas/papers/epti/epti.md
+    - flush+reload:
+      - ucas/papers/flush+reload/flush+reload.md
+    - llc_prime+probe:
+      - ucas/papers/llc_prime+probe/llc_prime+probe.md
+    - ridl:
+      - ucas/papers/ridl/index.md
+      - ucas/papers/ridl/RIDL.md
+    - zombieload:
+      - ucas/papers/zombieload/zombieload.md
+      - ucas/papers/zombieload/zombieload_script.md
+  - prml_hw:
+    - ucas/prml_hw/index.md
+    - prml_hw2:
+      - ucas/prml_hw/prml_hw2/prml_hw2.md
+    - prml_hw3:
+      - ucas/prml_hw/prml_hw3/prml_hw3.md
+  - qemu_kvm:
+    - ucas/qemu_kvm/index.md
+    - ucas/qemu_kvm/qemu_componets.md
+    - ucas/qemu_kvm/qemu_kvm_overview.md
+  - side_channel:
+    - ucas/side_channel/cross-vm_flush_reload.md
+    - ucas/side_channel/cross-vm_side_channel_attacks.md
+    - ucas/side_channel/mastik.md
+    - ucas/side_channel/side_channel_overview_2020.md
+    - ucas/side_channel/side_channel_usenix20.md
+  - spectre:
+    - ucas/spectre/spectre.md
+  - tee:
+    - ucas/tee/sok_a_study_of_using_hardware-assisted_isolated_execution_environments_for_security.md
+    - amd_sev:
+      - ucas/tee/amd_sev/amd_manual_sev.md
+      - ucas/tee/amd_sev/amd_memory_encryption.md
+      - ucas/tee/amd_sev/amd_sev-es.md
+      - ucas/tee/amd_sev/amd_sev-snp.md
+      - ucas/tee/amd_sev/amd_sev_attacks.md
+      - ucas/tee/amd_sev/asid-based_isolation.md
+      - ucas/tee/amd_sev/a_comparison_study_of_intel_sgx_and_amd_memory_encryption.md
+      - ucas/tee/amd_sev/cipherleaks.md
+      - ucas/tee/amd_sev/crossline.md
+      - ucas/tee/amd_sev/enclavisor.md
+      - ucas/tee/amd_sev/fault_injection.md
+    - intel_tdx:
+      - ucas/tee/intel_tdx/intel_tdx.md
+  - the_art_of_linux_kernel_design:
+    - ucas/the_art_of_linux_kernel_design/index.md
+    - ucas/the_art_of_linux_kernel_design/boot_to_main.md
+    - ucas/the_art_of_linux_kernel_design/create_process_1_and_execute.md
+    - ucas/the_art_of_linux_kernel_design/initial_and_create_process_0.md
+    - ucas/the_art_of_linux_kernel_design/interprocess_communication.md
+  - virtualization:
+    - ucas/virtualization/apicv.md
+    - ucas/virtualization/device_virtualization.md
+    - ucas/virtualization/dma_and_iommu.md
+    - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/virtio_vhost.md
+    - ucas/virtualization/vt-d.md
+  - virtualization_overview:
+    - ucas/virtualization_overview/virtualization.md
+  - virtual_machine_introspection:
+    - ucas/virtual_machine_introspection/vmfunc_based_vmi.md
+    - ucas/virtual_machine_introspection/vmi.md
+    - ucas/virtual_machine_introspection/vmi_based_location.md
+    - ucas/virtual_machine_introspection/vmi_overview_2015.md
+    - ucas/virtual_machine_introspection/vmi_overview_2016.md
+plugins:
+- search
+- git-revision-date-localized
+- minify:
+    minify_html: true
+repo_name: caijiqhx/Notes
+repo_url: https://github.com/caijiqhx/Notes
+site_author: caijiqhx
+site_description: caijiqhx notes
+site_name: caijiqhx notes
+site_url: https://notes.caijiqhx.top
+theme:
+  features:
+  - navigation.tabs
+  - navigation.tabs.sticky
+  - search.suggest
+  - search.highlight
+  - search.share
+  - content.code.annotate
+  font:
+    code: Source Code Pro
+    text: Noto Sans
+  icon:
+    repo: fontawesome/brands/github-alt
+  language: zh
+  logo: static/githubcat.jpg
+  name: material
+  palette:
+  - accent: red
+    primary: teal
+    scheme: default
+    toggle:
+      icon: material/toggle-switch-off-outline
+      name: Switch to dark mode
+  - accent: red
+    primary: red
+    scheme: slate
+    toggle:
+      icon: material/toggle-switch
+      name: Switch to light mode
