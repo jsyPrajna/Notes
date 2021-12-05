@@ -30,7 +30,7 @@ DMA & IOMMU 要点：
 
   ![](images/dma_and_iommu.assets/image-20211125205222.png)
 
-- 启用 Intel IOMMU 配置
+- 硬件 IOMMU，即 [Intel VT-d](./vt-d.md) 和 AMD-Vi。启用 Intel IOMMU 配置
 
   - BIOS 开启 Intel VT/VT-d
   - 编译时 *.config* 中开启 `CONFIG_INTEL_IOMMU=y`
@@ -82,4 +82,4 @@ DMA & IOMMU 要点：
 
   ![](images/dma_and_iommu.assets/image-20211125194553.png)
 
-- QEMU 通过 VFIO 使用 IOMMU，见 [vfio.md](./vfio.md)
+- QEMU 通过 VFIO 使用 IOMMU，见 [vfio](./vfio.md)

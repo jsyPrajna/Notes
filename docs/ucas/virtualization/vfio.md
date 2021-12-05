@@ -63,29 +63,29 @@ VFIO 要点：
   - 对于 MMIO 访问，通过 EPT 将虚拟机的 MMIO 地址映射到物理设备的 MMIO 地址空间，guest 访问 MMIO 不需要陷入。
   - PCI 配置空间是用来报告设备 I/O 信息的区域，可以通过 PIO 或 MMIO 方式（PCIE 之后可以通过 MMIO 访问）访问。设备直通中的配置空间并不直接呈现给 guest 而是由 VFIO 配合 QEMU 模拟。
   
-  !!! question
+!!! question
 
-      Q：既然配置空间可以通过 MMIO 访问，那这一部分是否也应该陷入由 QEMU 模拟？
+    既然配置空间可以通过 MMIO 访问，那这一部分是否也应该陷入由 QEMU 模拟？
 
-      PCI 配置空间为 256 bytes，仅支持 PIO 方式访问。I/O 端口地址空间的 0xCF8 ~ 0xCFF 预留给了 PCI，前 32 位为 CONFIG_ADDRESS，格式如下，后 32 位为 CONFIG_DATA。
+PCI 配置空间为 256 bytes，仅支持 PIO 方式访问。I/O 端口地址空间的 0xCF8 ~ 0xCFF 预留给了 PCI，前 32 位为 CONFIG_ADDRESS，格式如下，后 32 位为 CONFIG_DATA。
 
-      ![](images/vfio.assets/image-20211125100349.png)
+![](images/vfio.assets/image-20211125100349.png)
 
-      PCIe 将配置空间扩展到 4096 bytes，其中扩展的部分无法使用以上的 PIO 方式访问，使用 MMIO 方式访问，称为 Enhanced Configuration Access Mechanism, ECAM。映射的内存空间由 ACPI MCFG 表指定，格式如下。
+PCIe 将配置空间扩展到 4096 bytes，其中扩展的部分无法使用以上的 PIO 方式访问，使用 MMIO 方式访问，称为 Enhanced Configuration Access Mechanism, ECAM。映射的内存空间由 ACPI MCFG 表指定，格式如下。
 
-      ![](images/vfio.assets/image-20211125102317.png)
+![](images/vfio.assets/image-20211125102317.png)
 
-      访问时首先通过设备 PCI 段组号和总线找到对应的映射空间，获取起始地址和起始总线号。然后根据 BDF 信息使用以下的公式计算地址：
+访问时首先通过设备 PCI 段组号和总线找到对应的映射空间，获取起始地址和起始总线号。然后根据 BDF 信息使用以下的公式计算地址：
 
-      `pa = START_PA + (Bus - START_BUS) << 20 | Dev << 15 | Func << 12`
+`pa = START_PA + (Bus - START_BUS) << 20 | Dev << 15 | Func << 12`
 
-      可能的解决方案：
+可能的解决方案：
 
-      VM 的 ACPI 是由 QEMU 模拟的，那么 QEMU 是否可以控制或知晓 PCIe 配置空间映射的内存空间，从而在申请内存时告知 KVM，通过配置 EPT 陷入。
+VM 的 ACPI 是由 QEMU 模拟的，那么 QEMU 是否可以控制或知晓 PCIe 配置空间映射的内存空间，从而在申请内存时告知 KVM，通过配置 EPT 陷入。
 
-      ![](images/vfio.assets/image-20211125110847.png)
+![](images/vfio.assets/image-20211125110847.png)
 
-      ![](images/vfio.assets/image-20211125121709.png)
+![](images/vfio.assets/image-20211125121709.png)
     
   - 直通设备 MMIO（BAR 空间）映射：
     1. 查询设备 BAR 空间信息
@@ -93,5 +93,7 @@ VFIO 要点：
     3. 将该段虚拟地址标记为 RAM 类型注册给虚拟机
 
 - QEMU VFIO 初始化：
+
+  之后要看以下 QEMU/KVM 这部分的代码。
 
   ![](images/vfio.assets/qemu-vfio.svg)
