@@ -291,6 +291,7 @@ nav:
     - ucas/virtualization/apicv.md
     - ucas/virtualization/device_basic.md
     - ucas/virtualization/dma_and_iommu.md
+    - ucas/virtualization/hyperfuzzer.md
     - ucas/virtualization/interrupt_virtualization.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
