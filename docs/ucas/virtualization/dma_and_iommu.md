@@ -70,15 +70,42 @@ DMA & IOMMU 要点：
                       other late_init fns
   ```
 
-  - `intel_iommu_init` 函数完成 Intel IOMMU 所需数据结构的初始化工作，而在函数的最后，初始化工作完成后，将全局变量 `swiotlb` 置零。
-  - 之后会执行 SWIOTLB 的 `late_init` 函数，会判断 `swiotlb`，如果为零，则释放之前 `early_init` 已分配的 buffer 和数据结构，SWIOTLB 不复存在，只剩下 Intel IOMMU。
-  - 总结 Intel IOMMU 的初始化流程：将初始化函数加载到 iommu_table；初始化 SWIOTLB；初始化 Intel IOMMU；将 swiotlb 置零；释放 SWIOTLB 相关结构。
-
   !!! question
 
       Q: 上面的调用链，如何从 `do_basic_setup` 最后调用 `pci_iommu_init`？
 
       涉及 [Linux 的 initcall 机制](../linux_kernel/initcall.md)。
+
+  - `intel_iommu_init` 函数完成 Intel IOMMU 所需数据结构的初始化工作，而在函数的最后，初始化工作完成后，将全局变量 `swiotlb` 置零。
+  - 这里先简单分析一下这个 `intel_iommu_init`，流程如下。首先解析 ACPI 表，
+
+  ```c
+  intel_iommu_init
+  |-> dmar_table_init -> parse_dmar_table -> dmar_walk_dmar_table
+  |-> dmar_dev_scope_init 
+      |-> dmar_acpi_dev_scope_init -> dmar_acpi_insert_dev_scope
+      |-> dmar_pci_bus_add_dev -> dmar_insert_dev_scope
+      |-> bus_register_notifier
+  |-> dmar_init_reserved_ranges   // init RMRR
+  |-> init_no_remapping_devices   // init no remapping devices
+  |-> init_dmars
+      |-> intel_iommu_init_qi         // qeueu invalidation
+      |-> iommu_init_domains
+      |-> init_translation_status
+      |-> iommu_alloc_root_entry      //创建 Root Entry
+      |-> translation_pre_enabled
+      |-> iommu_set_root_entry
+      |-> iommu_prepare_rmrr_dev
+      |-> iommu_prepare_isa           // 0-16 MiB 留给 ISA 设备
+      |-> dmar_set_interrupt          // IOMMU 中断初始化
+  |-> dma_ops = &intel_dma_ops
+  |-> iommu_device_sysfs_add, iommu_device_set_ops, iommu_device_register
+  |-> bus_set_iommu(&pci_bus_type, &intel_iommu_ops)
+  |-> bus_register_notifier(&pci_bus_type, &device_nb)
+  ```
+
+  - 之后会执行 SWIOTLB 的 `late_init` 函数，会判断 `swiotlb`，如果为零，则释放之前 `early_init` 已分配的 buffer 和数据结构，SWIOTLB 不复存在，只剩下 Intel IOMMU。
+  - 总结 Intel IOMMU 的初始化流程：将初始化函数加载到 iommu_table；初始化 SWIOTLB；初始化 Intel IOMMU；将 swiotlb 置零；释放 SWIOTLB 相关结构。
 
   ![](images/dma_and_iommu.assets/image-20211125194553.png)
 
