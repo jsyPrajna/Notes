@@ -4,9 +4,7 @@
 
 #### 格式
 
-每篇论文一个文件夹，包括：
-
 - 论文 pdf，命名格式 `[<conference/journal> <year>] <title>.pdf`
 - 笔记 markdown
-- 资源文件夹，命名为 `<markdown_file_name>.assets`
+- 资源文件夹，命名为 `images/<markdown_file_name>.assets`
 

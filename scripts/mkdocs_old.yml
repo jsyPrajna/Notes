@@ -192,6 +192,7 @@ nav:
     - security/pwnable/week4.md
     - security/pwnable/week5.md
 - tools:
+  - tools/acme.md
   - tools/gitbook.md
   - tools/ida.md
   - tools/manjaro.md
@@ -242,8 +243,15 @@ nav:
     - llc_prime+probe:
       - ucas/papers/llc_prime+probe/llc_prime+probe.md
     - ridl:
-      - ucas/papers/ridl/index.md
       - ucas/papers/ridl/RIDL.md
+    - side_channel:
+      - ucas/papers/side_channel/cross-vm_flush_reload.md
+      - ucas/papers/side_channel/cross-vm_side_channel_attacks.md
+      - ucas/papers/side_channel/mastik.md
+      - ucas/papers/side_channel/side_channel_overview_2020.md
+      - ucas/papers/side_channel/side_channel_usenix20.md
+    - spectre:
+      - ucas/papers/spectre/spectre.md
     - zombieload:
       - ucas/papers/zombieload/zombieload.md
       - ucas/papers/zombieload/zombieload_script.md
@@ -257,14 +265,6 @@ nav:
     - ucas/qemu_kvm/index.md
     - ucas/qemu_kvm/qemu_componets.md
     - ucas/qemu_kvm/qemu_kvm_overview.md
-  - side_channel:
-    - ucas/side_channel/cross-vm_flush_reload.md
-    - ucas/side_channel/cross-vm_side_channel_attacks.md
-    - ucas/side_channel/mastik.md
-    - ucas/side_channel/side_channel_overview_2020.md
-    - ucas/side_channel/side_channel_usenix20.md
-  - spectre:
-    - ucas/spectre/spectre.md
   - tee:
     - ucas/tee/sok_a_study_of_using_hardware-assisted_isolated_execution_environments_for_security.md
     - amd_sev:
@@ -288,7 +288,8 @@ nav:
     - ucas/the_art_of_linux_kernel_design/initial_and_create_process_0.md
     - ucas/the_art_of_linux_kernel_design/interprocess_communication.md
   - virtualization:
-    - ucas/virtualization/apicv.md
+    - ucas/virtualization/apicv_sdm.md
+    - ucas/virtualization/apicv_summary.md
     - ucas/virtualization/device_basic.md
     - ucas/virtualization/dma_and_iommu.md
     - ucas/virtualization/hyperfuzzer.md

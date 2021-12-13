@@ -149,6 +149,7 @@ nav:
   - python/index.md
   - python/pandas.md
   - python/python_cheatsheet.md
+  - python/python_getopt.md
   - python/python_json.md
   - python/python_mail.md
   - python/python_pathlib.md
@@ -194,6 +195,7 @@ nav:
 - tools:
   - tools/acme.md
   - tools/gitbook.md
+  - tools/git_hook.md
   - tools/ida.md
   - tools/manjaro.md
   - tools/regex.md
@@ -236,18 +238,18 @@ nav:
     - ucas/linux_kernel/syscall.md
   - papers:
     - ucas/papers/index.md
-    - epti:
-      - ucas/papers/epti/epti.md
-    - flush+reload:
-      - ucas/papers/flush+reload/flush+reload.md
-    - llc_prime+probe:
-      - ucas/papers/llc_prime+probe/llc_prime+probe.md
-    - ridl:
-      - ucas/papers/ridl/index.md
-      - ucas/papers/ridl/RIDL.md
-    - zombieload:
-      - ucas/papers/zombieload/zombieload.md
-      - ucas/papers/zombieload/zombieload_script.md
+    - ucas/papers/cache_telepathy.md
+    - ucas/papers/cross-vm_flush_reload.md
+    - ucas/papers/epti.md
+    - ucas/papers/flush+reload.md
+    - ucas/papers/llc_prime+probe.md
+    - ucas/papers/mastik.md
+    - ucas/papers/reload_refresh.md
+    - ucas/papers/RIDL.md
+    - ucas/papers/side_channel_overview_2020.md
+    - ucas/papers/spectre.md
+    - ucas/papers/zombieload.md
+    - ucas/papers/zombieload_script.md
   - prml_hw:
     - ucas/prml_hw/index.md
     - prml_hw2:
@@ -258,14 +260,6 @@ nav:
     - ucas/qemu_kvm/index.md
     - ucas/qemu_kvm/qemu_componets.md
     - ucas/qemu_kvm/qemu_kvm_overview.md
-  - side_channel:
-    - ucas/side_channel/cross-vm_flush_reload.md
-    - ucas/side_channel/cross-vm_side_channel_attacks.md
-    - ucas/side_channel/mastik.md
-    - ucas/side_channel/side_channel_overview_2020.md
-    - ucas/side_channel/side_channel_usenix20.md
-  - spectre:
-    - ucas/spectre/spectre.md
   - tee:
     - ucas/tee/sok_a_study_of_using_hardware-assisted_isolated_execution_environments_for_security.md
     - amd_sev:
