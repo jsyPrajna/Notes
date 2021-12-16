@@ -235,6 +235,7 @@ nav:
     - ucas/linux_kernel/kgdb.md
     - ucas/linux_kernel/makefile.md
     - ucas/linux_kernel/pcid.md
+    - ucas/linux_kernel/static_call.md
     - ucas/linux_kernel/syscall.md
   - papers:
     - ucas/papers/index.md

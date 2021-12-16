@@ -292,6 +292,7 @@ nav:
     - ucas/virtualization/interrupt_virtualization.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
+    - ucas/virtualization/vmcs.md
     - ucas/virtualization/vt-d.md
   - virtualization_overview:
     - ucas/virtualization_overview/virtualization.md
