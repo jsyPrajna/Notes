@@ -336,7 +336,7 @@ APIC-write emulation 优先于 SMI、INIT 信号和低优先级事件。不会�
 
 在某些情况下，必须调用 VMM 完成对 APIC-access page 的写访问虚拟化，此时 APIC-write emulation 就会触发 APIC-write VM Exit。Exit reason 为 APIC write，exit qualification 为导致 VM Exit 的写访问的页偏移。
 
-!!! note
+!!! todo
 
     后面三节介绍了特定指令注意事项、与页大小和 TLB 管理相关的问题以及不直接由线性地址导致的 APIC 访问，以后再看吧。
 
