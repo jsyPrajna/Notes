@@ -84,7 +84,7 @@ root 模式下两种 VMCS 都可以被 vmread 和 vmwrite 访问。软件无法�
     特别是其中第一章讲的内容还是挺有用的，VMM 编程注意事项，之后可以整理一下。
 
 
-## KVM 状态保存与回复
+## KVM 状态保存与恢复
 
 QEMU/KVM 中 vCPU 运行（进入 VM）流程为：
 

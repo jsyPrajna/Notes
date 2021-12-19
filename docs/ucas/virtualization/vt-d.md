@@ -1,8 +1,4 @@
-
-
 # Intel VT-d
-
-
 
 [VT-d DMA Remapping · kernelgo](https://kernelgo.org/dma-remapping.html)
 
