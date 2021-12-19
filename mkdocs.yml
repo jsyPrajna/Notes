@@ -290,9 +290,11 @@ nav:
     - ucas/virtualization/dma_and_iommu.md
     - ucas/virtualization/hyperfuzzer.md
     - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/v-shuttle.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
     - ucas/virtualization/vmcs.md
+    - ucas/virtualization/vmx_instructions.md
     - ucas/virtualization/vt-d.md
   - virtualization_overview:
     - ucas/virtualization_overview/virtualization.md
