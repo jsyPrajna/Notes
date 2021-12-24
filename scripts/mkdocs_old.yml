@@ -275,6 +275,7 @@ nav:
       - ucas/tee/amd_sev/crossline.md
       - ucas/tee/amd_sev/enclavisor.md
       - ucas/tee/amd_sev/fault_injection.md
+      - ucas/tee/amd_sev/tlb_poison.md
     - intel_tdx:
       - ucas/tee/intel_tdx/intel_tdx.md
   - the_art_of_linux_kernel_design:
@@ -288,6 +289,7 @@ nav:
     - ucas/virtualization/apicv_summary.md
     - ucas/virtualization/device_basic.md
     - ucas/virtualization/dma_and_iommu.md
+    - ucas/virtualization/dune.md
     - ucas/virtualization/hyperfuzzer.md
     - ucas/virtualization/interrupt_virtualization.md
     - ucas/virtualization/v-shuttle.md
