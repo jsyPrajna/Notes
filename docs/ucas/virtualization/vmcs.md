@@ -13,10 +13,6 @@ VMCS 的 launch state 决定应该对这个 VMCS 使用哪个 VM Entry 指令：
 - vmlaunch 要求 VMCS 状态为 clear
 - vmresume 要求 vm 状态为 launched
 
-!!! todo
-
-    之后还要结合手册详细看一下 VMX 指令的功能。
-
 逻辑处理器在相应的 VMCS 区域维护 VMCS 的状态，按以下的方式管理：
 
 - 如果 current VMCS 的状态为 clear，成功执行 vmlaunch 指令之后，状态变为 launched
