@@ -235,6 +235,7 @@ nav:
     - ucas/linux_kernel/kgdb.md
     - ucas/linux_kernel/makefile.md
     - ucas/linux_kernel/pcid.md
+    - ucas/linux_kernel/retpoline.md
     - ucas/linux_kernel/static_call.md
     - ucas/linux_kernel/syscall.md
   - papers:
@@ -276,6 +277,7 @@ nav:
       - ucas/tee/amd_sev/enclavisor.md
       - ucas/tee/amd_sev/fault_injection.md
       - ucas/tee/amd_sev/tlb_poison.md
+      - ucas/tee/amd_sev/via.md
     - intel_tdx:
       - ucas/tee/intel_tdx/intel_tdx.md
   - the_art_of_linux_kernel_design:
@@ -292,6 +294,7 @@ nav:
     - ucas/virtualization/dune.md
     - ucas/virtualization/hyperfuzzer.md
     - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/nyx.md
     - ucas/virtualization/v-shuttle.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md

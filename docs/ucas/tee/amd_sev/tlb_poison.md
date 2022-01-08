@@ -1,5 +1,7 @@
 # TLB Poisoning Attacks on AMD Secure Encrypted Virtualization
 
+[pdf]([ACSAC%202021]%20TLB%20Poisoning%20Attacks%20on%20AMD%20Secure%20Encrypted%20Virtualization.pdf)
+
 首次探讨 SEV 处理器上 TLB 管理的安全问题，并演示了针对 SEV VM 的新型 TLB 投毒攻击。首先揭示 SEV 如何在 AMD-V 之上扩展 TLB 实现，并展示了 SEV 威胁模型下的 TLB 管理不再安全，hypervisor 可以在 SEV VM 的两个进程之间的 TLB 条目中投毒，从而破坏 SEV VM 完整性和机密性。文章描述了 TLB 投毒攻击的两个变体，以及两个可以在 SEV 和 SEV-ES 上成功实施的端到端攻击。
 
 ## Introduction

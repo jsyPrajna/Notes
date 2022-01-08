@@ -1,6 +1,6 @@
-[toc]
-
 # V-Shuttle: Scalable and Semantics-Aware Hypervisor Virtual Device Fuzzing
+
+[pdf]([CCS%202021]%20V-Shuttle%20Scalable%20and%20Semantics-Aware%20Hypervisor%20Virtual%20Device%20Fuzzing.pdf)
 
 虚拟设备向 guest 暴露接口以进行通信，是 hypervisor 中最脆弱的部分。对 hypervisor 虚拟设备的 fuzzing 存在一定挑战：DMA 传输的数据结构是根据协议规范以嵌套形式构造的。无法理解虚拟设备的协议使得 fuzzing 过程停滞在初始阶段，效率低下。
 
