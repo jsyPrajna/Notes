@@ -295,6 +295,7 @@ nav:
     - ucas/virtualization/hyperfuzzer.md
     - ucas/virtualization/interrupt_virtualization.md
     - ucas/virtualization/nyx.md
+    - ucas/virtualization/seimi.md
     - ucas/virtualization/v-shuttle.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
