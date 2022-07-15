@@ -16,6 +16,10 @@ DMA & IOMMU 要点：
 
   ![](images/dma_and_iommu.assets/image-20211124163329.png)
 
+!!! todo
+
+    DMA 具体流程，coherent 和 streaming 两种映射方式。
+
 - IOMMU 通过地址转换解决安全问题，可以实现用户态驱动和虚拟机设备直通。另外，可以将连续的虚拟地址映射到不连续的物理内存片段，在此之前设备访问的物理空间必须是连续的。
 
   ![](images/dma_and_iommu.assets/image-20211124162518.png)
