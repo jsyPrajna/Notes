@@ -12,7 +12,7 @@
 <span class=cm> *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}</span>
 <span class=cm> * };</span>
 <span class=cm> */</span><span class=w></span>
-</code></pre></div> <p>根据前序遍历和中序遍历的结果划分，根据前序的第一个结点把中序分为该结点的左右子树中序遍历结果，递归或用辅助栈求解。</p> <p>经典的递归建树，重点在于控制遍历序列的边界。<sup id=fnref:1><a class=footnote-ref href=#fn:1>1</a></sup></p> <p>从先序遍历获取根结点值 preorder[rootPos]，创建根结点，然后其在获取中序遍历的位置 pos，构建左子树，左子树的根结点值为 preorder[rootPos + 1]，对应的中序遍历序列的范围为 [start, pos - 1]，左子树结点数为 pos - start，由此计算右子树的根结点值为 preorder[rootPos + pos - start + 1]，对应中序遍历序列范围为 [pos + 1,end]，由此递归。</p> <p>可以使用 map 优化每次查找中序遍历位置的过程，效果很显著。</p> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+</code></pre></div> <p>根据前序遍历和中序遍历的结果划分，根据前序的第一个结点把中序分为该结点的左右子树中序遍历结果，递归或用辅助栈求解。</p> <p>经典的递归建树，重点在于控制遍历序列的边界。[^1]</p> <p>从先序遍历获取根结点值 preorder[rootPos]，创建根结点，然后其在获取中序遍历的位置 pos，构建左子树，左子树的根结点值为 preorder[rootPos + 1]，对应的中序遍历序列的范围为 [start, pos - 1]，左子树结点数为 pos - start，由此计算右子树的根结点值为 preorder[rootPos + pos - start + 1]，对应中序遍历序列范围为 [pos + 1,end]，由此递归。</p> <p>可以使用 map 优化每次查找中序遍历位置的过程，效果很显著。</p> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
 <span class=k>public</span><span class=o>:</span><span class=w></span>
 <span class=w>    </span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>build</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>preorder</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>rootPos</span><span class=p>,</span><span class=w></span>
 <span class=w>                    </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>inorder</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>start</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>end</span><span class=p>,</span><span class=w> </span><span class=n>unordered_map</span><span class=o>&lt;</span><span class=kt>int</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>posMap</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
@@ -82,4 +82,93 @@
 <span class=w>    </span><span class=p>}</span><span class=w></span>
 <span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>root</span><span class=p>;</span><span class=w></span>
 <span class=p>}</span><span class=w></span>
-</code></pre></div> <p><code>c++ tab="迭代" /** * Definition for a binary tree node. * struct TreeNode { * int val; * TreeNode *left; * TreeNode *right; * TreeNode(int x) : val(x), left(NULL), right(NULL) {} * }; */ class Solution { public: TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) { if(preorder.size() == 0) { return nullptr; } int rootPos = 0; int inPos = 0 TreeNode *root = new TreeNode(preorder[rootPos++]); stack&lt;TreeNode*&gt; s; s.push(root); while(rootPos &lt; preorder.size()) { TreeNode *tmp = nullptr; // 当栈顶元素是 inPos 位置的中序节点，表明已经构建到当前位置。 // 未进入循环，tmp == nullptr 表示左子树已构建完毕。 while(!s.empty() &amp;&amp; s.top()-&gt;val == inorder[inPos]) { inPos++; tmp = s.top(); s.pop(); } TreeNode *cur = new TreeNode(preorder[rootPos]); if(tmp == nullptr) { s.top()-&gt;left = cur; }else { tmp-&gt;right = cur; } s.push(cur); rootPos++; } return root; } };</code></p> <div class=footnote> <hr> <ol> <li id=fn:1> <p>脑子实属 8 太行，一定要多熟悉熟悉。&#160;<a class=footnote-backref href=#fnref:1 title="Jump back to footnote 1 in the text">&#8617;</a></p> </li> </ol> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of06/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 06.从尾到头打印链表 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 06.从尾到头打印链表 (Easy) </div> </div> </a> <a href=../of08/ class="md-footer__link md-footer__link--next" aria-label="下一页: 08.二叉树的下一个结点" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 08.二叉树的下一个结点 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+</code></pre></div> <div class="tabbed-set tabbed-alternate" data-tabs=1:1><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>迭代</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) {
+        if(preorder.size() == 0) {
+            return nullptr;
+        }
+        int rootPos = 0;
+        int inPos = 0
+        TreeNode *root = new TreeNode(preorder[rootPos++]);
+        stack&lt;TreeNode*&gt; s;
+        s.push(root);
+        while(rootPos &lt; preorder.size()) {
+            TreeNode *tmp = nullptr;
+            // 当栈顶元素是 inPos 位置的中序节点，表明已经构建到当前位置。
+            // 未进入循环，tmp == nullptr 表示左子树已构建完毕。
+            while(!s.empty() &amp;&amp; s.top()-&gt;val == inorder[inPos]) {
+                inPos++;
+                tmp = s.top();
+                s.pop();
+            }
+            TreeNode *cur = new TreeNode(preorder[rootPos]);
+            if(tmp == nullptr) {
+                s.top()-&gt;left = cur;
+            }else {
+                tmp-&gt;right = cur;
+            }
+            s.push(cur);
+            rootPos++;
+        }
+        return root;
+    }
+};
+```
+
+[^1]: 脑子实属 8 太行，一定要多熟悉熟悉。
+</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of06/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 06.从尾到头打印链表 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 06.从尾到头打印链表 (Easy) </div> </div> </a> <a href=../of08/ class="md-footer__link md-footer__link--next" aria-label="下一页: 08.二叉树的下一个结点" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 08.二叉树的下一个结点 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>

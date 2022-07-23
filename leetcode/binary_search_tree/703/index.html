@@ -6,26 +6,201 @@
 <span class=n>kthLargest</span><span class=p>.</span><span class=n>add</span><span class=p>(</span><span class=mi>10</span><span class=p>);</span><span class=w>  </span><span class=c1>// returns 5</span>
 <span class=n>kthLargest</span><span class=p>.</span><span class=n>add</span><span class=p>(</span><span class=mi>9</span><span class=p>);</span><span class=w>   </span><span class=c1>// returns 8</span>
 <span class=n>kthLargest</span><span class=p>.</span><span class=n>add</span><span class=p>(</span><span class=mi>4</span><span class=p>);</span><span class=w>   </span><span class=c1>// returns 8</span>
-</code></pre></div> <h3 id=_3>说明<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>你可以假设 nums 的长度≥ k-1 且k ≥ 1。</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>看着应该是用堆实现比较简单，不过这个题是在探索二叉搜索树里的，所以先用 BST 实现以下。还可以使用 multiset 自动排序。应该还是堆最快。</p> <p>```c++ tab="二叉树" class KthLargest { private: TreeNode <em>root = nullptr; unordered_map<treenode*, int> nodeCnt; int kth; TreeNode</em> insert(TreeNode <em>root, int _val) { if(root == nullptr) { root = new TreeNode(_val); nodeCnt[root] = 1; return root; } if(_val &lt; root-&gt;val) { root-&gt;left = insert(root-&gt;left, _val); }else if(_val &gt; root-&gt;val) { root-&gt;right = insert(root-&gt;right, _val); } nodeCnt[root] += 1; return root; } TreeNode</em> searchKth(TreeNode *root, int k) { if(root == nullptr) { return root; } int leftCnt = (root-&gt;left == nullptr ? 0 : nodeCnt[root-&gt;left]); int rightCnt = (root-&gt;right == nullptr ? 0 : nodeCnt[root-&gt;right]); int rootCnt = nodeCnt[root] - leftCnt - rightCnt; if(k &lt;= rightCnt) { return searchKth(root-&gt;right, k); }else if(k &gt; rightCnt + rootCnt) { return searchKth(root-&gt;left, k - rightCnt - rootCnt); }else { return root; } } public: KthLargest(int k, vector<int>&amp; nums) { kth = k; for(auto i : nums) { root = insert(root, i); } }</p> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal>1</span>
-<span class=normal>2</span>
-<span class=normal>3</span>
-<span class=normal>4</span>
-<span class=normal>5</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>int add(int val) {
-    root = insert(root, val);
-    TreeNode *res = searchKth(root, kth);
-    return res-&gt;val;
-}
-</code></pre></div> </td></tr></table> <p>}; <code></code>c++ tab="multiset" class KthLargest { private: int k; multiset<int> s; public: KthLargest(int _k, vector<int>&amp; nums) { for(auto i : nums) { s.insert(i); if(s.size() &gt; _k) { s.erase(s.begin()); } } k = _k; } int add(int val) { s.insert(val); if(s.size() &gt; k) { s.erase(s.begin()); } return *s.begin(); } }; ```</p> <p>```c++ tab="堆" class KthLargest { private: priority_queue<int, vector\&lt;int>, greater\<int>> q; int k; public: KthLargest(int k, vector<int>&amp; nums) { for(auto i : nums) { q.push(i); if(q.size() &gt; k) { q.pop(); } } this-&gt;k = k; }</p> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal>1</span>
-<span class=normal>2</span>
-<span class=normal>3</span>
-<span class=normal>4</span>
-<span class=normal>5</span>
-<span class=normal>6</span>
-<span class=normal>7</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>int add(int val) {
-    q.push(val);
-    if(q.size() &gt; k) {
-        q.pop();
+</code></pre></div> <h3 id=_3>说明<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>你可以假设 nums 的长度≥ k-1 且k ≥ 1。</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>看着应该是用堆实现比较简单，不过这个题是在探索二叉搜索树里的，所以先用 BST 实现以下。还可以使用 multiset 自动排序。应该还是堆最快。</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:3><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><input id=__tabbed_1_3 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>二叉树</label><label for=__tabbed_1_2>multiset</label><label for=__tabbed_1_3>堆</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span>
+<span class=normal>26</span>
+<span class=normal>27</span>
+<span class=normal>28</span>
+<span class=normal>29</span>
+<span class=normal>30</span>
+<span class=normal>31</span>
+<span class=normal>32</span>
+<span class=normal>33</span>
+<span class=normal>34</span>
+<span class=normal>35</span>
+<span class=normal>36</span>
+<span class=normal>37</span>
+<span class=normal>38</span>
+<span class=normal>39</span>
+<span class=normal>40</span>
+<span class=normal>41</span>
+<span class=normal>42</span>
+<span class=normal>43</span>
+<span class=normal>44</span>
+<span class=normal>45</span>
+<span class=normal>46</span>
+<span class=normal>47</span>
+<span class=normal>48</span>
+<span class=normal>49</span>
+<span class=normal>50</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
+class KthLargest {
+private:
+    TreeNode *root = nullptr;
+    unordered_map&lt;TreeNode*, int&gt; nodeCnt;
+    int kth;
+    TreeNode* insert(TreeNode *root, int _val) {
+        if(root == nullptr) {
+            root = new TreeNode(_val);
+            nodeCnt[root] = 1;
+            return root;
+        }
+        if(_val &lt; root-&gt;val) {
+            root-&gt;left = insert(root-&gt;left, _val);
+        }else if(_val &gt; root-&gt;val) {
+            root-&gt;right = insert(root-&gt;right, _val);
+        }
+        nodeCnt[root] += 1;
+        return root;
     }
-    return q.top();
-}
-</code></pre></div> </td></tr></table> <p>}; ```</p> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../701/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 701.二叉搜索树中的插入操作 (Medium)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 701.二叉搜索树中的插入操作 (Medium) </div> </div> </a> <a href=../98/ class="md-footer__link md-footer__link--next" aria-label="下一页: 98.验证二叉搜索树 (Medium)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 98.验证二叉搜索树 (Medium) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+    TreeNode* searchKth(TreeNode *root, int k) {
+        if(root == nullptr) {
+            return root;
+        }
+        int leftCnt = (root-&gt;left == nullptr ? 0 : nodeCnt[root-&gt;left]);
+        int rightCnt = (root-&gt;right == nullptr ? 0 : nodeCnt[root-&gt;right]);
+        int rootCnt = nodeCnt[root] - leftCnt - rightCnt;
+        if(k &lt;= rightCnt) {
+            return searchKth(root-&gt;right, k);
+        }else if(k &gt; rightCnt + rootCnt) {
+            return searchKth(root-&gt;left, k - rightCnt - rootCnt);
+        }else {
+            return root;
+        }
+    }
+public:
+    KthLargest(int k, vector&lt;int&gt;&amp; nums) {
+        kth = k;
+        for(auto i : nums) {
+            root = insert(root, i);
+        }
+    }
+
+    int add(int val) {
+        root = insert(root, val);
+        TreeNode *res = searchKth(root, kth);
+        return res-&gt;val;
+    }
+};
+```
+</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
+class KthLargest {
+private:
+    int k;
+    multiset&lt;int&gt; s;
+public:
+    KthLargest(int _k, vector&lt;int&gt;&amp; nums) {
+        for(auto i : nums) {
+            s.insert(i);
+            if(s.size() &gt; _k) {
+                s.erase(s.begin());
+            }
+        }
+        k = _k;
+    }
+
+    int add(int val) {
+        s.insert(val);
+        if(s.size() &gt; k) {
+            s.erase(s.begin());
+        }
+        return *s.begin();
+    }
+};
+```
+</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
+<span class=normal> 2</span>
+<span class=normal> 3</span>
+<span class=normal> 4</span>
+<span class=normal> 5</span>
+<span class=normal> 6</span>
+<span class=normal> 7</span>
+<span class=normal> 8</span>
+<span class=normal> 9</span>
+<span class=normal>10</span>
+<span class=normal>11</span>
+<span class=normal>12</span>
+<span class=normal>13</span>
+<span class=normal>14</span>
+<span class=normal>15</span>
+<span class=normal>16</span>
+<span class=normal>17</span>
+<span class=normal>18</span>
+<span class=normal>19</span>
+<span class=normal>20</span>
+<span class=normal>21</span>
+<span class=normal>22</span>
+<span class=normal>23</span>
+<span class=normal>24</span>
+<span class=normal>25</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
+class KthLargest {
+private:
+    priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; q;
+    int k;
+public:
+    KthLargest(int k, vector&lt;int&gt;&amp; nums) {
+        for(auto i : nums) {
+            q.push(i);
+            if(q.size() &gt; k) {
+                q.pop();
+            }
+        }
+        this-&gt;k = k;
+    }
+
+    int add(int val) {
+        q.push(val);
+        if(q.size() &gt; k) {
+            q.pop();
+        }
+        return q.top();
+    }
+};
+```
+</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../701/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 701.二叉搜索树中的插入操作 (Medium)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 701.二叉搜索树中的插入操作 (Medium) </div> </div> </a> <a href=../98/ class="md-footer__link md-footer__link--next" aria-label="下一页: 98.验证二叉搜索树 (Medium)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 98.验证二叉搜索树 (Medium) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
