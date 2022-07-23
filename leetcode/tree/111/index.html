@@ -3,100 +3,49 @@
   9  20
     /  \
    15   7
-</code></pre></div> <blockquote> <p>返回它的最小深度 2.</p> </blockquote> <h2 id=_3>代码<a class=headerlink href=#_3 title="Permanent link">*</a></h2> <p>递归，不过此时不能直接取两侧最小的深度，应该时当左右都不空时取最小，任一为空取非空的深度。之前也用 bfs 来找最大深度，现在可以改为到叶子节点就返回。</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>bfs</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    int minDepth(TreeNode* root) {
-        if(root == nullptr) {
-            return 0;
-        }
-        if(root-&gt;left != nullptr &amp;&amp; root-&gt;right != nullptr) {
-            return min(minDepth(root-&gt;left), minDepth(root-&gt;right)) + 1;
-        }else {
-            return max(minDepth(root-&gt;left), minDepth(root-&gt;right)) + 1;
-        }
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span>
-<span class=normal>23</span>
-<span class=normal>24</span>
-<span class=normal>25</span>
-<span class=normal>26</span>
-<span class=normal>27</span>
-<span class=normal>28</span>
-<span class=normal>29</span>
-<span class=normal>30</span>
-<span class=normal>31</span>
-<span class=normal>32</span>
-<span class=normal>33</span>
-<span class=normal>34</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    int minDepth(TreeNode* root) {
-        if(root == nullptr) {
-            return 0;
-        }
-        queue&lt;TreeNode*&gt; helpQueue;
-        TreeNode *cur = root;
-        helpQueue.push(cur);
-        int depth = 1;
-        while(!helpQueue.empty()) {
-            int len = helpQueue.size();
-            for(int i = 0; i &lt; len; i++) {
-                cur = helpQueue.front();
-                helpQueue.pop();
-                // 如果是叶子节点，就返回当前深度
-                if(cur-&gt;left == nullptr &amp;&amp; cur-&gt;right == nullptr) {
-                    return depth;
-                }
-                if(cur-&gt;left != nullptr) {
-                    helpQueue.push(cur-&gt;left);
-                }
-                if(cur-&gt;right != nullptr) {
-                    helpQueue.push(cur-&gt;right);
-                }
+</code></pre></div> <blockquote> <p>返回它的最小深度 2.</p> </blockquote> <h2 id=_3>代码<a class=headerlink href=#_3 title="Permanent link">*</a></h2> <p>递归，不过此时不能直接取两侧最小的深度，应该时当左右都不空时取最小，任一为空取非空的深度。之前也用 bfs 来找最大深度，现在可以改为到叶子节点就返回。</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>bfs</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>minDepth</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>root</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>root</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>min</span><span class=p>(</span><span class=n>minDepth</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>),</span><span class=w> </span><span class=n>minDepth</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>))</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=n>max</span><span class=p>(</span><span class=n>minDepth</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>),</span><span class=w> </span><span class=n>minDepth</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>))</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>int</span><span class=w> </span><span class=n>minDepth</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>root</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>root</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=n>queue</span><span class=o>&lt;</span><span class=n>TreeNode</span><span class=o>*&gt;</span><span class=w> </span><span class=n>helpQueue</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>push</span><span class=p>(</span><span class=n>cur</span><span class=p>);</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>depth</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=k>while</span><span class=p>(</span><span class=o>!</span><span class=n>helpQueue</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=kt>int</span><span class=w> </span><span class=n>len</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>size</span><span class=p>();</span><span class=w></span>
+<span class=w>            </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>len</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>front</span><span class=p>();</span><span class=w></span>
+<span class=w>                </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>pop</span><span class=p>();</span><span class=w></span>
+<span class=w>                </span><span class=c1>// 如果是叶子节点，就返回当前深度</span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=k>return</span><span class=w> </span><span class=n>depth</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>push</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>);</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>helpQueue</span><span class=p>.</span><span class=n>push</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>);</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
 
-            }
-            depth++;
-        }
-        return depth;
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../110/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 110.平衡二叉树 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 110.平衡二叉树 (Easy) </div> </div> </a> <a href=../112/ class="md-footer__link md-footer__link--next" aria-label="下一页: 112.路径总和 (Easy)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 112.路径总和 (Easy) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=n>depth</span><span class=o>++</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>depth</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../110/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 110.平衡二叉树 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 110.平衡二叉树 (Easy) </div> </div> </a> <a href=../112/ class="md-footer__link md-footer__link--next" aria-label="下一页: 112.路径总和 (Easy)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 112.路径总和 (Easy) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>

@@ -23,104 +23,47 @@
 <span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>firstMatch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>text</span><span class=p>.</span><span class=n>length</span><span class=p>()</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=p>(</span><span class=n>pattern</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;.&#39;</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>text</span><span class=p>[</span><span class=mi>0</span><span class=p>]));</span><span class=w></span>
 <span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>firstMatch</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>isMatch</span><span class=p>(</span><span class=n>text</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span><span class=w> </span><span class=n>pattern</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>1</span><span class=p>));</span><span class=w></span>
 <span class=p>}</span><span class=w></span>
-</code></pre></div> <p>接下来处理 <code>*</code> 的实现，匹配前一个字符任意次数，包括零次，我们不能确定到底是几次，不过对于递归，我们只需要处理当前的情况：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>dp</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-bool isMatch(string text, string pattern) {
-    if(pattern.length() == 0) {
-        return text.length() == 0;
-    }
-    bool firstMatch = (text.length() != 0 &amp;&amp; (pattern[0] == &#39;.&#39; || pattern[0] == text[0]));
-    if(pattern.length() &gt;= 2 &amp;&amp; pattern[1] == &#39;*&#39;) {
-        // 当前字符后面出现了 *
-        // 选择匹配零次，即跳过 pattern 的这两个字符
-        // 选择匹配一次，text 前进一个字符
-        return isMatch(text, pattern.substr(2)) || 
-            (firstMatch &amp;&amp; isMatch(text.substr(1), pattern));
-    }else {
-        return firstMatch &amp;&amp; isMatch(text.substr(1), pattern.substr(1));
-    }
-}
-```
-
-到这其实我们就实现了正则匹配的功能。我们可以通过动态规划的思路来优化这个问题，避免子字符串重复划分。
-
-dp[i + 1][j + 1] 表示 text 的前 i 个是否能被 pattern 的前 j 个匹配。
-</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span>
-<span class=normal>23</span>
-<span class=normal>24</span>
-<span class=normal>25</span>
-<span class=normal>26</span>
-<span class=normal>27</span>
-<span class=normal>28</span>
-<span class=normal>29</span>
-<span class=normal>30</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    bool isMatch(string text, string pattern) {
-        int lenText = text.length(), lenPattern = pattern.length();
-        vector&lt;vector&lt;bool&gt;&gt; dp(lenText + 1, vector&lt;bool&gt;(lenPattern + 1, false));
-        dp[0][0] = true;
-        // 初始化 为了匹配空串
-        for(int i = 1; i &lt; lenPattern; i++) {
-            if(pattern[i] == &#39;*&#39; &amp;&amp; dp[0][i - 1]) {
-                dp[0][i + 1] = true;
-            }
-        }
-        for(int i = 0; i &lt; lenText; i++) {
-            for(int j = 0; j &lt; lenPattern; j++) {
-                if(text[i] == pattern[j] || pattern[j] == &#39;.&#39;) {
-                    dp[i + 1][j + 1] = dp[i][j];
-                }else if(pattern[j] == &#39;*&#39;) {
-                    if(pattern[j - 1] == &#39;.&#39; || text[i] == pattern[j - 1]) {
-                        dp[i + 1][j + 1] = dp[i][j + 1] || dp[i + 1][j - 1];
-                    }else {
-                        dp[i + 1][j + 1] = dp[i + 1][j - 1];
-                    }
-                }
-            }
-        }
-        return dp[lenText][lenPattern];
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../ class="md-footer__link md-footer__link--prev" aria-label="上一页: 动态规划" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 动态规划 </div> </div> </a> <a href=../1035/ class="md-footer__link md-footer__link--next" aria-label="下一页: 1035.不相交的线 (Medium)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 1035.不相交的线 (Medium) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+</code></pre></div> <p>接下来处理 <code>*</code> 的实现，匹配前一个字符任意次数，包括零次，我们不能确定到底是几次，不过对于递归，我们只需要处理当前的情况：</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>dp</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=kt>bool</span><span class=w> </span><span class=nf>isMatch</span><span class=p>(</span><span class=n>string</span><span class=w> </span><span class=n>text</span><span class=p>,</span><span class=w> </span><span class=n>string</span><span class=w> </span><span class=n>pattern</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>pattern</span><span class=p>.</span><span class=n>length</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>text</span><span class=p>.</span><span class=n>length</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>firstMatch</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>text</span><span class=p>.</span><span class=n>length</span><span class=p>()</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=p>(</span><span class=n>pattern</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;.&#39;</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>text</span><span class=p>[</span><span class=mi>0</span><span class=p>]));</span><span class=w></span>
+<span class=w>    </span><span class=k>if</span><span class=p>(</span><span class=n>pattern</span><span class=p>.</span><span class=n>length</span><span class=p>()</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>2</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;*&#39;</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=c1>// 当前字符后面出现了 *</span>
+<span class=w>        </span><span class=c1>// 选择匹配零次，即跳过 pattern 的这两个字符</span>
+<span class=w>        </span><span class=c1>// 选择匹配一次，text 前进一个字符</span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>isMatch</span><span class=p>(</span><span class=n>text</span><span class=p>,</span><span class=w> </span><span class=n>pattern</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>2</span><span class=p>))</span><span class=w> </span><span class=o>||</span><span class=w> </span>
+<span class=w>            </span><span class=p>(</span><span class=n>firstMatch</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>isMatch</span><span class=p>(</span><span class=n>text</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span><span class=w> </span><span class=n>pattern</span><span class=p>));</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>firstMatch</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>isMatch</span><span class=p>(</span><span class=n>text</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>1</span><span class=p>),</span><span class=w> </span><span class=n>pattern</span><span class=p>.</span><span class=n>substr</span><span class=p>(</span><span class=mi>1</span><span class=p>));</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>}</span><span class=w></span>
+</code></pre></div> <p>到这其实我们就实现了正则匹配的功能。我们可以通过动态规划的思路来优化这个问题，避免子字符串重复划分。</p> <p>dp[i + 1][j + 1] 表示 text 的前 i 个是否能被 pattern 的前 j 个匹配。</p> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>isMatch</span><span class=p>(</span><span class=n>string</span><span class=w> </span><span class=n>text</span><span class=p>,</span><span class=w> </span><span class=n>string</span><span class=w> </span><span class=n>pattern</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>lenText</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>text</span><span class=p>.</span><span class=n>length</span><span class=p>(),</span><span class=w> </span><span class=n>lenPattern</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>pattern</span><span class=p>.</span><span class=n>length</span><span class=p>();</span><span class=w></span>
+<span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>bool</span><span class=o>&gt;&gt;</span><span class=w> </span><span class=n>dp</span><span class=p>(</span><span class=n>lenText</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>bool</span><span class=o>&gt;</span><span class=p>(</span><span class=n>lenPattern</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nb>false</span><span class=p>));</span><span class=w></span>
+<span class=w>        </span><span class=n>dp</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=mi>0</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=c1>// 初始化 为了匹配空串</span>
+<span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>lenPattern</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>pattern</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;*&#39;</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=n>i</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>dp</span><span class=p>[</span><span class=mi>0</span><span class=p>][</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>lenText</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>j</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>j</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>lenPattern</span><span class=p>;</span><span class=w> </span><span class=n>j</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>text</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;.&#39;</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>];</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>pattern</span><span class=p>[</span><span class=n>j</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;*&#39;</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=k>if</span><span class=p>(</span><span class=n>pattern</span><span class=p>[</span><span class=n>j</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=sc>&#39;.&#39;</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>text</span><span class=p>[</span><span class=n>i</span><span class=p>]</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>pattern</span><span class=p>[</span><span class=n>j</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                        </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>];</span><span class=w></span>
+<span class=w>                    </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                        </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>]</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=n>i</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>][</span><span class=n>j</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>];</span><span class=w></span>
+<span class=w>                    </span><span class=p>}</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>dp</span><span class=p>[</span><span class=n>lenText</span><span class=p>][</span><span class=n>lenPattern</span><span class=p>];</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../ class="md-footer__link md-footer__link--prev" aria-label="上一页: 动态规划" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 动态规划 </div> </div> </a> <a href=../1035/ class="md-footer__link md-footer__link--next" aria-label="下一页: 1035.不相交的线 (Medium)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 1035.不相交的线 (Medium) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>

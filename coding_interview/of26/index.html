@@ -6,49 +6,25 @@
 </code></pre></div> <blockquote> <p>给定的树 B：</p> </blockquote> <div class=highlight><pre><span></span><code>   4 
   /
  1
-</code></pre></div> <blockquote> <p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p> </blockquote> <h3 id=_3>限制<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>0 &lt;= 节点个数 &lt;= 10000</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <div class="tabbed-set tabbed-alternate" data-tabs=1:1><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span>
-<span class=normal>23</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    bool helper(TreeNode *A, TreeNode *B) {
-        if(B == nullptr) {
-            return true;
-        }
-        if(A == nullptr) {
-            return false;
-        }
-        if(A-&gt;val != B-&gt;val) {
-            return false;
-        }
-        return helper(A-&gt;left, B-&gt;left) &amp;&amp; helper(A-&gt;right, B-&gt;right);
-    }
-    bool isSubStructure(TreeNode* A, TreeNode* B) {
-        if(A == nullptr || B == nullptr) {
-            return false;
-        }
-        return helper(A, B) || isSubStructure(A-&gt;left, B) || isSubStructure(A-&gt;right, B);
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of25/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 25.合并两个有序的链表 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 25.合并两个有序的链表 (Easy) </div> </div> </a> <a href=../of27/ class="md-footer__link md-footer__link--next" aria-label="下一页: 27.二叉树的镜像" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 27.二叉树的镜像 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+</code></pre></div> <blockquote> <p>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p> </blockquote> <h3 id=_3>限制<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>0 &lt;= 节点个数 &lt;= 10000</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <div class="tabbed-set tabbed-alternate" data-tabs=1:1><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>helper</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>A</span><span class=p>,</span><span class=w> </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>B</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>B</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>A</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>A</span><span class=o>-&gt;</span><span class=n>val</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=n>B</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>helper</span><span class=p>(</span><span class=n>A</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>)</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>helper</span><span class=p>(</span><span class=n>A</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>);</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>isSubStructure</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>A</span><span class=p>,</span><span class=w> </span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>B</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>A</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>B</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>helper</span><span class=p>(</span><span class=n>A</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=p>)</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>isSubStructure</span><span class=p>(</span><span class=n>A</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=p>)</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>isSubStructure</span><span class=p>(</span><span class=n>A</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>,</span><span class=w> </span><span class=n>B</span><span class=p>);</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of25/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 25.合并两个有序的链表 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 25.合并两个有序的链表 (Easy) </div> </div> </a> <a href=../of27/ class="md-footer__link md-footer__link--next" aria-label="下一页: 27.二叉树的镜像" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 27.二叉树的镜像 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>

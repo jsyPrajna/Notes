@@ -5,142 +5,69 @@
    [10, 13, 14, 17, 24],
    [18, 21, 23, 26, 30]
  ]
-</code></pre></div> <blockquote> <p>给定 target = 5，返回  true。</p> <p>给定  target = 20，返回  false。</p> </blockquote> <h3 id=_3>限制<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>0 &lt;= n &lt;= 1000, 0 &lt;= m &lt;= 1000</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>从右上角或左下角开始，根据 target 与元素值的大小关系移动。不能从左上角或右下角，不然不知道往哪移动了。复杂度 O(m + n)</p> <p>第二次做这个题感觉这个方法太慢了，感觉应该可以用二分做的。开始是对行列分别二分，但显然不对，以示例为例，以行首元素判断二分，最后得到 5 是在 3 和 10 之间，可见这样并不对，因为并不是下一行的元素一定大于上一行所有元素。看到题解里说可以从对角线遍历，每次从对角线元素开始从两个方向进行二分查找。</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>简单遍历</label><label for=__tabbed_1_2>二分查找</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    bool findNumberIn2DArray(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) {
-        if(matrix.size() == 0 || matrix[0].size() == 0) {
-            return false;
-        }
-        int i = 0, j = matrix[0].size() - 1;
-        while(i &lt; matrix.size() &amp;&amp; j &gt;= 0) {
-            if(target == matrix[i][j]) {
-                return true;
-            }else if(target &gt; matrix[i][j]) {
-                i++;
-            }else {
-                j--;
-            }
-        }
-        return false;
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span>
-<span class=normal>23</span>
-<span class=normal>24</span>
-<span class=normal>25</span>
-<span class=normal>26</span>
-<span class=normal>27</span>
-<span class=normal>28</span>
-<span class=normal>29</span>
-<span class=normal>30</span>
-<span class=normal>31</span>
-<span class=normal>32</span>
-<span class=normal>33</span>
-<span class=normal>34</span>
-<span class=normal>35</span>
-<span class=normal>36</span>
-<span class=normal>37</span>
-<span class=normal>38</span>
-<span class=normal>39</span>
-<span class=normal>40</span>
-<span class=normal>41</span>
-<span class=normal>42</span>
-<span class=normal>43</span>
-<span class=normal>44</span>
-<span class=normal>45</span>
-<span class=normal>46</span>
-<span class=normal>47</span>
-<span class=normal>48</span>
-<span class=normal>49</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-    bool binary_search(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target, int i, bool isVertical) {
-        int l = i, r = (isVertical ? matrix.size() - 1 : matrix[0].size() - 1);
-        if(isVertical) {
-            while(l &lt;= r) {
-                int mid = l + (r - l) / 2;
-                if(target == matrix[mid][i]) {
-                    return true;
-                }else if(target &gt; matrix[mid][i]) {
-                    l = mid + 1;
-                }else {
-                    r = mid - 1;
-                }
-            }
-        }else {
-            while(l &lt;= r) {
-                int mid = l + (r - l) / 2;
-                if(target == matrix[i][mid]) {
-                    return true;
-                }else if(target &gt; matrix[i][mid]) {
-                    l = mid + 1;
-                }else {
-                    r = mid - 1;
-                }
-            }
-        }
-        return false;
-    }
-public:
-    bool findNumberIn2DArray(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) {
-        int n = matrix.size();
-        if(n == 0) {
-            return false;
-        }
-        int m = matrix[0].size();
-        if(m == 0) {
-            return false;
-        }
-        for(int i = 0; i &lt; m &amp;&amp; i &lt; n; i++) {
-            if(binary_search(matrix, target, i, true) || binary_search(matrix, target, i, false)) {
-                return true;
-            }
-        }
-        return false;
-    }
-};
-
-```
-</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of03/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 03.数组中重复的数字 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 03.数组中重复的数字 (Easy) </div> </div> </a> <a href=../of05/ class="md-footer__link md-footer__link--next" aria-label="下一页: 05.替换空格 (Easy)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 05.替换空格 (Easy) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+</code></pre></div> <blockquote> <p>给定 target = 5，返回  true。</p> <p>给定  target = 20，返回  false。</p> </blockquote> <h3 id=_3>限制<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>0 &lt;= n &lt;= 1000, 0 &lt;= m &lt;= 1000</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>从右上角或左下角开始，根据 target 与元素值的大小关系移动。不能从左上角或右下角，不然不知道往哪移动了。复杂度 O(m + n)</p> <p>第二次做这个题感觉这个方法太慢了，感觉应该可以用二分做的。开始是对行列分别二分，但显然不对，以示例为例，以行首元素判断二分，最后得到 5 是在 3 和 10 之间，可见这样并不对，因为并不是下一行的元素一定大于上一行所有元素。看到题解里说可以从对角线遍历，每次从对角线元素开始从两个方向进行二分查找。</p> <div class="tabbed-set tabbed-alternate" data-tabs=1:2><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>简单遍历</label><label for=__tabbed_1_2>二分查找</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>findNumberIn2DArray</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&gt;&amp;</span><span class=w> </span><span class=n>matrix</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>target</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>matrix</span><span class=p>.</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>,</span><span class=w> </span><span class=n>j</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=k>while</span><span class=p>(</span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>matrix</span><span class=p>.</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>j</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>j</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>i</span><span class=o>++</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>j</span><span class=o>--</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=nf>binary_search</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&gt;&amp;</span><span class=w> </span><span class=n>matrix</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>target</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=p>,</span><span class=w> </span><span class=kt>bool</span><span class=w> </span><span class=n>isVertical</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>l</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>i</span><span class=p>,</span><span class=w> </span><span class=n>r</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=p>(</span><span class=n>isVertical</span><span class=w> </span><span class=o>?</span><span class=w> </span><span class=n>matrix</span><span class=p>.</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=o>:</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=n>size</span><span class=p>()</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>);</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>isVertical</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>while</span><span class=p>(</span><span class=n>l</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=n>r</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>l</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=p>(</span><span class=n>r</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=n>l</span><span class=p>)</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>2</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>mid</span><span class=p>][</span><span class=n>i</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>mid</span><span class=p>][</span><span class=n>i</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>l</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>r</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>while</span><span class=p>(</span><span class=n>l</span><span class=w> </span><span class=o>&lt;=</span><span class=w> </span><span class=n>r</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=kt>int</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>l</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=p>(</span><span class=n>r</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=n>l</span><span class=p>)</span><span class=w> </span><span class=o>/</span><span class=w> </span><span class=mi>2</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>mid</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>target</span><span class=w> </span><span class=o>&gt;</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=n>i</span><span class=p>][</span><span class=n>mid</span><span class=p>])</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>l</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>+</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>r</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>mid</span><span class=w> </span><span class=o>-</span><span class=w> </span><span class=mi>1</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>bool</span><span class=w> </span><span class=n>findNumberIn2DArray</span><span class=p>(</span><span class=n>vector</span><span class=o>&lt;</span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&gt;&amp;</span><span class=w> </span><span class=n>matrix</span><span class=p>,</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>target</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>n</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>matrix</span><span class=p>.</span><span class=n>size</span><span class=p>();</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>n</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=kt>int</span><span class=w> </span><span class=n>m</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>matrix</span><span class=p>[</span><span class=mi>0</span><span class=p>].</span><span class=n>size</span><span class=p>();</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>m</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=mi>0</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>for</span><span class=p>(</span><span class=kt>int</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>m</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=o>&lt;</span><span class=w> </span><span class=n>n</span><span class=p>;</span><span class=w> </span><span class=n>i</span><span class=o>++</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>binary_search</span><span class=p>(</span><span class=n>matrix</span><span class=p>,</span><span class=w> </span><span class=n>target</span><span class=p>,</span><span class=w> </span><span class=n>i</span><span class=p>,</span><span class=w> </span><span class=nb>true</span><span class=p>)</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=n>binary_search</span><span class=p>(</span><span class=n>matrix</span><span class=p>,</span><span class=w> </span><span class=n>target</span><span class=p>,</span><span class=w> </span><span class=n>i</span><span class=p>,</span><span class=w> </span><span class=nb>false</span><span class=p>))</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=k>return</span><span class=w> </span><span class=nb>true</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=nb>false</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../of03/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 03.数组中重复的数字 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 03.数组中重复的数字 (Easy) </div> </div> </a> <a href=../of05/ class="md-footer__link md-footer__link--next" aria-label="下一页: 05.替换空格 (Easy)" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 05.替换空格 (Easy) </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>

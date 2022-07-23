@@ -3,139 +3,66 @@
      2
     /
    3
-</code></pre></div> <blockquote> <p>输出: [1,3,2]</p> </blockquote> <h3 id=_3>进阶<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>递归算法很简单，你可以通过迭代算法完成吗？</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>最简单的就是递归。</p> <p>栈的思路：每遇到一个结点 A，先将 A 入栈，遍历左子树，接着访问 A，最后遍历右子树。访问完 A 后，A 就可以出栈了，因为 A 与其左子树都已经访问完成。</p> <p><strong>Mirros Traversal 算法：</strong></p> <p>递归和栈的方法都是使用了 O(h) 的辅助空间来保存上一层的信息，中序遍历就是遍历完左子树然后遍历根节点。左子树最后遍历的结点一定是叶子结点（实际就是中序遍历下根结点的前驱），我们把它的右指针指向根节点，这样就不需要额外的空间，遍历完左子树，就可以回到根结点。</p> <p>具体的步骤：</p> <ol> <li>cur-&gt;left == nullptr，保存 cur 的值，更新 cur = cur-&gt;right。</li> <li>cur-&gt;left != nullptr，找到 cur-&gt;left 这个子树最右结点记为 last。<ol> <li>last-&gt;right == nullptr，则 last-&gt;right = cur，更新 cur = cur-&gt;left。</li> <li>last-&gt;right != nullptr，说明之前已经访问过，表明当前子树已访问完成，保存 cur 的值，更新 cur = cur-&gt;right。</li> </ol> </li> </ol> <div class="tabbed-set tabbed-alternate" data-tabs=1:3><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><input id=__tabbed_1_3 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>栈</label><label for=__tabbed_1_3>Mirros Traversal</label></div> <div class=tabbed-content> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    void helper(TreeNode *root, vector&lt;int&gt;&amp; res) {
-        if(root != nullptr) {
-            helper(root-&gt;left, res);
-            res.push_back(root-&gt;val);
-            helper(root-&gt;right, res);
-        }
-    }
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
-        vector&lt;int&gt; res;
-        helper(root, res);
-        return res;
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
-        vector&lt;int&gt; res;
-        stack&lt;TreeNode*&gt; helpStack;
-        TreeNode *cur = root;
-        while(cur != nullptr || !helpStack.empty()) {
-            while(cur != nullptr) {
-                helpStack.push(cur);
-                cur = cur-&gt;left;
-            }
-            cur = helpStack.top();
-            helpStack.pop();
-            res.push_back(cur-&gt;val);
-            cur = cur-&gt;right;
-        }
-        return res;
-    }
-};
-
-```
-</code></pre></div> </td></tr></table> </div> <div class=tabbed-block> <table class=codehilitetable><tr><td class=linenos><div class=linenodiv><pre><span class=normal> 1</span>
-<span class=normal> 2</span>
-<span class=normal> 3</span>
-<span class=normal> 4</span>
-<span class=normal> 5</span>
-<span class=normal> 6</span>
-<span class=normal> 7</span>
-<span class=normal> 8</span>
-<span class=normal> 9</span>
-<span class=normal>10</span>
-<span class=normal>11</span>
-<span class=normal>12</span>
-<span class=normal>13</span>
-<span class=normal>14</span>
-<span class=normal>15</span>
-<span class=normal>16</span>
-<span class=normal>17</span>
-<span class=normal>18</span>
-<span class=normal>19</span>
-<span class=normal>20</span>
-<span class=normal>21</span>
-<span class=normal>22</span>
-<span class=normal>23</span>
-<span class=normal>24</span>
-<span class=normal>25</span>
-<span class=normal>26</span>
-<span class=normal>27</span>
-<span class=normal>28</span>
-<span class=normal>29</span>
-<span class=normal>30</span></pre></div></td><td class=code><div class=codehilite><pre><span></span><code>```c++
-class Solution {
-public:
-    vector&lt;int&gt; inorderTraversal(TreeNode* root) {
-        vector&lt;int&gt; res;
-        TreeNode *cur = root;
-        while(cur != nullptr) {
-            if(cur-&gt;left == nullptr) {
-                res.push_back(cur-&gt;val);
-                cur = cur-&gt;right;
-            }else {
-                TreeNode *last = cur-&gt;left;
-                // 找到左子树最右结点
-                while(last-&gt;right != nullptr &amp;&amp; last-&gt;right != cur) {
-                    last = last-&gt;right;
-                }
-                if(last-&gt;right == nullptr) {
-                    last-&gt;right = cur;
-                    cur = cur-&gt;left;
-                }else if(last-&gt;right == cur) {
-                    last-&gt;right = nullptr;
-                    res.push_back(cur-&gt;val);
-                    cur = cur-&gt;right;
-                }
-            }
-        }
-        return res;
-    }
-};
-```
-</code></pre></div> </td></tr></table> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../543/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 543.二叉树的直径 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 543.二叉树的直径 (Easy) </div> </div> </a> <a href=../traversal/ class="md-footer__link md-footer__link--next" aria-label="下一页: 二叉树的遍历" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 二叉树的遍历 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
+</code></pre></div> <blockquote> <p>输出: [1,3,2]</p> </blockquote> <h3 id=_3>进阶<a class=headerlink href=#_3 title="Permanent link">*</a></h3> <p>递归算法很简单，你可以通过迭代算法完成吗？</p> <h2 id=_4>代码<a class=headerlink href=#_4 title="Permanent link">*</a></h2> <p>最简单的就是递归。</p> <p>栈的思路：每遇到一个结点 A，先将 A 入栈，遍历左子树，接着访问 A，最后遍历右子树。访问完 A 后，A 就可以出栈了，因为 A 与其左子树都已经访问完成。</p> <p><strong>Mirros Traversal 算法：</strong></p> <p>递归和栈的方法都是使用了 O(h) 的辅助空间来保存上一层的信息，中序遍历就是遍历完左子树然后遍历根节点。左子树最后遍历的结点一定是叶子结点（实际就是中序遍历下根结点的前驱），我们把它的右指针指向根节点，这样就不需要额外的空间，遍历完左子树，就可以回到根结点。</p> <p>具体的步骤：</p> <ol> <li>cur-&gt;left == nullptr，保存 cur 的值，更新 cur = cur-&gt;right。</li> <li>cur-&gt;left != nullptr，找到 cur-&gt;left 这个子树最右结点记为 last。<ol> <li>last-&gt;right == nullptr，则 last-&gt;right = cur，更新 cur = cur-&gt;left。</li> <li>last-&gt;right != nullptr，说明之前已经访问过，表明当前子树已访问完成，保存 cur 的值，更新 cur = cur-&gt;right。</li> </ol> </li> </ol> <div class="tabbed-set tabbed-alternate" data-tabs=1:3><input checked=checked id=__tabbed_1_1 name=__tabbed_1 type=radio><input id=__tabbed_1_2 name=__tabbed_1 type=radio><input id=__tabbed_1_3 name=__tabbed_1 type=radio><div class=tabbed-labels><label for=__tabbed_1_1>递归</label><label for=__tabbed_1_2>栈</label><label for=__tabbed_1_3>Mirros Traversal</label></div> <div class=tabbed-content> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=n>helper</span><span class=p>(</span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;&amp;</span><span class=w> </span><span class=n>res</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=k>if</span><span class=p>(</span><span class=n>root</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=n>helper</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>,</span><span class=w> </span><span class=n>res</span><span class=p>);</span><span class=w></span>
+<span class=w>            </span><span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>);</span><span class=w></span>
+<span class=w>            </span><span class=n>helper</span><span class=p>(</span><span class=n>root</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>,</span><span class=w> </span><span class=n>res</span><span class=p>);</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=w>    </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>inorderTraversal</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>root</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>helper</span><span class=p>(</span><span class=n>root</span><span class=p>,</span><span class=w> </span><span class=n>res</span><span class=p>);</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>inorderTraversal</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>root</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>stack</span><span class=o>&lt;</span><span class=n>TreeNode</span><span class=o>*&gt;</span><span class=w> </span><span class=n>helpStack</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=k>while</span><span class=p>(</span><span class=n>cur</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=w> </span><span class=o>||</span><span class=w> </span><span class=o>!</span><span class=n>helpStack</span><span class=p>.</span><span class=n>empty</span><span class=p>())</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>while</span><span class=p>(</span><span class=n>cur</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>helpStack</span><span class=p>.</span><span class=n>push</span><span class=p>(</span><span class=n>cur</span><span class=p>);</span><span class=w></span>
+<span class=w>                </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>helpStack</span><span class=p>.</span><span class=n>top</span><span class=p>();</span><span class=w></span>
+<span class=w>            </span><span class=n>helpStack</span><span class=p>.</span><span class=n>pop</span><span class=p>();</span><span class=w></span>
+<span class=w>            </span><span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>);</span><span class=w></span>
+<span class=w>            </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> <div class=tabbed-block> <div class=highlight><pre><span></span><code><span class=k>class</span> <span class=nc>Solution</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=k>public</span><span class=o>:</span><span class=w></span>
+<span class=w>    </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>inorderTraversal</span><span class=p>(</span><span class=n>TreeNode</span><span class=o>*</span><span class=w> </span><span class=n>root</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>        </span><span class=n>vector</span><span class=o>&lt;</span><span class=kt>int</span><span class=o>&gt;</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>root</span><span class=p>;</span><span class=w></span>
+<span class=w>        </span><span class=k>while</span><span class=p>(</span><span class=n>cur</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>            </span><span class=k>if</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>);</span><span class=w></span>
+<span class=w>                </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>;</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                </span><span class=n>TreeNode</span><span class=w> </span><span class=o>*</span><span class=n>last</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=c1>// 找到左子树最右结点</span>
+<span class=w>                </span><span class=k>while</span><span class=p>(</span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=k>nullptr</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=n>cur</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>last</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>                </span><span class=k>if</span><span class=p>(</span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=k>nullptr</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=p>;</span><span class=w></span>
+<span class=w>                    </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>left</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=k>else</span><span class=w> </span><span class=k>if</span><span class=p>(</span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>cur</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w></span>
+<span class=w>                    </span><span class=n>last</span><span class=o>-&gt;</span><span class=n>right</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>nullptr</span><span class=p>;</span><span class=w></span>
+<span class=w>                    </span><span class=n>res</span><span class=p>.</span><span class=n>push_back</span><span class=p>(</span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>val</span><span class=p>);</span><span class=w></span>
+<span class=w>                    </span><span class=n>cur</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cur</span><span class=o>-&gt;</span><span class=n>right</span><span class=p>;</span><span class=w></span>
+<span class=w>                </span><span class=p>}</span><span class=w></span>
+<span class=w>            </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=p>}</span><span class=w></span>
+<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>res</span><span class=p>;</span><span class=w></span>
+<span class=w>    </span><span class=p>}</span><span class=w></span>
+<span class=p>};</span><span class=w></span>
+</code></pre></div> </div> </div> </div> <hr> <div class=md-source-date> <small> 最后更新: <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">July 23, 2022</span> </small> </div> </article> </div> </div> </main> <footer class=md-footer> <nav class="md-footer__inner md-grid" aria-label=Footer> <a href=../543/ class="md-footer__link md-footer__link--prev" aria-label="上一页: 543.二叉树的直径 (Easy)" rel=prev> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg> </div> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 上一页 </span> 543.二叉树的直径 (Easy) </div> </div> </a> <a href=../traversal/ class="md-footer__link md-footer__link--next" aria-label="下一页: 二叉树的遍历" rel=next> <div class=md-footer__title> <div class=md-ellipsis> <span class=md-footer__direction> 下一页 </span> 二叉树的遍历 </div> </div> <div class="md-footer__button md-icon"> <svg xmlns=http://www.w3.org/2000/svg viewbox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg> </div> </a> </nav> <div class="md-footer-meta md-typeset"> <div class="md-footer-meta__inner md-grid"> <div class=md-footer-copyright> <div class=md-footer-copyright__highlight> Copyright &copy; 2020 - 2021 caijiqhx </div> Made with <a href=https://squidfunk.github.io/mkdocs-material/ target=_blank rel=noopener> Material for MkDocs </a> </div> </div> </div> </footer> </div> <div class=md-dialog data-md-component=dialog> <div class="md-dialog__inner md-typeset"></div> </div> <script id=__config type=application/json>{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "search.suggest", "search.highlight", "search.share", "content.code.annotate"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": null}</script> <script src=../../../assets/javascripts/bundle.b1047164.min.js></script> <script src=../../../static/js/bundle.525231ca.min.js></script> <script src=https://cdnjs.loli.net/ajax/libs/pangu/3.3.0/pangu.min.js></script> <script src=../../../static/js/extra.js></script> <script src="https://cdnjs.loli.net/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script> </body> </html>
