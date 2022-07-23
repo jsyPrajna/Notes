@@ -230,11 +230,19 @@ nav:
     - ucas/hypervisor-tutorial/index.md
     - ucas/hypervisor-tutorial/part-01.md
   - linux_kernel:
+    - ucas/linux_kernel/asm_annotations.md
     - ucas/linux_kernel/gcc_inline_assembly.md
     - ucas/linux_kernel/initcall.md
+    - ucas/linux_kernel/io.md
+    - ucas/linux_kernel/iskios.md
     - ucas/linux_kernel/kgdb.md
+    - ucas/linux_kernel/licenses.md
+    - ucas/linux_kernel/lkm.md
     - ucas/linux_kernel/makefile.md
+    - ucas/linux_kernel/nested_kernel.md
     - ucas/linux_kernel/pcid.md
+    - ucas/linux_kernel/perf_pmu.md
+    - ucas/linux_kernel/platform_device.md
     - ucas/linux_kernel/retpoline.md
     - ucas/linux_kernel/static_call.md
     - ucas/linux_kernel/syscall.md
@@ -270,14 +278,21 @@ nav:
       - ucas/tee/amd_sev/amd_sev-es.md
       - ucas/tee/amd_sev/amd_sev-snp.md
       - ucas/tee/amd_sev/amd_sev_attacks.md
+      - ucas/tee/amd_sev/amd_sev_attestation.md
       - ucas/tee/amd_sev/asid-based_isolation.md
       - ucas/tee/amd_sev/a_comparison_study_of_intel_sgx_and_amd_memory_encryption.md
       - ucas/tee/amd_sev/cipherleaks.md
+      - ucas/tee/amd_sev/ciphertext_side_channel.md
       - ucas/tee/amd_sev/crossline.md
       - ucas/tee/amd_sev/enclavisor.md
       - ucas/tee/amd_sev/fault_injection.md
+      - ucas/tee/amd_sev/fidelius.md
+      - ucas/tee/amd_sev/page_fault_controlled_channel.md
       - ucas/tee/amd_sev/tlb_poison.md
       - ucas/tee/amd_sev/via.md
+      - ucas/tee/amd_sev/vmpl.md
+    - arm_trustzone:
+      - ucas/tee/arm_trustzone/research_on_arm_trustzone.md
     - intel_tdx:
       - ucas/tee/intel_tdx/intel_tdx.md
   - the_art_of_linux_kernel_design:
@@ -292,16 +307,28 @@ nav:
     - ucas/virtualization/device_basic.md
     - ucas/virtualization/dma_and_iommu.md
     - ucas/virtualization/dune.md
+    - ucas/virtualization/ed-monitor.md
     - ucas/virtualization/hyperfuzzer.md
+    - ucas/virtualization/hyperlock.md
+    - ucas/virtualization/hypsec.md
     - ucas/virtualization/interrupt_virtualization.md
+    - ucas/virtualization/kvm_code_analysis.md
+    - ucas/virtualization/lvd.md
+    - ucas/virtualization/memory_virtualization.md
+    - ucas/virtualization/mem_free_test.md
+    - ucas/virtualization/nexen.md
     - ucas/virtualization/nyx.md
+    - ucas/virtualization/qemu.md
     - ucas/virtualization/seimi.md
+    - ucas/virtualization/sgx_virtualization.md
     - ucas/virtualization/v-shuttle.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
     - ucas/virtualization/vmcs.md
+    - ucas/virtualization/vmm_programming_sdm.md
     - ucas/virtualization/vmx_instructions.md
     - ucas/virtualization/vt-d.md
+    - ucas/virtualization/xmp.md
   - virtualization_overview:
     - ucas/virtualization_overview/virtualization.md
   - virtual_machine_introspection:
