@@ -10,34 +10,34 @@
 
 === "颜色遍历框架"
 
-		```c++
-		class Solution {
-		public:
-		    vector<int> postorderTraversal(TreeNode* root) {
-		        if(root == nullptr) {
-		            return {};
-		        }
-		        vector<int> res;
-		        stack<pair<bool, TreeNode*>> st;
-		        st.push({true, root});
-		        while(!st.empty()) {
-		            auto flag = st.top().first;
-		            auto cur = st.top().second;
-		            st.pop();
-		            if(flag) {
-		                // 不同的遍历，修改此处的入栈顺序
-		                if(cur->right != nullptr) {
-		                    st.push({true, cur->right});
-		                }
-		                st.push({false, cur});
-		                if(cur->left != nullptr) {
-		                    st.push({true, cur->left});
-		                }
-		            }else {
-		                res.push_back(cur->val);
-		            }
-		        }
-		        return res;
-		    }
-		};
-		```
+    ```c++
+    class Solution {
+    public:
+        vector<int> postorderTraversal(TreeNode* root) {
+            if(root == nullptr) {
+                return {};
+            }
+            vector<int> res;
+            stack<pair<bool, TreeNode*>> st;
+            st.push({true, root});
+            while(!st.empty()) {
+                auto flag = st.top().first;
+                auto cur = st.top().second;
+                st.pop();
+                if(flag) {
+                    // 不同的遍历，修改此处的入栈顺序
+                    if(cur->right != nullptr) {
+                        st.push({true, cur->right});
+                    }
+                    st.push({false, cur});
+                    if(cur->left != nullptr) {
+                        st.push({true, cur->left});
+                    }
+                }else {
+                    res.push_back(cur->val);
+                }
+            }
+            return res;
+        }
+    };
+    ```

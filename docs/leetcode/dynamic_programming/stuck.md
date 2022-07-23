@@ -68,236 +68,236 @@ dp[i][1] = max(dp[i - 1][1], -prices[i]);
 
 === "dp"
 
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        vector<vector<int>> dp(n, vector<int>(2, 0));
-		        dp[0][0] = 0, dp[0][1] = -1 * prices[0];
-		        for(int i = 1; i < n; i++) {
-		            dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-		            dp[i][1] = max(dp[i - 1][1], -1 * prices[i]);
-		        }
-		        return dp[n - 1][0];
-		    }
-		};
-		```
-		
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            vector<vector<int>> dp(n, vector<int>(2, 0));
+            dp[0][0] = 0, dp[0][1] = -1 * prices[0];
+            for(int i = 1; i < n; i++) {
+                dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+                dp[i][1] = max(dp[i - 1][1], -1 * prices[i]);
+            }
+            return dp[n - 1][0];
+        }
+    };
+    ```
+    
 === "O(1)"
 
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        int dp_i_0 = 0, dp_i_1 = INT_MIN;
-		        for(int i = 0; i < n; i++) {
-		            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
-		            dp_i_1 = max(dp_i_1, -1 * prices[i]);
-		        }
-		        return dp_i_0;
-		    }
-		};
-		```
-		
-		## k = +infinity
-		
-		k 为正无穷，那我们就不需要记录这个状态，状态转移方程变为：
-		
-		```
-		dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-		dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
-		```
-		
-		直接写空间复杂度 O(1) 的代码：
-		
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        int dp_i_0 = 0, dp_i_1 = INT_MIN;
-		        for(int i = 0; i < n; i++) {
-		            int tmp = dp_i_0;
-		            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
-		            dp_i_1 = max(dp_i_1, tmp - prices[i]);
-		        }
-		        return dp_i_0;
-		    }
-		};
-		```
-		
-		## k = 2
-		
-		上两个都和 k 关系不大，这个就需要处理 k 。状态转移方程无法化简。
-		
-		```c++
-		dp[i][k][0] = max(dp[i - 1][k][0], dp[i -1][k][1] + prices[i]);
-		dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
-		
-		dp[0][k][0] = max(dp[-1][k][0], dp[-1][k][1] + prices[i]) = 0;
-		dp[0][k][1] = max(dp[-1][k][1], dp[-1][k - 1][0] - prices[i]) = - prices[i];
-		
-		dp[i][2][0] = max(dp[i - 1][2][0], dp[i - 1][2][1] + prices[i]);
-		dp[i][2][1] = max(dp[i - 1][2][1], dp[i - 1][1][0] - prices[i]);
-		dp[i][1][0] = max(dp[i - 1][1][0], dp[i - 1][1][1] + prices[i]);
-		dp[i][1][1] = max(dp[i - 1][1][1], - prices[i]);
-		```
-		
-		我们不仅需要对 i 遍历，还需要遍历 k，要注意初始状态。当然 k 比较小，我们还可以直接列出来。
-		
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            int dp_i_0 = 0, dp_i_1 = INT_MIN;
+            for(int i = 0; i < n; i++) {
+                dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = max(dp_i_1, -1 * prices[i]);
+            }
+            return dp_i_0;
+        }
+    };
+    ```
+    
+    ## k = +infinity
+    
+    k 为正无穷，那我们就不需要记录这个状态，状态转移方程变为：
+    
+    ```
+    dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+    dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i]);
+    ```
+    
+    直接写空间复杂度 O(1) 的代码：
+    
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            int dp_i_0 = 0, dp_i_1 = INT_MIN;
+            for(int i = 0; i < n; i++) {
+                int tmp = dp_i_0;
+                dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = max(dp_i_1, tmp - prices[i]);
+            }
+            return dp_i_0;
+        }
+    };
+    ```
+    
+    ## k = 2
+    
+    上两个都和 k 关系不大，这个就需要处理 k 。状态转移方程无法化简。
+    
+    ```c++
+    dp[i][k][0] = max(dp[i - 1][k][0], dp[i -1][k][1] + prices[i]);
+    dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+    
+    dp[0][k][0] = max(dp[-1][k][0], dp[-1][k][1] + prices[i]) = 0;
+    dp[0][k][1] = max(dp[-1][k][1], dp[-1][k - 1][0] - prices[i]) = - prices[i];
+    
+    dp[i][2][0] = max(dp[i - 1][2][0], dp[i - 1][2][1] + prices[i]);
+    dp[i][2][1] = max(dp[i - 1][2][1], dp[i - 1][1][0] - prices[i]);
+    dp[i][1][0] = max(dp[i - 1][1][0], dp[i - 1][1][1] + prices[i]);
+    dp[i][1][1] = max(dp[i - 1][1][1], - prices[i]);
+    ```
+    
+    我们不仅需要对 i 遍历，还需要遍历 k，要注意初始状态。当然 k 比较小，我们还可以直接列出来。
+    
 === "三维 dp"
 
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        int dp[n][3][2] = { 0 };
-		        for(int i = 0; i < n; i++) {
-		            for(int k = 2; k >= 1; k--) {
-		                if(i == 0) {
-		                    dp[i][k][0] = 0;
-		                    dp[i][k][1] = -1 * prices[i];
-		                    continue;
-		                }
-		                dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
-		                dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
-		            }
-		        }
-		        return dp[n - 1][2][0];
-		    }
-		};
-		```
-		
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            int dp[n][3][2] = { 0 };
+            for(int i = 0; i < n; i++) {
+                for(int k = 2; k >= 1; k--) {
+                    if(i == 0) {
+                        dp[i][k][0] = 0;
+                        dp[i][k][1] = -1 * prices[i];
+                        continue;
+                    }
+                    dp[i][k][0] = max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+                    dp[i][k][1] = max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+                }
+            }
+            return dp[n - 1][2][0];
+        }
+    };
+    ```
+    
 === "优化"
 
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int dp_i10 = 0, dp_i11 = INT_MIN;
-		        int dp_i20 = 0, dp_i21 = INT_MIN;
-		        for(auto price : prices) {
-		            dp_i20 = max(dp_i20, dp_i21 + price);
-		            dp_i21 = max(dp_i21, dp_i10 - price);
-		            dp_i10 = max(dp_i10, dp_i11 + price);
-		            dp_i11 = max(dp_i11, -1 * price);
-		        }
-		        return dp_i20;
-		    }
-		};
-		```
-		
-		## 任意给定的 k
-		
-		一次交易买入卖出至少需要两天，所以当 k > n / 2 时，就等价于不限制次数了。对于有效限制的部分就按照上面 k = 2 时穷举即可。
-		
-		```c++
-		class Solution {
-		public:
-		    int maxProfitWithoutK(vector<int>& prices) {
-		        int dp_i_0 = 0, dp_i_1 = INT_MIN;
-		        for(int i = 0; i < prices.size(); i++) {
-		            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
-		            dp_i_1 = max(dp_i_1, dp_i_0 - prices[i]);
-		        }
-		        return dp_i_0;
-		    }
-		    int maxProfit(int k, vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        if(k > n / 2) {
-		            return maxProfitWithoutK(prices);
-		        }
-		        int dp[n][k + 1][2] = { 0 };
-		        for(int i = 0; i < n; i++) {
-		            for(int j = k; j >= 1; j--) {
-		                if(i == 0) {
-		                    dp[i][j][0] = 0;
-		                    dp[i][j][1] = -1 * prices[i];
-		                    continue;
-		                }
-		                dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
-		                dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]);
-		            }
-		        }
-		        return dp[n - 1][k][0];
-		    }
-		};
-		```
-		
-		## k = +infinity 含冷冻期
-		
-		卖出股票后，第二天不能买入股票。稍微修改一下前面 k = +infinity 的状态方程。
-		
-		```c++ hl_line="2"
-		dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-		dp[i][1] = max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
-		```
-		
-		添加一个变量记录前天的即可。
-		
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        int dp_i_0 = 0, dp_i_1 = INT_MIN;
-		        int dp_i2_0 = 0; // 记录前天的
-		        for(int i = 0; i < n; i++) {
-		            int tmp = dp_i_0;
-		            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
-		            dp_i_1 = max(dp_i_1, dp_i2_0 - prices[i]);
-		            dp_i2_0 = tmp;
-		        }
-		        return dp_i_0;
-		    }
-		};
-		```
-		
-		## k = +infinity 含手续费
-		
-		每次交易要付手续费，也比较简单，只要再买入的时候减去手续费即可。
-		
-		```c++
-		dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-		dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee);
-		```
-		
-		```c++
-		class Solution {
-		public:
-		    int maxProfit(vector<int>& prices, int fee) {
-		        int n = prices.size();
-		        if(n <= 1) {
-		            return 0;
-		        }
-		        int dp_i_0 = 0, dp_i_1 = INT_MIN;
-		        for(int i = 0; i < n; i++) {
-		            int tmp = dp_i_0;
-		            dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
-		            dp_i_1 = max(dp_i_1, tmp - prices[i] - fee);
-		        }
-		        return dp_i_0;
-		    }
-		};
-		```
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int dp_i10 = 0, dp_i11 = INT_MIN;
+            int dp_i20 = 0, dp_i21 = INT_MIN;
+            for(auto price : prices) {
+                dp_i20 = max(dp_i20, dp_i21 + price);
+                dp_i21 = max(dp_i21, dp_i10 - price);
+                dp_i10 = max(dp_i10, dp_i11 + price);
+                dp_i11 = max(dp_i11, -1 * price);
+            }
+            return dp_i20;
+        }
+    };
+    ```
+    
+    ## 任意给定的 k
+    
+    一次交易买入卖出至少需要两天，所以当 k > n / 2 时，就等价于不限制次数了。对于有效限制的部分就按照上面 k = 2 时穷举即可。
+    
+    ```c++
+    class Solution {
+    public:
+        int maxProfitWithoutK(vector<int>& prices) {
+            int dp_i_0 = 0, dp_i_1 = INT_MIN;
+            for(int i = 0; i < prices.size(); i++) {
+                dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = max(dp_i_1, dp_i_0 - prices[i]);
+            }
+            return dp_i_0;
+        }
+        int maxProfit(int k, vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            if(k > n / 2) {
+                return maxProfitWithoutK(prices);
+            }
+            int dp[n][k + 1][2] = { 0 };
+            for(int i = 0; i < n; i++) {
+                for(int j = k; j >= 1; j--) {
+                    if(i == 0) {
+                        dp[i][j][0] = 0;
+                        dp[i][j][1] = -1 * prices[i];
+                        continue;
+                    }
+                    dp[i][j][0] = max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i]);
+                    dp[i][j][1] = max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i]);
+                }
+            }
+            return dp[n - 1][k][0];
+        }
+    };
+    ```
+    
+    ## k = +infinity 含冷冻期
+    
+    卖出股票后，第二天不能买入股票。稍微修改一下前面 k = +infinity 的状态方程。
+    
+    ```c++ hl_line="2"
+    dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+    dp[i][1] = max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
+    ```
+    
+    添加一个变量记录前天的即可。
+    
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            int dp_i_0 = 0, dp_i_1 = INT_MIN;
+            int dp_i2_0 = 0; // 记录前天的
+            for(int i = 0; i < n; i++) {
+                int tmp = dp_i_0;
+                dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = max(dp_i_1, dp_i2_0 - prices[i]);
+                dp_i2_0 = tmp;
+            }
+            return dp_i_0;
+        }
+    };
+    ```
+    
+    ## k = +infinity 含手续费
+    
+    每次交易要付手续费，也比较简单，只要再买入的时候减去手续费即可。
+    
+    ```c++
+    dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+    dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee);
+    ```
+    
+    ```c++
+    class Solution {
+    public:
+        int maxProfit(vector<int>& prices, int fee) {
+            int n = prices.size();
+            if(n <= 1) {
+                return 0;
+            }
+            int dp_i_0 = 0, dp_i_1 = INT_MIN;
+            for(int i = 0; i < n; i++) {
+                int tmp = dp_i_0;
+                dp_i_0 = max(dp_i_0, dp_i_1 + prices[i]);
+                dp_i_1 = max(dp_i_1, tmp - prices[i] - fee);
+            }
+            return dp_i_0;
+        }
+    };
+    ```
