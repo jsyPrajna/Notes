@@ -8,22 +8,24 @@
 
 N 叉树遍历就前序和后序两种，对子结点通常就从左到右访问。
 
-```c++ tab="N 叉树"
-class Node {
-public:
-    int val;
-    vector<Node*> children;
+=== "N 叉树"
 
-    Node() {}
-
-    Node(int _val) {
-        val = _val;
-    }
-
-    Node(int _val, vector<Node*> _children) {
-        val = _val;
-        children = _children;
-    }
-};
-```
-
+		```c++
+		class Node {
+		public:
+		    int val;
+		    vector<Node*> children;
+		
+		    Node() {}
+		
+		    Node(int _val) {
+		        val = _val;
+		    }
+		
+		    Node(int _val, vector<Node*> _children) {
+		        val = _val;
+		        children = _children;
+		    }
+		};
+		```
+		
