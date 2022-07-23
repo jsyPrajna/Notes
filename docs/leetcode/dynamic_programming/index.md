@@ -62,47 +62,51 @@ dp(n) = \left\{
 \right.
 $$
 
-```c++ tab="暴力递归"
-vector<int>& coins;
-int amount;
+=== "暴力递归"
 
-int dp(int n) {
-    // base case
-    if(n == 0) {
-        return 0;
-    }else if(n < 0) {
-        return -1;
-    }else {
-        for()
-    }
-    int res = -1;
-    for(auto coin : coins) {
-        int subProblem = dp(n - coin);
-        if(subProblem == -1) {
-            continue;
-        }
-        res = min(res, 1 + subProblem);
-    }
-    return res;
-}
-```
+		```c++
+		vector<int>& coins;
+		int amount;
+		
+		int dp(int n) {
+		    // base case
+		    if(n == 0) {
+		        return 0;
+		    }else if(n < 0) {
+		        return -1;
+		    }else {
+		        for()
+		    }
+		    int res = -1;
+		    for(auto coin : coins) {
+		        int subProblem = dp(n - coin);
+		        if(subProblem == -1) {
+		            continue;
+		        }
+		        res = min(res, 1 + subProblem);
+		    }
+		    return res;
+		}
+		```
+		
+=== "dp 数组"
 
-```c++ tab="dp 数组"
-int coinChang(vector<int>& coins, int amount) {
-    // 取最小值，所以可以把初值设大一点，最多就是 amount + 1
-    vector<int> dp(amount + 1, amount + 1);
-    // base case:
-    dp[0] = 0;
-    for(int i = 1; i <= amount; i++) {
-        // 内层循环求所有子问题 + 1 的最小值
-        for(int coin : coins) {
-            if(i - coin < 0) {
-                continue;
-            }
-            dp[i] = min(dp[i], 1 + dp[i - coin]);
-        }
-    }
-    return (dp[amount] == amount + 1) ? -1 : dp[amount];
-}
-```
-
+		```c++
+		int coinChang(vector<int>& coins, int amount) {
+		    // 取最小值，所以可以把初值设大一点，最多就是 amount + 1
+		    vector<int> dp(amount + 1, amount + 1);
+		    // base case:
+		    dp[0] = 0;
+		    for(int i = 1; i <= amount; i++) {
+		        // 内层循环求所有子问题 + 1 的最小值
+		        for(int coin : coins) {
+		            if(i - coin < 0) {
+		                continue;
+		            }
+		            dp[i] = min(dp[i], 1 + dp[i - coin]);
+		        }
+		    }
+		    return (dp[amount] == amount + 1) ? -1 : dp[amount];
+		}
+		```
+		

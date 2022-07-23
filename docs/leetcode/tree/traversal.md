@@ -8,34 +8,36 @@
 
 栈里存 `pair<bool, TreeNode*>`，以中序遍历为例，如果当前节点对应的标记为 true 表示未遍历过，那么就按照中序顺序倒序插入，false 则访问当前结点。
 
-```c++ tab="颜色遍历框架"
-class Solution {
-public:
-    vector<int> postorderTraversal(TreeNode* root) {
-        if(root == nullptr) {
-            return {};
-        }
-        vector<int> res;
-        stack<pair<bool, TreeNode*>> st;
-        st.push({true, root});
-        while(!st.empty()) {
-            auto flag = st.top().first;
-            auto cur = st.top().second;
-            st.pop();
-            if(flag) {
-                // 不同的遍历，修改此处的入栈顺序
-                if(cur->right != nullptr) {
-                    st.push({true, cur->right});
-                }
-                st.push({false, cur});
-                if(cur->left != nullptr) {
-                    st.push({true, cur->left});
-                }
-            }else {
-                res.push_back(cur->val);
-            }
-        }
-        return res;
-    }
-};
-```
+=== "颜色遍历框架"
+
+		```c++
+		class Solution {
+		public:
+		    vector<int> postorderTraversal(TreeNode* root) {
+		        if(root == nullptr) {
+		            return {};
+		        }
+		        vector<int> res;
+		        stack<pair<bool, TreeNode*>> st;
+		        st.push({true, root});
+		        while(!st.empty()) {
+		            auto flag = st.top().first;
+		            auto cur = st.top().second;
+		            st.pop();
+		            if(flag) {
+		                // 不同的遍历，修改此处的入栈顺序
+		                if(cur->right != nullptr) {
+		                    st.push({true, cur->right});
+		                }
+		                st.push({false, cur});
+		                if(cur->left != nullptr) {
+		                    st.push({true, cur->left});
+		                }
+		            }else {
+		                res.push_back(cur->val);
+		            }
+		        }
+		        return res;
+		    }
+		};
+		```
