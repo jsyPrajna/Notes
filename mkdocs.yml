@@ -539,6 +539,7 @@ nav:
   - tools/gitbook.md
   - tools/git_hook.md
   - tools/ida.md
+  - tools/learn_git_branching.md
   - tools/manjaro.md
   - tools/regex.md
   - tools/shell.md

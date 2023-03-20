@@ -577,6 +577,12 @@ nav:
     - ucas/linux_kernel/initcall.md
     - ucas/linux_kernel/io.md
     - ucas/linux_kernel/iskios.md
+    - ucas/linux_kernel/kernel_booting_process.md
+    - ucas/linux_kernel/kernel_building_process.md
+    - ucas/linux_kernel/kernel_dmesg_output.md
+    - ucas/linux_kernel/kernel_nested_kernel.md
+    - ucas/linux_kernel/kernel_page_table.md
+    - ucas/linux_kernel/kernel_physical_memory_management.md
     - ucas/linux_kernel/kgdb.md
     - ucas/linux_kernel/licenses.md
     - ucas/linux_kernel/lkm.md
@@ -661,8 +667,10 @@ nav:
     - ucas/virtualization/nexen.md
     - ucas/virtualization/nyx.md
     - ucas/virtualization/qemu.md
+    - ucas/virtualization/secfortress.md
     - ucas/virtualization/seimi.md
     - ucas/virtualization/sgx_virtualization.md
+    - ucas/virtualization/svm_instructions.md
     - ucas/virtualization/v-shuttle.md
     - ucas/virtualization/vfio.md
     - ucas/virtualization/virtio_vhost.md
