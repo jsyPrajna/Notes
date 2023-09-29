@@ -54,8 +54,8 @@ markdown_extensions:
 nav:
 - index.md
 - C++:
-  - C++/C.md
-  - C++/Cpre.md
+  - C++/C++ core programming.md
+  - C++/C++ improves programming.md
 plugins:
 - search
 - git-revision-date-localized

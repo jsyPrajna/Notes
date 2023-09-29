@@ -1,8 +1,9 @@
 copyright: Copyright &copy; 2020 - 2021 jsyPrajna
 extra:
   social:
-  - icon: fontawesome/brands/twitter
-    link: https://twitter.com/squidfunk
+  - icon: fontawesome/brands/github
+    link: https://notes.caijiqhx.top/
+    name: cjqxh on github
 extra_css:
 - static/css/extra.css
 - static/css/main.bf3dc0a9.min.css
