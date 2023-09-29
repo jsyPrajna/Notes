@@ -1,6 +1,6 @@
-# QHX's Notes
+# Main
 
-菜鸡 qhx 的学习笔记。
+姜某人的学习笔记。
 
 ## Material color palette 颜色主题
 

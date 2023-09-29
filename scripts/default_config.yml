@@ -1,10 +1,10 @@
-site_name: caijiqhx notes
-site_description: caijiqhx notes
-site_author: caijiqhx
-site_url: https://notes.caijiqhx.top
-repo_name: caijiqhx/Notes
-repo_url: https://github.com/caijiqhx/Notes
-copyright: "Copyright &copy; 2020 - 2021 caijiqhx"
+site_name: 姜某的笔记
+site_description: 这个人很懒，什么也没留下
+site_author: jsyPrajna
+site_url: https://github.com/jsyPrajna/Notes
+repo_name: jsyPrajna/Notes
+repo_url: https://github.com/jsyPrajna/Notes
+copyright: "Copyright &copy; 2020 - 2021 jsyPrajna"
 extra_css:
 - static/css/extra.css
 - static/css/main.bf3dc0a9.min.css
@@ -24,14 +24,14 @@ theme:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
     - scheme: slate
-      primary: red
-      accent: red
+      primary: black
+      accent: green
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
   icon:
     repo: fontawesome/brands/github-alt
-  logo: static/githubcat.jpg
+  logo: static/big-yellow-star.jpg
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -46,7 +46,13 @@ plugins:
   - search
   - git-revision-date-localized
   - minify:
-      minify_html: true  
+      minify_html: true 
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://notes.caijiqhx.top/
+      name: cjqxh on github
+ 
 markdown_extensions:
   - abbr
   - attr_list
