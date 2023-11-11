@@ -8,6 +8,8 @@
 
 [零基础-通过Github Pages搭建个人博客_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Xh411b7wh/?spm_id_from=333.999.0.0&vd_source=ff416108a9a6533327d7b10389a3449a)
 
+ [使用Mkdocs生成项目文档 - 韩志超 - 博客园 (cnblogs.com)](https://www.cnblogs.com/superhin/p/17532712.html#生成站点)
+
 - 这个是只利用git实现搭建博客。
 
 python环境、mkdocs使用，git上传代码。

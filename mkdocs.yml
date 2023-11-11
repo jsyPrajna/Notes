@@ -1,4 +1,4 @@
-copyright: Copyright &copy; 2020 - 2021 jsyPrajna
+copyright: Copyright &copy; 2020 - 2021 jsyjsyYxx
 extra:
   social:
   - icon: fontawesome/brands/github
@@ -56,18 +56,25 @@ nav:
 - C++:
   - C++/C++ core programming.md
   - C++/C++ improves programming.md
+- MFC:
+  - MFC/MFC notes.md
+- project:
+  - project/MoveControl.md
+- tools:
+  - mkdocs:
+    - tools/mkdocs/github page.md
 plugins:
 - search
 - git-revision-date-localized
 - minify:
     minify_html: true
-repo_name: jsyPrajna/Notes
-repo_url: https://github.com/jsyPrajna/Notes
-site_author: jsyPrajna
+repo_name: jsyjsyYxx/Notes
+repo_url: https://github.com/jsyYxx/Notes
+site_author: jsyYxx
 site_description: "\u8FD9\u4E2A\u4EBA\u5F88\u61D2\uFF0C\u4EC0\u4E48\u4E5F\u6CA1\u7559\
   \u4E0B"
 site_name: "\u59DC\u67D0\u7684\u7B14\u8BB0"
-site_url: https://github.com/jsyPrajna/Notes
+site_url: https://github.com/jsyYxx/Notes
 theme:
   features:
   - navigation.tabs

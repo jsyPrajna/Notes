@@ -1,10 +1,10 @@
 site_name: 姜某的笔记
 site_description: 这个人很懒，什么也没留下
-site_author: jsyPrajna
-site_url: https://github.com/jsyPrajna/Notes
-repo_name: jsyPrajna/Notes
-repo_url: https://github.com/jsyPrajna/Notes
-copyright: "Copyright &copy; 2020 - 2021 jsyPrajna"
+site_author: jsyYxx
+site_url: https://github.com/jsyYxx/Notes
+repo_name: jsyjsyYxx/Notes
+repo_url: https://github.com/jsyYxx/Notes
+copyright: "Copyright &copy; 2020 - 2021 jsyjsyYxx"
 extra_css:
 - static/css/extra.css
 - static/css/main.bf3dc0a9.min.css
